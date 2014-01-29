@@ -22,7 +22,7 @@ public class LoginDAOImpl implements LoginDAO {
 	{
 		Session session=(Session) sessionFactory.getCurrentSession();
 		session.beginTransaction();
-		List loginList=session.createQuery("from login").list();
+		List<Login> loginList=session.createQuery("from login").list();
 		System.out.println("Login list:"+loginList);
 		session.getTransaction().commit();
 		return loginList;

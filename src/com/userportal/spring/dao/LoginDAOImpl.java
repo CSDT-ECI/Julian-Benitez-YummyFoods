@@ -17,16 +17,12 @@ public class LoginDAOImpl implements LoginDAO {
 
 	@Autowired
 	private SessionFactory sessionFactory;
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Login> listLogin() 
 	{
-		Session session=(Session) sessionFactory.getCurrentSession();
-		session.beginTransaction();
-		List<Login> loginList=session.createQuery("from login").list();
-		System.out.println("Login list:"+loginList);
-		session.getTransaction().commit();
-		return loginList;
-
+		return sessionFactory.getCurrentSession().createQuery("from Login").list();
+		
 	
 	}
 

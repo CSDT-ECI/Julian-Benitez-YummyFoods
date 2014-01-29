@@ -1,5 +1,7 @@
 package com.userportal.spring.controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -10,16 +12,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.userportal.spring.form.Login;
 import com.userportal.spring.service.LoginService;
 
-@Controller
+@Controller 
 public class LoginController 
 {
 	@Autowired
 	private LoginService loginService;
 	
-	@RequestMapping(value="/login", method=RequestMethod.GET)
-	public String login(@ModelAttribute("login")Login login,BindingResult result)
+	
+	@RequestMapping(value="/login")
+	public String login(Map<String, Object> map)
 	{
-		System.out.println("Value:"+loginService.login().toString());
+		//map.put("home", new Login());
+		//map.put("loginList", loginService.login());
 		return "home";
 	}
 }

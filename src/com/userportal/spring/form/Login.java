@@ -2,12 +2,14 @@ package com.userportal.spring.form;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="login")
 public class Login 
 {
+	@Id
 	@Column(name="userId")
 	private String userId;
 	

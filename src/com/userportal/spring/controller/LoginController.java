@@ -1,6 +1,5 @@
 package com.userportal.spring.controller;
 
-import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 
 import com.userportal.spring.form.Login;
-import com.userportal.spring.form.User;
 import com.userportal.spring.service.LoginService;
 import com.userportal.spring.validator.LoginValidator;
 

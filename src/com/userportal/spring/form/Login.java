@@ -2,17 +2,20 @@ package com.userportal.spring.form;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 
+
 @Entity
 @Table(name="login", schema="userportalschema")
 public class Login 
 {
+	@OneToOne
+	@PrimaryKeyJoinColumn
+	private User user;
 	
 	@Id
 	@Column(name="userId")
@@ -21,8 +24,12 @@ public class Login
 	@Column(name="userPassword")
 	private String userPassword;
 	
-	@OneToOne(fetch=FetchType.LAZY)
-	@PrimaryKeyJoinColumn
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
 	public String getUserId() {
 		return userId;
 	}

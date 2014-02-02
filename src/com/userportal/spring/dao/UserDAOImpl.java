@@ -3,10 +3,8 @@ package com.userportal.spring.dao;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
-import org.hibernate.classic.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.userportal.spring.form.User;
 
@@ -24,9 +22,7 @@ public class UserDAOImpl implements UserDAO
 	@Override
 	public void addUser(User user) 
 	{
-		sessionFactory.getCurrentSession().save(user);	
-		System.out.println("Save user done");
-		
+		sessionFactory.getCurrentSession().save(user);		
 	}
 
 	@Override

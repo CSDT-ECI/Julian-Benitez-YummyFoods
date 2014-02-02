@@ -7,4 +7,7 @@ import com.userportal.spring.form.Login;
 public interface LoginService 
 {
 	public List<Login> login();
+	public Login getParticularUser(String userId);
+	public void update(String userId,String userPassword);
+	public void save(Login login);
 }

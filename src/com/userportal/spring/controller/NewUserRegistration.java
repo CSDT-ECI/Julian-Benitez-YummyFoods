@@ -19,6 +19,7 @@ import com.userportal.spring.form.User;
 import com.userportal.spring.service.UserService;
 import com.userportal.spring.validator.LoginValidator;
 import com.userportal.spring.validator.NewUserValidator;
+import com.userportal.utility.Email;
 
 @Controller
 public class NewUserRegistration 
@@ -76,6 +77,7 @@ public class NewUserRegistration
 
 			user.setLogin(login);
 			userService.save(user);
+			Email.sendEmail(user.getUserEmailId(), "Registration", "Hi, Congratulations "+user.getUserId()+" for registering!!", "Support<support@userportal.mailgun.org>");
 			return "home";
 		}
 		else

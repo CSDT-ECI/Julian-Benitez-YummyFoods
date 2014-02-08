@@ -3,7 +3,7 @@
 
   <display-name>UserPortal</display-name>
   	<welcome-file-list>
-	    <welcome-file>/JSP/index.jsp</welcome-file>
+	    <welcome-file>/JSP/welcome.jsp</welcome-file>
 	    
   	</welcome-file-list>
   	<listener> 

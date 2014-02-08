@@ -14,9 +14,10 @@ public class UserDAOImpl implements UserDAO
 	@Autowired
 	private SessionFactory sessionFactory;
 	@Override
-	public List<User> listUser() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<User> listUser() 
+	{
+		return sessionFactory.getCurrentSession().createQuery("from User").list();
+		
 	}
 
 	@Override

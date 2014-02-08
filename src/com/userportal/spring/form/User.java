@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="user")
@@ -20,6 +21,34 @@ public class User
 	
 	@Column(name="userName", nullable=false)
 	private String userName;
+	
+	@Column(name="emailId",nullable=false)
+	private String userEmailId;
+	
+	@Transient
+	private String userPassword;
+	
+	@Transient
+	private String userConfirmPassword;
+	
+	public String getUserEmailId() {
+		return userEmailId;
+	}
+	public void setUserEmailId(String userEmailId) {
+		this.userEmailId = userEmailId;
+	}
+	public String getUserPassword() {
+		return userPassword;
+	}
+	public void setUserPassword(String userPassword) {
+		this.userPassword = userPassword;
+	}
+	public String getUserConfirmPassword() {
+		return userConfirmPassword;
+	}
+	public void setUserConfirmPassword(String userConfirmPassword) {
+		this.userConfirmPassword = userConfirmPassword;
+	}
 	
 	public Login getLogin() {
 		return login;

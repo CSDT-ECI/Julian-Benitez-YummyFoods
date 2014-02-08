@@ -12,7 +12,7 @@ public class LoginValidator implements Validator
 {
 
 	@Override
-	public boolean supports(Class classz) 
+	public boolean supports(Class<?> classz) 
 	{
 		return Login.class.equals(classz);
 	}
@@ -20,7 +20,6 @@ public class LoginValidator implements Validator
 	@Override
 	public void validate(Object obj, Errors error)
 	{
-		//System.out.println("We have eneterd into validator class");
 		ValidationUtils.rejectIfEmptyOrWhitespace(error, "userId", "userIdError", "User Id can't be null or blank");
 		ValidationUtils.rejectIfEmptyOrWhitespace(error, "userPassword", "userPasswordError", "Password can't be null or blank");
 		

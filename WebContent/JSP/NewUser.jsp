@@ -9,14 +9,19 @@
 <title>Registration</title>
 </head>
 <body>
-<form:form action="newUserAdd" method="POST">
+<form:form action="newUserAdd" method="POST" modelAttribute="user">
+		<center>
 		<table>
-			<tr><td>User Id:</td><td><input name="userId" type="text" /></td><td><font color="red"><c:out value="${userIdError}" /></font> </td></tr>
-			<tr><td>Password:</td><td><input name="userPassword" type="password"/></td><td><font color="red"><c:out value="${userPasswordError}" /></font></td></tr>
-			<tr><td>Name:</td><td><input name="userName" type="text"/></td><td><font color="red"><c:out value="${userPasswordError}" /></font></td></tr>
+			<tr><td>Name:</td><td><form:input path="userName"/></td><td><font color="red"><c:out value="${userNameError}" /></font></td></tr>
+			<tr><td>Email ID:</td><td><form:input path="userEmailId"/></td><td><font color="red"><c:out value="${userEmailIdError}" /></font></td></tr>
+			<tr><td>User Id:</td><td><form:input path="userId"/></td><td><font color="red"><c:out value="${userIdError}" /></font> </td></tr>
+			<tr><td>Password:</td><td><form:password path="userPassword"/></td><td><font color="red"><c:out value="${userPasswordError}" /><c:out value="${userPasswordMismatchError}"/></font></td></tr>
+			<tr><td>Confirm Password:</td><td><form:password path="userConfirmPassword"/></td><td><font color="red"><c:out value="${userConfirmPasswordError}" /></font></td></tr>
+			
 			<tr><td></td><td><input type="submit" value="Create"/></td></tr>
 	
 		</table>
+		</center>
 	</form:form>
 
 

@@ -6,6 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 
 
@@ -23,6 +24,7 @@ public class Login
 	
 	@Column(name="userPassword")
 	private String userPassword;
+	
 	
 	public User getUser() {
 		return user;

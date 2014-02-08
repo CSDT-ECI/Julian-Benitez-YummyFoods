@@ -30,19 +30,24 @@ public class LoginController
 	@Autowired
 	private LoginValidator loginValidator; 
 	
-	@InitBinder
+	@InitBinder("login")
 	public void initBinder(WebDataBinder binder)
 	{
-		System.out.println("we are in initbinder");
 		binder.setValidator(loginValidator);
+	}
+	
+	
+	@RequestMapping(value="/index")
+	public String index(Model model)
+	{
+		model.addAttribute("login", new Login());
+		return "index";
 	}
 	
 
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String login(@ModelAttribute("login")@Valid Login login,BindingResult result, Model model)
 	{
-		
-		//System.out.println("We have entered into controller class");
 		if(result.hasErrors())
 		{
 			if(result.hasFieldErrors("userId"))

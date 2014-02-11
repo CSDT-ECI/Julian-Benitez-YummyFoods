@@ -1,12 +1,18 @@
 package com.userportal.spring.form;
 
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+
 
 @Entity
 @Table(name="user")
@@ -14,6 +20,9 @@ public class User
 {
 	@OneToOne(mappedBy="user",cascade=CascadeType.ALL)
 	private Login login;
+	
+	@OneToMany(mappedBy="user")
+	private Set<Recipe> recipe;
 	
 	@Id
 	@Column(name="userId",nullable=false)
@@ -31,6 +40,12 @@ public class User
 	@Transient
 	private String userConfirmPassword;
 	
+	public Set<Recipe> getRecipe() {
+		return recipe;
+	}
+	public void setRecipe(Set<Recipe> recipe) {
+		this.recipe = recipe;
+	}
 	public String getUserEmailId() {
 		return userEmailId;
 	}

@@ -8,7 +8,19 @@
 <title>Insert title here</title>
 </head>
 <body>
-Home Page for registered user sir
-<font color="red">
-<c:out value="${userIdError}" /></font></body>
+	Home Page for registered user sir
+	<font color="red">
+	<c:choose>
+		<c:when test="${sessionValue==null }">
+			<%--<jsp:forward page="/index"/> --%>
+		</c:when>
+		<c:otherwise>
+			we have the persisted value
+		</c:otherwise>
+	</c:choose>
+	</font>
+	
+	<br><a href="recipe">Add Recipe</a><br>
+	<a href="viewRecipe">View Recipe</a><br>
+</body>
 </html>

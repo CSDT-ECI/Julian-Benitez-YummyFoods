@@ -1,6 +1,7 @@
 package com.userportal.spring.controller;
 
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,12 +42,12 @@ public class LoginController
 	public String index(Model model)
 	{
 		model.addAttribute("login", new Login());
-		return "index";
+		return "Login";
 	}
 	
 
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String login(@ModelAttribute("login")@Valid Login login,BindingResult result, Model model)
+	public String login(@ModelAttribute("login")@Valid Login login,BindingResult result, Model model,HttpSession session)
 	{
 		if(result.hasErrors())
 		{
@@ -59,7 +60,7 @@ public class LoginController
 			{
 				model.addAttribute("userPasswordError", result.getFieldError("userPassword").getDefaultMessage());
 			}
-			return "index";
+			return "Login";
 		}
 		
 		
@@ -69,12 +70,13 @@ public class LoginController
 			{
 				if(obj.getUserPassword().equals(login.getUserPassword()))
 				{
+					session.setAttribute("sessionValue", login.getUserId());
 					return "home";
 				}
 				else
 				{
 					model.addAttribute("userPasswordError", "Wrong Password");
-					return "index";
+					return "Login";
 				}
 				
 			}
@@ -82,7 +84,7 @@ public class LoginController
 		}
 		model.addAttribute("userIdError", "Wrong User Id");
 		model.addAttribute("userPasswordError", "Wrong Password");
-		return "index";
+		return "Login";
 	}
 	
 }

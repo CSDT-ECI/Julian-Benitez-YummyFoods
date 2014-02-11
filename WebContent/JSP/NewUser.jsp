@@ -19,7 +19,6 @@
 			<tr><td>Confirm Password:</td><td><form:password path="userConfirmPassword"/></td><td><font color="red"><c:out value="${userConfirmPasswordError}" /></font></td></tr>
 			
 			<tr><td></td><td><input type="submit" value="Create"/></td></tr>
-	
 		</table>
 		</center>
 	</form:form>

@@ -21,10 +21,7 @@ public class NewUserValidator  implements Validator
 	@Override
 	public void validate(Object obj, Errors error) 
 	{
-		System.out.println("We came in validation");
-	
-		
-		ValidationUtils.rejectIfEmptyOrWhitespace(error, "userId", "userIdEmpty", "User ID can't be empty");
+			ValidationUtils.rejectIfEmptyOrWhitespace(error, "userId", "userIdEmpty", "User ID can't be empty");
 		ValidationUtils.rejectIfEmpty(error, "userEmailId", "userEmailIdEmpty", "Email ID cann't be empty");
 		ValidationUtils.rejectIfEmptyOrWhitespace(error, "userPassword", "userPasswordEmpty", "Password cant be empty");
 		ValidationUtils.rejectIfEmptyOrWhitespace(error, "userConfirmPassword", "userConfirmPasswordEmpty", "Confirm Password cant be empty");

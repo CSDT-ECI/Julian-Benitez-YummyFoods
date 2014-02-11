@@ -34,7 +34,7 @@ public class LoginDAOImpl implements LoginDAO {
 		Login login= null;
 		try 
 		{	
-			login = (Login) session.createQuery("from Login where userId="+userId+"").list();
+			login = (Login) session.createQuery("from Login where userId='"+userId+"'").list().get(0);
 		}
 		catch (HibernateException e) 
 		{

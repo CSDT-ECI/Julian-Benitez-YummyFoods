@@ -1,5 +1,9 @@
 package com.userportal.spring.controller;
 
+import java.awt.List;
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import javax.validation.Validation;
 
@@ -17,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.userportal.spring.form.Login;
 import com.userportal.spring.form.User;
 import com.userportal.spring.service.UserService;
-import com.userportal.spring.validator.LoginValidator;
 import com.userportal.spring.validator.NewUserValidator;
 import com.userportal.utility.Email;
 
@@ -40,13 +43,12 @@ public class NewUserRegistration
 	@RequestMapping(value="/newUser")
 	public String newUser(Model model)
 	{
-		
 		model.addAttribute("user", new User());
 		return "NewUser";
 	}
 	
 	@RequestMapping(value="/newUserAdd", method=RequestMethod.POST)
-	public String addUser(@ModelAttribute("user")@Valid User user,BindingResult result,Login login, Model model)
+	public String addUser(@ModelAttribute("user")@Valid User user,BindingResult result,Login login, Model model,HttpSession session)
 	{
 		if(result.hasErrors())
 		{
@@ -77,7 +79,8 @@ public class NewUserRegistration
 
 			user.setLogin(login);
 			userService.save(user);
-			Email.sendEmail(user.getUserEmailId(), "Registration", "Hi, Congratulations "+user.getUserId()+" for registering!!", "Support<support@userportal.mailgun.org>");
+			Email.sendEmail(user.getUserEmailId(), "Registration", "Hi,\n\nCongratulations "+user.getUserId()+" for registering!!\n\nRegards\nYummyFoods", "Support<support@userportal.mailgun.org>");
+			session.setAttribute("sessionValue", user.getUserId());
 			return "home";
 		}
 		else

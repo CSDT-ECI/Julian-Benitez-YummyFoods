@@ -9,4 +9,5 @@ public interface UserService
 	public List<User> list();
 	public void save(User user);
 	public void delete(User user);
+	public User getUserById(String userId);
 }

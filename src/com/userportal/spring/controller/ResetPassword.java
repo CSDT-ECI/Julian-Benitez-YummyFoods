@@ -36,15 +36,13 @@ public class ResetPassword
 	{
 		for(User tempUser:userService.list())
 		{
-			System.out.println(tempUser.getUserEmailId());
 			if(tempUser.getUserEmailId().equals(user.getUserEmailId()))
 			{
 				for(Login login:loginService.login())
 				{
 					if(login.getUserId().equals(tempUser.getUserId()))
 					{
-						System.out.println("Success");
-						Email.sendEmail(user.getUserEmailId(), "Password Details", "Hi user, your password details are Password:"+login.getUserPassword(), "Admin<admin@userportal.mailgun.org>");
+						Email.sendEmail(user.getUserEmailId(), "Password Details", "Hi user,\n\nYour password details are Password:"+login.getUserPassword()+"\n\nRegards\nYummyFoods Admin", "Admin<admin@userportal.mailgun.org>");
 						
 					}
 				}

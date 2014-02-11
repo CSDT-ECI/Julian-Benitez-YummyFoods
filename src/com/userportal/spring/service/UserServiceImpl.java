@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService
 	{
 		return userDAO.listUser();
 	}
-
+	
 	@Override
 	@Transactional
 	public void save(User user) 
@@ -33,6 +33,11 @@ public class UserServiceImpl implements UserService
 	public void delete(User user) {
 		// TODO Auto-generated method stub
 
+	}
+	@Transactional
+	public User getUserById(String userId)
+	{
+		return userDAO.getUserById(userId);
 	}
 
 }

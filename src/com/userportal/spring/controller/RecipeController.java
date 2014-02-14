@@ -1,11 +1,17 @@
 package com.userportal.spring.controller;
 
+import java.io.BufferedOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,13 +42,6 @@ public class RecipeController
 	@Autowired
 	private UserService userService;
 	
-	/*@InitBinder(value="recipe")
-	protected void initBinder(HttpServletRequest request,
-	        ServletRequestDataBinder binder) throws ServletException {
-	    binder.registerCustomEditor(byte[].class,
-	            new ByteArrayMultipartFileEditor());
-	}
-	*/
 	@RequestMapping(value="/recipe")
 	public String recipe(Model model)
 	{
@@ -50,6 +49,18 @@ public class RecipeController
 		return "RecipeForm";
 		
 	}
+	
+	@RequestMapping(value="/viewRecipe")
+	public String viewRecipe(Model model,HttpSession session)
+	{
+		User user=userService.getUserById("pulkit");
+		List<Recipe> list=recipeService.list(user);
+		session.setAttribute("sessionList", list);
+		model.addAttribute("recipeList", list);
+		
+		return "ViewRecipe";
+	}
+	
 	@RequestMapping(value="/addRecipe", method=RequestMethod.POST)
 	public String addRecipe(@ModelAttribute("recipe")Recipe recipe,User user,@RequestParam("file") MultipartFile file)
 	{
@@ -74,11 +85,5 @@ public class RecipeController
 	}
 	
 	
- 
-	@RequestMapping(value="/viewRecipe")
-	public String viewRecipe()
-	{
-		return null;
-	}
-	
+ 	
 }

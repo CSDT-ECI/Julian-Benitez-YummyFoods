@@ -22,7 +22,7 @@ public class RecipeDAOImpl implements RecipeDAO
 	@Override
 	public List<Recipe> list(User user) 
 	{
-		return sessionFactory.getCurrentSession().createQuery("from Recipe where userId="+user.getUserId()).list();
+		return sessionFactory.getCurrentSession().createQuery("from Recipe where userId='"+user.getUserId()+"'").list();
 	}
 
 }

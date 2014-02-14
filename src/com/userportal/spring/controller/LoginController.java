@@ -1,6 +1,7 @@
 package com.userportal.spring.controller;
 
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.context.request.WebRequest;
 
 
 import com.userportal.spring.form.Login;
@@ -47,8 +50,9 @@ public class LoginController
 	
 
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String login(@ModelAttribute("login")@Valid Login login,BindingResult result, Model model,HttpSession session)
+	public String login(@ModelAttribute("login")@Valid Login login,BindingResult result, Model model,HttpServletRequest request)
 	{
+		System.out.println("Coming to controller");
 		if(result.hasErrors())
 		{
 			if(result.hasFieldErrors("userId"))
@@ -70,12 +74,13 @@ public class LoginController
 			{
 				if(obj.getUserPassword().equals(login.getUserPassword()))
 				{
-					session.setAttribute("sessionValue", login.getUserId());
+					request.getSession().setAttribute("sessionValue", login.getUserId());
 					return "home";
 				}
 				else
 				{
 					model.addAttribute("userPasswordError", "Wrong Password");
+					
 					return "Login";
 				}
 				
@@ -85,6 +90,16 @@ public class LoginController
 		model.addAttribute("userIdError", "Wrong User Id");
 		model.addAttribute("userPasswordError", "Wrong Password");
 		return "Login";
+	}
+	
+	@RequestMapping(value="/logout")
+	public String logout(HttpServletRequest request)
+	{
+		System.out.println(request.getSession().getAttribute("sessionValue"));
+		request.getSession().setAttribute("sessionValue", null);
+		request.getSession().invalidate();
+		return "welcome";
+		
 	}
 	
 }

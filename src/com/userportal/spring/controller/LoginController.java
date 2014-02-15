@@ -53,6 +53,8 @@ public class LoginController
 	public String login(@ModelAttribute("login")@Valid Login login,BindingResult result, Model model,HttpServletRequest request)
 	{
 		System.out.println("Coming to controller");
+		System.out.println(login.getUserId());
+		System.out.println(login.getUserPassword());
 		if(result.hasErrors())
 		{
 			if(result.hasFieldErrors("userId"))
@@ -74,6 +76,7 @@ public class LoginController
 			{
 				if(obj.getUserPassword().equals(login.getUserPassword()))
 				{
+					
 					request.getSession().setAttribute("sessionValue", login.getUserId());
 					return "home";
 				}
@@ -98,7 +101,7 @@ public class LoginController
 		System.out.println(request.getSession().getAttribute("sessionValue"));
 		request.getSession().setAttribute("sessionValue", null);
 		request.getSession().invalidate();
-		return "welcome";
+		return "redirect:index";
 		
 	}
 	

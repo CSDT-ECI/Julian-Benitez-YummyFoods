@@ -12,6 +12,8 @@
 <body>
 <center>
 Welcome to the new world Pulkit Sharva!!!!
+<img src="<c:url value="/images/logo.png" />" alt="logo" />
+
 <br><c:out value="${ResetPassword}"></c:out>
 	<form:form action="login" method="POST" modelAttribute="login">
 		<table>

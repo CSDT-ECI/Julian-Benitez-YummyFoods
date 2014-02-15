@@ -17,7 +17,7 @@
 			we have the persisted value
 		</c:otherwise>
 	</c:choose>
-	
+	<a href="logout"><input type="button" value="Logout"></a>
 <center>
 	<form:form action="addRecipe" method="POST" enctype="multipart/form-data" modelAttribute="recipe" >
 		New

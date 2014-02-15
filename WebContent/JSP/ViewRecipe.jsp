@@ -23,7 +23,7 @@ NEW PAGE
 	For People: 	${recipe.forPeople }<br>
 	Ingredients		${recipe.ingredients }<br>
 	Directions		${recipe.directions }<br>
-	Img				<img src="images/?recipeId=${recipe.recipeId }" width="100" height="100"/><br>
+	Img				<img src="image/?recipeId=${recipe.recipeId }" width="100" height="100"/><br>
 	
 	</c:forEach>
 	

@@ -1,6 +1,10 @@
 package com.userportal.spring.controller;
 
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -21,7 +25,9 @@ import org.springframework.web.context.request.WebRequest;
 
 
 import com.userportal.spring.form.Login;
+import com.userportal.spring.form.Recipe;
 import com.userportal.spring.service.LoginService;
+import com.userportal.spring.service.RecipeService;
 import com.userportal.spring.validator.LoginValidator;
 
 @Controller
@@ -34,6 +40,9 @@ public class LoginController
 	@Autowired
 	private LoginValidator loginValidator; 
 	
+	@Autowired
+	private RecipeService recipeService;
+	
 	@InitBinder("login")
 	public void initBinder(WebDataBinder binder)
 	{
@@ -42,10 +51,24 @@ public class LoginController
 	
 	
 	@RequestMapping(value="/index")
-	public String index(Model model)
+	public String index(Model model,HttpServletRequest request)
 	{
+		HttpSession session =request.getSession(false);
+		if(session.getAttribute("sessionRecipeList")==null)
+		{
+			
+			List<Recipe> recipeList=recipeService.getAllRecipe();
+			List<Recipe> sessionRecipeList=new ArrayList<Recipe>();
+			
+			sessionRecipeList.add(recipeList.get(0));
+			sessionRecipeList.add(recipeList.get(1));
+			sessionRecipeList.add(recipeList.get(2));
+			session.setAttribute("sessionList", sessionRecipeList);
+			
+		}
+		
 		model.addAttribute("login", new Login());
-		return "Login";
+		return "main";
 	}
 	
 

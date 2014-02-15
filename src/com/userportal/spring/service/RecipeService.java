@@ -9,4 +9,5 @@ public interface RecipeService
 {
 	public void add(Recipe recipe);
 	public List<Recipe> list(User user);
+	public List<Recipe> getAllRecipe();
 }

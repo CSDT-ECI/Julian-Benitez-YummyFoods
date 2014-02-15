@@ -30,4 +30,11 @@ public class RecipeServiceImpl implements RecipeService
 		return recipeDAO.list(user);
 	}
 
+	@Override
+	@Transactional
+	public List<Recipe> getAllRecipe() 
+	{
+		return recipeDAO.getAllRecipe();
+	}
+
 }

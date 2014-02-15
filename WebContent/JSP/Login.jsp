@@ -12,6 +12,13 @@
 <body>
 <center>
 Welcome to the new world Pulkit Sharva!!!!
+
+	<c:forEach items="${sessionList }" var="recipe">
+		${recipe.name }
+		
+	</c:forEach>
+
+
 <img src="<c:url value="/images/logo.png" />" alt="logo" />
 
 <br><c:out value="${ResetPassword}"></c:out>

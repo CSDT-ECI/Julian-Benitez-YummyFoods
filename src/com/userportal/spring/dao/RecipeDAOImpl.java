@@ -24,5 +24,11 @@ public class RecipeDAOImpl implements RecipeDAO
 	{
 		return sessionFactory.getCurrentSession().createQuery("from Recipe where userId='"+user.getUserId()+"'").list();
 	}
+	
+	@Override
+	public List<Recipe> getAllRecipe()
+	{
+		return sessionFactory.getCurrentSession().createQuery("from Recipe").list();
+	}
 
 }

@@ -2,8 +2,10 @@ package com.userportal.spring.dao;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -39,6 +41,16 @@ public class RecipeDAOImpl implements RecipeDAO
         q.setFirstResult(page * limitResultsPerPage); 
         q.setMaxResults(limitResultsPerPage);
         return (List<Recipe>) q.list();
+	}
+
+	@Override
+	public List<Recipe> getFeaturedList() 
+	{
+		Criteria criteria =sessionFactory.getCurrentSession().createCriteria(Recipe.class);
+		criteria.add(Restrictions.sqlRestriction("1=1 order by rand()"));
+		criteria.setMaxResults(3);
+		return criteria.list();
+		
 	}
 
 }

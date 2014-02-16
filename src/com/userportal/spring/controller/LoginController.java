@@ -53,19 +53,14 @@ public class LoginController
 	@RequestMapping(value="/index")
 	public String index(Model model,HttpServletRequest request)
 	{
-		System.out.println("Entry point");
 		HttpSession session =request.getSession();
 		List<Recipe> recipeList=null;
 		if(session.getAttribute("sessionList")==null)
 		{	
-			System.out.println("No session");
 			
 			recipeList=recipeService.getAllRecipe();
-			List<Recipe> sessionRecipeList=new ArrayList<Recipe>();
+			List<Recipe> sessionRecipeList=recipeService.getFeaturedList();
 			
-			sessionRecipeList.add(recipeList.get(0));
-			sessionRecipeList.add(recipeList.get(1));
-			sessionRecipeList.add(recipeList.get(2));
 			session.setAttribute("sessionList", sessionRecipeList);
 			
 		}

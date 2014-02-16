@@ -30,7 +30,40 @@ public class ImageServlet extends HttpServlet
 	{
 		Integer recipeId=Integer.parseInt((String)request.getParameter("recipeId"));
 		List<Recipe>sessionRecipeList=(List<Recipe>) request.getSession(false).getAttribute("sessionList");
-		
+		List<Recipe>sessionFullRecipeList=(List<Recipe>) request.getSession(false).getAttribute("sessionFullList");
+		for(int i=0;i<sessionFullRecipeList.size();i++)
+		{
+			Blob image=sessionFullRecipeList.get(i).getPic();
+			if(image==null)
+			{
+				return;
+			}
+			else if(sessionFullRecipeList.get(i).getRecipeId().equals(recipeId))
+			{
+				 BufferedOutputStream output = null;
+				try
+			     {
+					  response.setBufferSize(DEFAULT_BUFFER_SIZE);
+				     response.setContentType(sessionFullRecipeList.get(i).getContentType());
+				     response.setContentLength((int) image.length());
+				     //response.setHeader("Content-Disposition", "inline; filename=\"" + sessionRecipeList.get(i).getFileName() + "\"");
+				     output = new BufferedOutputStream(response.getOutputStream(), DEFAULT_BUFFER_SIZE);
+				     output.write(image.getBytes(1, (int) image.length()));
+
+			     }
+			     catch (Exception e)
+			     {
+			    	 System.err.println("Some error is coming:"+e.getMessage());
+			    	 e.printStackTrace();
+			     }
+			     finally 
+			     {
+			        output.close();
+			        return;
+			      }
+			}
+		}
+	
 		for(int i=0;i<sessionRecipeList.size();i++)
 		{
 			Blob image=sessionRecipeList.get(i).getPic();

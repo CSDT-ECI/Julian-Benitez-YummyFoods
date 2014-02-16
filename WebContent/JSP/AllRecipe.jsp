@@ -81,28 +81,18 @@
 			<div>
 				<h3>Featured Recipes</h3>
 				<ul id="featured">
+				<c:forEach items="${sessionList}" var="recipe">
 					<li>
-						<a href="recipes.html"><img src="images/sandwich.jpg" alt="Image"></a>
+					<a href="recipe?recipeId=<c:out value="${recipe.recipeId}"/>"><img src="image?recipeId=<c:out value="${recipe.recipeId}"/>" width="80" height="80" alt="Image"></a>
 						<div>
-							<h2><a href="recipes.html">Ham Sandwich</a></h2>
-							<span>by: Anna</span>
+							<h2><a href="recipe?recipeId=<c:out value="${recipe.recipeId}"/>"><c:out value="${recipe.name}"/></a></h2>
+							<span>by: ${recipe.user.userId}</span>
 						</div>
 					</li>
-					<li>
-						<a href="recipes.html"><img src="images/biscuit-and-coffee.jpg" alt="Image"></a>
-						<div>
-							<h2><a href="recipes.html">Biscuit &amp; Sandwich</a></h2>
-							<span>by: Sarah</span>
-						</div>
-					</li>
-					<li>
-						<a href="recipes.html"><img src="images/pizza.jpg" alt="Image"></a>
-						<div>
-							<h2><a href="recipes.html">Delicious Pizza</a></h2>
-							<span>by: Rico</span>
-						</div>
-					</li>
+					</c:forEach>
+					
 				</ul>
+
 			</div>
 			<div>
 				<h3>Blog</h3>

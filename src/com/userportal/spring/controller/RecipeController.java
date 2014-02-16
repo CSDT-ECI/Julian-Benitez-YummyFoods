@@ -106,8 +106,14 @@ public class RecipeController
 	public String allRecipe(@RequestParam(value = "page", required = false) Integer page,Model model,HttpServletRequest request)
 	{
 		int page1=0,page2=0,page3=0;
-		List<Recipe> recipeList=recipeService.getAllRecipe();
-		request.getSession().setAttribute("sessionList", recipeList);
+		List<Recipe> recipeList=null;
+		List<Recipe> featuredRecipeList=null;
+		recipeList=recipeService.getAllRecipe();
+		
+			featuredRecipeList=recipeService.getFeaturedList();
+			request.getSession(false).setAttribute("sessionList", featuredRecipeList);
+		request.getSession(false).setAttribute("sessionFullList", recipeList);
+		
 		model.addAttribute("recipeList", recipeService.getRecipeForPagination(page));
 	
 		if(page==-1)

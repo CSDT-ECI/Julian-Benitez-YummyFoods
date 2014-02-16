@@ -26,7 +26,13 @@ public class ImageServlet extends HttpServlet
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
 		Integer recipeId=Integer.parseInt((String)request.getParameter("recipeId"));
-		List<Recipe>sessionRecipeList=(List<Recipe>) request.getSession(false).getAttribute("sessionList");
+		List<Recipe>sessionRecipeList=(List<Recipe>) request.getSession(false).getAttribute("sessionFullList");
+		for(int i=0;i<sessionRecipeList.size();i++)
+		{
+			System.out.println(sessionRecipeList.get(i).getFileName());
+		}
+		
+		
 		for(int i=0;i<sessionRecipeList.size();i++)
 		{
 			Blob image=sessionRecipeList.get(i).getPic();
@@ -43,8 +49,6 @@ public class ImageServlet extends HttpServlet
 				     response.setContentType(sessionRecipeList.get(i).getContentType());
 				     response.setContentLength((int) image.length());
 				     //response.setHeader("Content-Disposition", "inline; filename=\"" + sessionRecipeList.get(i).getFileName() + "\"");
-	
-				    
 				     output = new BufferedOutputStream(response.getOutputStream(), DEFAULT_BUFFER_SIZE);
 				     output.write(image.getBytes(1, (int) image.length()));
 

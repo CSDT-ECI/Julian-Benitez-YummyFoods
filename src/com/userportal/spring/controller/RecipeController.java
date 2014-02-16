@@ -42,7 +42,7 @@ public class RecipeController
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping(value="/recipe")
+	@RequestMapping(value="/user/recipe")
 	public String recipe(Model model)
 	{
 		model.addAttribute("recipe",new Recipe());
@@ -83,6 +83,33 @@ public class RecipeController
          
 		return "home";
 	}
+	
+	@RequestMapping(value="/recipe")
+	public String viewRecipeById(Model model,HttpServletRequest request)
+	{
+		Integer recipeId=Integer.parseInt(request.getParameter("recipeId"));
+		List<Recipe>sessionList=(List<Recipe>) request.getSession().getAttribute("sessionList");
+		for(int i=0;i<sessionList.size();i++)
+		{
+			if(sessionList.get(i).getRecipeId().equals(recipeId))
+			{
+				List<Recipe> recipeDetails= new ArrayList<Recipe>();
+				recipeDetails.add(sessionList.get(i));
+				model.addAttribute("recipeDetails", recipeDetails);
+				return "ViewRecipe";
+			}
+		}
+		return "main";
+	}
+	
+	@RequestMapping(value="allRecipe")
+	public String allRecipe(Model model)
+	{
+		List<Recipe> recipeList=recipeService.getAllRecipe();
+		model.addAttribute("recipeList", recipeList);
+		return "AllRecipe";
+	}
+	
 	
 	
  	

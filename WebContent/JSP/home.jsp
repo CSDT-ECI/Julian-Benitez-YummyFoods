@@ -21,7 +21,7 @@
 	</font>
 	<a href="logout"><input type="button" value="Logout"></a>
 	
-	<br><a href="recipe">Add Recipe</a><br>
+	<br><a href="user/recipe">Add Recipe</a><br>
 	<a href="viewRecipe">View Recipe</a><br>
 </body>
 </html>

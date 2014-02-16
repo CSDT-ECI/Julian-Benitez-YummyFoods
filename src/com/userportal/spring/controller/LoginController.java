@@ -54,10 +54,11 @@ public class LoginController
 	public String index(Model model,HttpServletRequest request)
 	{
 		HttpSession session =request.getSession(false);
-		if(session.getAttribute("sessionRecipeList")==null)
+		List<Recipe> recipeList=null;
+		if(session.getAttribute("sessionList")==null)
 		{
 			
-			List<Recipe> recipeList=recipeService.getAllRecipe();
+			recipeList=recipeService.getAllRecipe();
 			List<Recipe> sessionRecipeList=new ArrayList<Recipe>();
 			
 			sessionRecipeList.add(recipeList.get(0));
@@ -66,7 +67,7 @@ public class LoginController
 			session.setAttribute("sessionList", sessionRecipeList);
 			
 		}
-		
+		session.setAttribute("sessionFullList", recipeList);
 		model.addAttribute("login", new Login());
 		return "main";
 	}

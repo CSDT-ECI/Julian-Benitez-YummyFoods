@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- Website template by freewebsitetemplates.com -->
 <html>
 <head>
-<title>Food &amp; Recipes</title>
-	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/style.css"/>">
+	<meta charset="UTF-8">
+	<title>A to Z Recipes - Food &amp; Recipes Web</title>
+		<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/style.css" />">
 </head>
-
 <body>
 	<div class="header">
 		<div>
@@ -22,11 +23,11 @@
 		<div>
 			<div class="header">
 				<ul>
-					<li class="current">
-						<a href="index">Home</a>
-					</li>
 					<li>
-						<a href="allRecipe">A to Z Recipes</a>
+						<a href="index.html">Home</a>
+					</li>
+					<li class="current">
+						<a href="recipes.html">A to Z Recipes</a>
 					</li>
 					<li>
 						<a href="featured.html">Featured Recipes</a>
@@ -42,48 +43,24 @@
 					</li>
 				</ul>
 			</div>
-				<div class="body">
+			<div class="body">
+				<div id="content">
 					<div>
-						<a href="index"><img src="<c:url value="/resources/images/turkey.jpg" />" alt="Image"></a>
+						<ul>
+							<c:forEach items="${recipeList }" var="recipe">
+								<li>
+									<a href="recipe?recipeId=${recipe.recipeId }"><img src="image?recipeId=${recipe.recipeId }" alt="Image" width="160" height="160"></a>
+									<div>
+										<h3><a href="recipe?recipeId=${recipe.recipeId }">${recipe.name }</a></h3>
+										<p>
+										${recipe.directions } this could be long stiasd k ja shd k a hdahk sdh s dha k d s h ka h dkha skd h kas h dk j a shdkhaskdhaskhdkashdkhaskjdhkasjhdk.
+									</p>
+									</div>
+								</li>
+							</c:forEach>
+						</ul>
 					</div>
-					<ul>
-					<c:forEach items="${sessionList}" var="recipe">
-					<li>
-					
-						<a href="recipe?recipeId=<c:out value="${recipe.recipeId}"/>"><img src="image?recipeId=<c:out value="${recipe.recipeId}"/>" width="60" height="60" alt="Image"></a>
-						<div>					
-							<h2><a href="recipe?recipeId=<c:out value="${recipe.recipeId}"/>"><c:out value="${recipe.name}"/></a></h2>
-							<p>
-								This is just a place holder
-							</p>
-						</div>
-					</li>
-					</c:forEach>
-					
-				</ul>
 				</div>
-			
-			<div class="footer">
-				<ul>
-					<li>
-						<h2><a href="featured.html">Featured Recipes</a></h2>
-						<a href="featured.html"><img src="images/featured.jpg" alt="Image"></a>
-					</li>
-					<li>
-						<h2><a href="allRecipe">A to Z Recipes</a></h2>
-						<a href="allRecipe"><img src="<c:url value="/resources/images/a-z.jpg" />" alt="Image"></a>
-					</li>
-				</ul>
-				<ul>
-					<li>
-						<h2><a href="videos.html">Videos</a></h2>
-						<a href="videos.html"><img src="images/videos.jpg" alt="Image"></a>
-					</li>
-					<li>
-						<h2><a href="blog.html">Blog</a></h2>
-						<a href="blog.html"><img src="images/blog.jpg" alt="Image"></a>
-					</li>
-				</ul>
 			</div>
 		</div>
 		<div>

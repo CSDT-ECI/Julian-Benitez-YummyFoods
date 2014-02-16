@@ -24,10 +24,10 @@
 			<div class="header">
 				<ul>
 					<li>
-						<a href="index.html">Home</a>
+						<a href="index">Home</a>
 					</li>
 					<li class="current">
-						<a href="recipes.html">A to Z Recipes</a>
+						<a href="allRecipe">A to Z Recipes</a>
 					</li>
 					<li>
 						<a href="featured.html">Featured Recipes</a>

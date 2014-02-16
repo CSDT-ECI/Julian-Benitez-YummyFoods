@@ -33,7 +33,7 @@ import com.userportal.spring.validator.LoginValidator;
 @Controller
 public class LoginController
 {
-
+	
 	@Autowired
 	private LoginService loginService;
 	
@@ -53,10 +53,12 @@ public class LoginController
 	@RequestMapping(value="/index")
 	public String index(Model model,HttpServletRequest request)
 	{
-		HttpSession session =request.getSession(false);
+		System.out.println("Entry point");
+		HttpSession session =request.getSession();
 		List<Recipe> recipeList=null;
 		if(session.getAttribute("sessionList")==null)
-		{
+		{	
+			System.out.println("No session");
 			
 			recipeList=recipeService.getAllRecipe();
 			List<Recipe> sessionRecipeList=new ArrayList<Recipe>();

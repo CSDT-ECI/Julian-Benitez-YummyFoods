@@ -103,9 +103,11 @@ public class RecipeController
 	}
 	
 	@RequestMapping(value="allRecipe")
-	public String allRecipe(Model model)
+	public String allRecipe(Model model,HttpServletRequest request)
 	{
+		
 		List<Recipe> recipeList=recipeService.getAllRecipe();
+		request.getSession().setAttribute("sessionList", recipeList);
 		model.addAttribute("recipeList", recipeList);
 		return "AllRecipe";
 	}

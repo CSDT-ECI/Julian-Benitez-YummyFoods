@@ -15,23 +15,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.userportal.spring.controller.LoginController;
 import com.userportal.spring.form.Recipe;
 import com.userportal.spring.service.RecipeService;
+import com.userportal.spring.service.RecipeServiceImpl;
 
 
 public class ImageServlet extends HttpServlet
 {
 	private static final int DEFAULT_BUFFER_SIZE = 1024000; // 10KB.
-
+	@Autowired
+	RecipeService recipeService;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
 		Integer recipeId=Integer.parseInt((String)request.getParameter("recipeId"));
-		List<Recipe>sessionRecipeList=(List<Recipe>) request.getSession(false).getAttribute("sessionFullList");
-		for(int i=0;i<sessionRecipeList.size();i++)
-		{
-			System.out.println(sessionRecipeList.get(i).getFileName());
-		}
-		
+		List<Recipe>sessionRecipeList=(List<Recipe>) request.getSession(false).getAttribute("sessionList");
 		
 		for(int i=0;i<sessionRecipeList.size();i++)
 		{

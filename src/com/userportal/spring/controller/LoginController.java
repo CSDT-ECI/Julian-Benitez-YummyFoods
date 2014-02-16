@@ -55,15 +55,12 @@ public class LoginController
 	{
 		HttpSession session =request.getSession();
 		List<Recipe> recipeList=null;
-		if(session.getAttribute("sessionList")==null)
-		{	
-			
+		
 			recipeList=recipeService.getAllRecipe();
 			List<Recipe> sessionRecipeList=recipeService.getFeaturedList();
 			
 			session.setAttribute("sessionList", sessionRecipeList);
 			
-		}
 		session.setAttribute("sessionFullList", recipeList);
 		model.addAttribute("login", new Login());
 		return "main";

@@ -111,8 +111,8 @@ public class RecipeController
 		recipeList=recipeService.getAllRecipe();
 		
 			featuredRecipeList=recipeService.getFeaturedList();
-			request.getSession(false).setAttribute("sessionList", featuredRecipeList);
-		request.getSession(false).setAttribute("sessionFullList", recipeList);
+			request.getSession().setAttribute("sessionList", featuredRecipeList);
+		request.getSession().setAttribute("sessionFullList", recipeList);
 		
 		model.addAttribute("recipeList", recipeService.getRecipeForPagination(page));
 	
@@ -121,9 +121,6 @@ public class RecipeController
 			page1=(Integer) request.getSession().getAttribute("PageValue1");
 			page2=(Integer) request.getSession().getAttribute("PageValue2");
 			page3=(Integer) request.getSession().getAttribute("PageValue3");
-			System.out.println("Page1:"+page1);
-			System.out.println("Page2:"+page2);
-			System.out.println("Page3:"+page3);
 			page1=page1-1;
 			page2=page2-1;
 			page3=page3-1;

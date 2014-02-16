@@ -26,7 +26,7 @@
 						<a href="index">Home</a>
 					</li>
 					<li>
-						<a href="allRecipe">A to Z Recipes</a>
+						<a href="allRecipe?page=0">A to Z Recipes</a>
 					</li>
 					<li>
 						<a href="featured.html">Featured Recipes</a>
@@ -70,7 +70,7 @@
 						<a href="featured.html"><img src="images/featured.jpg" alt="Image"></a>
 					</li>
 					<li>
-						<h2><a href="allRecipe">A to Z Recipes</a></h2>
+						<h2><a href="allRecipe?page=0">A to Z Recipes</a></h2>
 						<a href="allRecipe"><img src="<c:url value="/resources/images/a-z.jpg" />" alt="Image"></a>
 					</li>
 				</ul>
@@ -138,10 +138,10 @@
 			<div>
 				<h3>Get Updates</h3>
 				<a href="https://www.facebook.com/pulkit.sharva" target="_blank" id="facebook">Facebook</a>
-				<a href="http://freewebsitetemplates.com/go/twitter/" target="_blank" id="twitter">Twitter</a>
-				<a href="http://freewebsitetemplates.com/go/youtube/" target="_blank" id="youtube">Youtube</a>
-				<a href="http://freewebsitetemplates.com/go/flickr/" target="_blank" id="flickr">Flickr</a>
+				<a href="http://www.youtube.com/user/pulkitb4Mv" target="_blank" id="youtube">Youtube</a>
 				<a href="https://plus.google.com/117192008917331015868/posts" target="_blank" id="googleplus">Google&#43;</a>
+				<a href="http://stackoverflow.com/users/2219920/pulkit" target="_blank" id="stackoverflow">Stack Overflow</a>
+				<a href="https://github.com/pulkitsharva" target="_blank" id="github">Github</a>
 			</div>
 		</div>
 	</div>

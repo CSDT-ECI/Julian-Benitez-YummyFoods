@@ -2,6 +2,7 @@ package com.userportal.spring.dao;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -29,6 +30,15 @@ public class RecipeDAOImpl implements RecipeDAO
 	public List<Recipe> getAllRecipe()
 	{
 		return sessionFactory.getCurrentSession().createQuery("from Recipe").list();
+	}
+
+	@Override
+	public List<Recipe> getRecipeForPagination(int page)
+	{
+		Query q = sessionFactory.getCurrentSession().createQuery("from Recipe");
+        q.setFirstResult(page * limitResultsPerPage); 
+        q.setMaxResults(limitResultsPerPage);
+        return (List<Recipe>) q.list();
 	}
 
 }

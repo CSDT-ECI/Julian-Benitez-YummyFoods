@@ -37,4 +37,11 @@ public class RecipeServiceImpl implements RecipeService
 		return recipeDAO.getAllRecipe();
 	}
 
+	@Override
+	@Transactional
+	public List<Recipe> getRecipeForPagination(int page) 
+	{
+		return recipeDAO.getRecipeForPagination(page);	
+	}
+
 }

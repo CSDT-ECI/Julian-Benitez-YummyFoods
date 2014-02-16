@@ -27,7 +27,7 @@
 						<a href="index">Home</a>
 					</li>
 					<li class="current">
-						<a href="allRecipe">A to Z Recipes</a>
+						<a href="allRecipe?page=0">A to Z Recipes</a>
 					</li>
 					<li>
 						<a href="featured.html">Featured Recipes</a>
@@ -48,17 +48,26 @@
 					<div>
 						<ul>
 							<c:forEach items="${recipeList }" var="recipe">
-								<li>
-									<a href="recipe?recipeId=${recipe.recipeId }"><img src="image?recipeId=${recipe.recipeId }" alt="Image" width="160" height="160"></a>
-									<div>
-										<h3><a href="recipe?recipeId=${recipe.recipeId }">${recipe.name }</a></h3>
-										<p>
-										${recipe.directions } this could be long stiasd k ja shd k a hdahk sdh s dha k d s h ka h dkha skd h kas h dk j a shdkhaskdhaskhdkashdkhaskjdhkasjhdk.
-									</p>
-									</div>
-								</li>
+							 		<li>
+										<a href="recipe?recipeId=${recipe.recipeId }"><img src="image?recipeId=${recipe.recipeId }" alt="Image" width="160" height="160"></a>
+										<div>
+											<h3><a href="recipe?recipeId=${recipe.recipeId }">${recipe.name }</a></h3>
+											<p>
+											${recipe.directions } this could be long stiasd k ja shd k a hdahk sdh s dha k d s h ka h dkha skd h kas h dk j a shdkhaskdhaskhdkashdkhaskjdhkasjhdk.
+										</p>
+										</div>
+									</li>
+								
 							</c:forEach>
 						</ul>
+						<div align="right">
+							<c:if test="${pageValue1>1 }">
+								<a href="allRecipe?page=-1">Previous </a>
+							</c:if>
+							<a href="allRecipe?page=${pageValue1-1 }">${pageValue1 }</a> 
+							<a href="allRecipe?page=${pageValue2-1 }">${pageValue2 }</a> 
+							<a href="allRecipe?page=${pageValue3-1 }">${pageValue3 }</a>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -114,12 +123,12 @@
 			</div>
 			<div>
 				<h3>Get Updates</h3>
-				<a href="http://freewebsitetemplates.com/go/facebook/" target="_blank" id="facebook">Facebook</a>
-				<a href="http://freewebsitetemplates.com/go/twitter/" target="_blank" id="twitter">Twitter</a>
-				<a href="http://freewebsitetemplates.com/go/youtube/" target="_blank" id="youtube">Youtube</a>
-				<a href="http://freewebsitetemplates.com/go/flickr/" target="_blank" id="flickr">Flickr</a>
-				<a href="http://freewebsitetemplates.com/go/googleplus/" target="_blank" id="googleplus">Google&#43;</a>
-			</div>
+				<a href="https://www.facebook.com/pulkit.sharva" target="_blank" id="facebook">Facebook</a>
+				<a href="http://www.youtube.com/user/pulkitb4Mv" target="_blank" id="youtube">Youtube</a>
+				<a href="https://plus.google.com/117192008917331015868/posts" target="_blank" id="googleplus">Google&#43;</a>
+				<a href="http://stackoverflow.com/users/2219920/pulkit" target="_blank" id="stackoverflow">Stack Overflow</a>
+				<a href="https://github.com/pulkitsharva" target="_blank" id="github">Github</a>
+				</div>
 		</div>
 	</div>
 	<div class="footer">

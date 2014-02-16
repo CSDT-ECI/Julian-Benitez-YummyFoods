@@ -27,7 +27,7 @@
 						<a href="index">Home</a>
 					</li>
 					<li>
-						<a href="allRecipe">A to Z Recipes</a>
+						<a href="allRecipe?page=0">A to Z Recipes</a>
 					</li>
 					<li>
 						<a href="featured.html">Featured Recipes</a>
@@ -48,14 +48,17 @@
 					<c:forEach items="${recipeDetails }" var="recipe">
 					<div>
 						<div>
-							<center><h2>${recipe.name }</h2></center>
+							<center><h2>${recipe.name }</h2>
+								By:- ${recipe.user.userId }
+							</center>
+							
 							<p><br>Ideal for ${recipe.forPeople } people.</p>
 							<p>
 							<b><u>Ingredients:</u></b>	${recipe.ingredients }.
 							</p>
 							<a href="index.html"><img src="image?recipeId=${recipe.recipeId }" alt="Image"></a>
 							<p>
-								<br><b><u>Directions:</u></b>${recipe.directions }.
+								<br><b><u>Directions:</u></b> ${recipe.directions }.
 							</p>
 							<p>
 								<br>
@@ -117,11 +120,11 @@
 			</div>
 			<div>
 				<h3>Get Updates</h3>
-				<a href="http://freewebsitetemplates.com/go/facebook/" target="_blank" id="facebook">Facebook</a>
-				<a href="http://freewebsitetemplates.com/go/twitter/" target="_blank" id="twitter">Twitter</a>
-				<a href="http://freewebsitetemplates.com/go/youtube/" target="_blank" id="youtube">Youtube</a>
-				<a href="http://freewebsitetemplates.com/go/flickr/" target="_blank" id="flickr">Flickr</a>
-				<a href="http://freewebsitetemplates.com/go/googleplus/" target="_blank" id="googleplus">Google&#43;</a>
+				<a href="https://www.facebook.com/pulkit.sharva" target="_blank" id="facebook">Facebook</a>
+				<a href="http://www.youtube.com/user/pulkitb4Mv" target="_blank" id="youtube">Youtube</a>
+				<a href="https://plus.google.com/117192008917331015868/posts" target="_blank" id="googleplus">Google&#43;</a>
+				<a href="http://stackoverflow.com/users/2219920/pulkit" target="_blank" id="stackoverflow">Stack Overflow</a>
+				<a href="https://github.com/pulkitsharva" target="_blank" id="github">Github</a>
 			</div>
 		</div>
 	</div>

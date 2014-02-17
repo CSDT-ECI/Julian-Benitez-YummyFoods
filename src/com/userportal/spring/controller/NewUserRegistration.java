@@ -81,7 +81,7 @@ public class NewUserRegistration
 			userService.save(user);
 			Email.sendEmail(user.getUserEmailId(), "Registration", "Hi,\n\nCongratulations "+user.getUserId()+" for registering!!\n\nRegards\nYummyFoods", "Support<support@userportal.mailgun.org>");
 			session.setAttribute("sessionValue", user.getUserId());
-			return "home";
+			return "UserHome";
 		}
 		else
 		{

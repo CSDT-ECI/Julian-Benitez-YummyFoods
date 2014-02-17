@@ -67,12 +67,9 @@ public class LoginController
 	}
 	
 
-	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String login(@ModelAttribute("login")@Valid Login login,BindingResult result, Model model,HttpServletRequest request)
+	@RequestMapping(value="/doLogin", method=RequestMethod.POST)
+	public String doLogin(@ModelAttribute("login")@Valid Login login,BindingResult result, Model model,HttpServletRequest request)
 	{
-		System.out.println("Coming to controller");
-		System.out.println(login.getUserId());
-		System.out.println(login.getUserPassword());
 		if(result.hasErrors())
 		{
 			if(result.hasFieldErrors("userId"))
@@ -96,7 +93,7 @@ public class LoginController
 				{
 					
 					request.getSession().setAttribute("sessionValue", login.getUserId());
-					return "home";
+					return "UserHome";
 				}
 				else
 				{
@@ -113,14 +110,27 @@ public class LoginController
 		return "Login";
 	}
 	
-	@RequestMapping(value="/logout")
-	public String logout(HttpServletRequest request)
+	@RequestMapping(value="/doLogout")
+	public String doLogout(HttpServletRequest request)
 	{
-		System.out.println(request.getSession().getAttribute("sessionValue"));
 		request.getSession().setAttribute("sessionValue", null);
 		request.getSession().invalidate();
 		return "redirect:index";
 		
+	}
+	@RequestMapping(value="/login")
+	public String login(Model model,HttpServletRequest request)
+	{
+		HttpSession session =request.getSession();
+		List<Recipe> recipeList=null;
+		List<Recipe> sessionRecipeList=recipeService.getFeaturedList();
+		recipeList=recipeService.getAllRecipe();
+		
+		session.setAttribute("sessionList", sessionRecipeList);
+			session.setAttribute("sessionFullList", recipeList);
+		
+		model.addAttribute("login", new Login());
+		return "Login";
 	}
 	
 }

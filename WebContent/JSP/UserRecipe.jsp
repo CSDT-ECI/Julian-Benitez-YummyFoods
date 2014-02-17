@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-        <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -24,9 +24,10 @@
 		<div>
 			<div class="header">
 				<ul>
-					<li>
-						<a href="index">Home</a>
+				<li class="current">
+						<a href="home">Home</a>
 					</li>
+					
 					<li>
 						<a href="allRecipe?page=0">A to Z Recipes</a>
 					</li>
@@ -36,25 +37,39 @@
 					<li>
 						<a href="videos.html">Videos</a>
 					</li>
+					
 					<li>
-						<a href="about.html">About</a>
+						<a href="doLogout">Logout</a>
 					</li>
-					<li class="current">
-						<a href="login">Login</a>
-					</li>
+					
 				</ul>
 			</div>
 			<div class="body">
-				<div id="content" align="center">
-				<br><br><font color="red"></font><c:out value="${ResetPassword}"></c:out><font></font><br>
-					<form:form action="doLogin" method="POST" modelAttribute="login">
-						<table>
-							<tr><td>User Id:</td><td><form:input path="userId"/></td><td><font color="red"><c:out value="${userIdError}" /></font> </td></tr>
-							<tr><td>Password:</td><td><form:password path="userPassword"/></td><td><font color="red"><c:out value="${userPasswordError}" /></font></td></tr>
-							<tr><td></td><td><input type="submit" value="Login"/></td></tr>
-							<tr><td align="left"><a href="newUser">New User</a></td><td align="right"><a href="forgotPassword">Forgot Password</a></td></tr>
-						</table>
-					</form:form>
+				<div id="content">
+					<div>
+						<ul>
+							<c:forEach items="${recipeList }" var="recipe">
+							 		<li>
+										<a href="recipe?recipeId=${recipe.recipeId }"><img src="image?recipeId=${recipe.recipeId }" alt="Image" width="160" height="160"></a>
+										<div>
+											<h3><a href="recipe?recipeId=${recipe.recipeId }">${recipe.name }</a></h3>
+											<p>
+											${recipe.directions }.
+										</p>
+										</div>
+									</li>
+								
+							</c:forEach>
+						</ul>
+						<div align="right">
+							<c:if test="${pageValue1>1 }">
+								<a href="userAllRecipe?page=-1">Previous </a>
+							</c:if>
+							<a href="userAllRecipe?page=${pageValue1-1 }">${pageValue1 }</a> 
+							<a href="userAllRecipe?page=${pageValue2-1 }">${pageValue2 }</a> 
+							<a href="userAllRecipe?page=${pageValue3-1 }">${pageValue3 }</a>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

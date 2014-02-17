@@ -51,4 +51,11 @@ public class RecipeServiceImpl implements RecipeService
 		return recipeDAO.getFeaturedList();
 	}
 
+	@Override
+	@Transactional
+	public List<Recipe> getRecipeForPaginationByUserId(int page, String userId) 
+	{
+		return recipeDAO.getRecipeForPaginationByUserId(page, userId);
+	}
+
 }

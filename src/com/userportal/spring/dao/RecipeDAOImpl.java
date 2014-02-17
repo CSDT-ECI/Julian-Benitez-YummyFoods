@@ -42,7 +42,15 @@ public class RecipeDAOImpl implements RecipeDAO
         q.setMaxResults(limitResultsPerPage);
         return (List<Recipe>) q.list();
 	}
-
+	
+	@Override
+	public List<Recipe> getRecipeForPaginationByUserId(int page,String userId)
+	{
+		Query q = sessionFactory.getCurrentSession().createQuery("from Recipe where userId='"+userId+"'");
+        q.setFirstResult(page * limitResultsPerPage); 
+        q.setMaxResults(limitResultsPerPage);
+        return (List<Recipe>) q.list();
+	}
 	@Override
 	public List<Recipe> getFeaturedList() 
 	{

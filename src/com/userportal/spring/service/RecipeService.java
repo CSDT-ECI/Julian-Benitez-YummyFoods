@@ -12,4 +12,5 @@ public interface RecipeService
 	public List<Recipe> getAllRecipe();
 	public List<Recipe> getRecipeForPagination(int page);
 	public List<Recipe> getFeaturedList();
+	public List<Recipe> getRecipeForPaginationByUserId(int page, String userId);
 }

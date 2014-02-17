@@ -51,6 +51,6 @@ public class ResetPassword
 			}
 		}
 		
-		return "index";
+		return "Login";
 	}
 }

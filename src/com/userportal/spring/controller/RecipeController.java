@@ -42,36 +42,69 @@ public class RecipeController
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping(value="/user/recipe")
+	@RequestMapping(value="/userAddRecipe")
 	public String recipe(Model model)
 	{
 		model.addAttribute("recipe",new Recipe());
-		return "RecipeForm";
+		return "UserRecipeForm";
 		
 	}
 	
-	@RequestMapping(value="/viewRecipe")
-	public String viewRecipe(Model model,HttpSession session)
+	@RequestMapping(value="/userAllRecipe")
+	public String viewRecipe(@RequestParam(value = "page", required = false) Integer page,Model model,HttpServletRequest request)
 	{
-		User user=userService.getUserById("pulkit");
-		List<Recipe> list=recipeService.list(user);
-		session.setAttribute("sessionList", list);
-		model.addAttribute("recipeList", list);
+		int page1=0,page2=0,page3=0;
+		//request.getSession(false).setAttribute("sessionList", list);
+		model.addAttribute("recipeList", recipeService.getRecipeForPaginationByUserId(page, (String)request.getSession(false).getAttribute("sessionValue")));
+		if(page==-1)
+		{
+			page1=(Integer) request.getSession().getAttribute("PageValue1");
+			page2=(Integer) request.getSession().getAttribute("PageValue2");
+			page3=(Integer) request.getSession().getAttribute("PageValue3");
+			page1=page1-1;
+			page2=page2-1;
+			page3=page3-1;
+			request.getSession().setAttribute("PageValue1", page1);
+			request.getSession().setAttribute("PageValue2", page2);
+			request.getSession().setAttribute("PageValue3", page3);
+			
+		}
+		else if(page<-1)
+		{
+			page1=1;
+			page2=2;
+			page3=3;
+		}
+		else if(page>=0)
+		{
+			page1=page+1;
+			page2=page1+1;
+			page3=page2+1;
+			request.getSession().setAttribute("PageValue1", page1);
+			request.getSession().setAttribute("PageValue2", page2);
+			request.getSession().setAttribute("PageValue3", page3);
+			
+		}
+			model.addAttribute("pageValue1",page1);
+			model.addAttribute("pageValue2",page2);
+			model.addAttribute("pageValue3",page3);
+	
 		
-		return "ViewRecipe";
+		return "UserRecipe";
 	}
 	
-	@RequestMapping(value="/addRecipe", method=RequestMethod.POST)
-	public String addRecipe(@ModelAttribute("recipe")Recipe recipe,User user,@RequestParam("file") MultipartFile file)
+	@RequestMapping(value="/userSubmitRecipe", method=RequestMethod.POST)
+	public String addRecipe(@ModelAttribute("recipe")Recipe recipe,User user,HttpServletRequest request,@RequestParam("file") MultipartFile file)
 	{
 		try 
         {
+			System.out.println("recipe submission");
         	Blob blob = Hibernate.createBlob(file.getBytes());
         	recipe.setFileName(file.getOriginalFilename());
             recipe.setPic(blob);
             recipe.setContentType(file.getContentType());
         	recipe.setPic(blob);
-        	user=userService.getUserById("pulkit");
+        	user=userService.getUserById((String) request.getSession(false).getAttribute("sessionValue"));
         	recipe.setUser(user);
         	recipeService.add(recipe);
         } 
@@ -81,7 +114,7 @@ public class RecipeController
             e.printStackTrace();
         }
          
-		return "home";
+		return "UserHome";
 	}
 	
 	@RequestMapping(value="/recipe")
@@ -152,6 +185,11 @@ public class RecipeController
 		return "AllRecipe";
 	}
 	
+	@RequestMapping(value="/home")
+	public String home(Model model)
+	{
+		return "UserHome";
+	}
 	
 	
  	

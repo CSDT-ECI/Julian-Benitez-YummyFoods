@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+       <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-        <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -24,8 +24,8 @@
 		<div>
 			<div class="header">
 				<ul>
-					<li>
-						<a href="index">Home</a>
+				<li class="current">
+						<a href="home">Home</a>
 					</li>
 					<li>
 						<a href="allRecipe?page=0">A to Z Recipes</a>
@@ -36,25 +36,49 @@
 					<li>
 						<a href="videos.html">Videos</a>
 					</li>
+					
 					<li>
-						<a href="about.html">About</a>
+						<a href="doLogout">Logout</a>
 					</li>
-					<li class="current">
-						<a href="login">Login</a>
-					</li>
+					
 				</ul>
 			</div>
 			<div class="body">
-				<div id="content" align="center">
-				<br><br><font color="red"></font><c:out value="${ResetPassword}"></c:out><font></font><br>
-					<form:form action="doLogin" method="POST" modelAttribute="login">
-						<table>
-							<tr><td>User Id:</td><td><form:input path="userId"/></td><td><font color="red"><c:out value="${userIdError}" /></font> </td></tr>
-							<tr><td>Password:</td><td><form:password path="userPassword"/></td><td><font color="red"><c:out value="${userPasswordError}" /></font></td></tr>
-							<tr><td></td><td><input type="submit" value="Login"/></td></tr>
-							<tr><td align="left"><a href="newUser">New User</a></td><td align="right"><a href="forgotPassword">Forgot Password</a></td></tr>
-						</table>
-					</form:form>
+				<div id="content">
+					<div>
+						<div>
+						<center>
+						<br><br><br>
+	<form:form action="userSubmitRecipe" method="POST" enctype="multipart/form-data" modelAttribute="recipe" >
+		<table>
+			<tr>
+				<td>Name</td><td><form:input path="name"/></td>
+			</tr>
+			<tr>
+				<td>No. of People</td><td>
+					<form:select path="forPeople">
+						<form:option value="1">1</form:option>
+						<form:option value="2">2</form:option>
+						<form:option value="3">3</form:option>
+					</form:select></td>
+			</tr>
+			<tr>
+				<td>Ingredients</td><td><form:textarea path="ingredients"/></td>
+			</tr>
+			<tr>
+				<td>Directions</td><td><form:textarea path="directions"/></td>
+			</tr>
+			<tr>
+				<td>Image</td><td><input type="file" name="file"></td>
+			</tr>
+		
+		</table>
+		<input type="submit" value="Add">
+	</form:form>
+						
+						</div>
+					</div>
+				
 				</div>
 			</div>
 		</div>

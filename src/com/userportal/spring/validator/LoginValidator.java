@@ -20,7 +20,7 @@ public class LoginValidator implements Validator
 	@Override
 	public void validate(Object obj, Errors error)
 	{
-		System.out.println("Coming to vlaidator");
+		
 		ValidationUtils.rejectIfEmptyOrWhitespace(error, "userId", "userIdError", "User Id can't be null or blank");
 		ValidationUtils.rejectIfEmptyOrWhitespace(error, "userPassword", "userPasswordError", "Password can't be null or blank");
 		

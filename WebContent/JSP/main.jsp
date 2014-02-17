@@ -9,10 +9,12 @@
 </head>
 
 <body>
+
 	<div class="header">
 		<div>
 			<a href="index"><img src="<c:url value="/resources/images/logo.png" />" alt="Logo"></a>
 		</div>
+			
 		<form action="index.html">
 			<input type="text" value="Search from our 10,000+ Recipes around the world" id="search">
 			<input type="submit" value="" id="searchbtn">
@@ -38,7 +40,7 @@
 						<a href="about.html">About</a>
 					</li>
 					<li>
-						<a href="blog.html">Blog</a>
+						<a href="login">Login</a>
 					</li>
 				</ul>
 			</div>
@@ -67,7 +69,7 @@
 				<ul>
 					<li>
 						<h2><a href="featured.html">Featured Recipes</a></h2>
-						<a href="featured.html"><img src="images/featured.jpg" alt="Image"></a>
+						<a href="featured.html"><img src="<c:url value="/resources/images/featured.jpg" />" alt="Image"></a>
 					</li>
 					<li>
 						<h2><a href="allRecipe?page=0">A to Z Recipes</a></h2>

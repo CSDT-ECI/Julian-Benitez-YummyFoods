@@ -50,12 +50,13 @@ public class RecipeController
 		
 	}
 	
-	@RequestMapping(value="/userAllRecipe")
+	@RequestMapping(value="/userRecipe")
 	public String viewRecipe(@RequestParam(value = "page", required = false) Integer page,Model model,HttpServletRequest request)
 	{
 		int page1=0,page2=0,page3=0;
-		//request.getSession(false).setAttribute("sessionList", list);
 		model.addAttribute("recipeList", recipeService.getRecipeForPaginationByUserId(page, (String)request.getSession(false).getAttribute("sessionValue")));
+		request.getSession(false).setAttribute("sessionList", recipeService.getRecipeForPaginationByUserId(page, (String)request.getSession(false).getAttribute("sessionValue")));
+		
 		if(page==-1)
 		{
 			page1=(Integer) request.getSession().getAttribute("PageValue1");
@@ -184,6 +185,57 @@ public class RecipeController
 		//model.addAttribute("recipeList", recipeList);
 		return "AllRecipe";
 	}
+	
+	@RequestMapping(value="userAllRecipe")
+	public String userAllRecipe(@RequestParam(value = "page", required = false) Integer page,Model model,HttpServletRequest request)
+	{
+		int page1=0,page2=0,page3=0;
+		List<Recipe> recipeList=null;
+		List<Recipe> featuredRecipeList=null;
+		recipeList=recipeService.getAllRecipe();
+		
+			featuredRecipeList=recipeService.getFeaturedList();
+			request.getSession().setAttribute("sessionList", featuredRecipeList);
+		request.getSession().setAttribute("sessionFullList", recipeList);
+		
+		model.addAttribute("recipeList", recipeService.getRecipeForPagination(page));
+	
+		if(page==-1)
+		{
+			page1=(Integer) request.getSession().getAttribute("PageValue1");
+			page2=(Integer) request.getSession().getAttribute("PageValue2");
+			page3=(Integer) request.getSession().getAttribute("PageValue3");
+			page1=page1-1;
+			page2=page2-1;
+			page3=page3-1;
+			request.getSession().setAttribute("PageValue1", page1);
+			request.getSession().setAttribute("PageValue2", page2);
+			request.getSession().setAttribute("PageValue3", page3);
+			
+		}
+		else if(page<-1)
+		{
+			page1=1;
+			page2=2;
+			page3=3;
+		}
+		else if(page>=0)
+		{
+			page1=page+1;
+			page2=page1+1;
+			page3=page2+1;
+			request.getSession().setAttribute("PageValue1", page1);
+			request.getSession().setAttribute("PageValue2", page2);
+			request.getSession().setAttribute("PageValue3", page3);
+			
+		}
+			model.addAttribute("pageValue1",page1);
+			model.addAttribute("pageValue2",page2);
+			model.addAttribute("pageValue3",page3);
+		//model.addAttribute("recipeList", recipeList);
+		return "UserAllRecipe";
+	}
+	
 	
 	@RequestMapping(value="/home")
 	public String home(Model model)

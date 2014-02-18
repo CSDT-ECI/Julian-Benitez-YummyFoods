@@ -76,7 +76,7 @@ div.header form input#searchbtn {
 }
 div.body {
 	margin: 20px auto 0;
-	overflow: hidden;
+	overflow:hidden;
 	width: 960px;
 }
 div.body div:first-child {
@@ -334,7 +334,9 @@ div.body div div a#facebook:hover,
 div.body div div a#twitter:hover,
 div.body div div a#youtube:hover,
 div.body div div a#flickr:hover,
-div.body div div a#googleplus:hover {
+div.body div div a#googleplus:hover,
+div.body div div a#stackoverflow:hover,
+div.body div div a#github:hover {
 	color: #6d4409;
 }
 div.body div div ul#featured li div span {
@@ -378,8 +380,7 @@ div.body div div a#youtube,
 div.body div div a#flickr,
 div.body div div a#googleplus,
 div.body div div a#stackoverflow,
-div.body div div a#github
-{
+div.body div div a#github {
 	color: #6c5b37;
 	display: block;
 	font-size: 13px;
@@ -433,23 +434,17 @@ div.body div div a#googleplus:hover {
 	background: url(../images/icons.png) no-repeat 2px -186px;
 }
 div.body div div a#stackoverflow {
-	background: url(../images/stackoverflow.png) no-repeat 2px -172px;
 	height: 14px;
 	line-height: 14px;
 	margin: 15px 0 0;
-}
-div.body div div a#stackoverflow:hover {
-	background: url(../images/stackoverflow.png) no-repeat 2px -186px;
 }
 div.body div div a#github {
-	background: url(../images/) no-repeat 2px -172px;
+	
 	height: 14px;
 	line-height: 14px;
 	margin: 15px 0 0;
 }
-div.body div div a#github:hover {
-	background: url(../images/) no-repeat 2px -186px;
-}
+
 div.body div#content {
 	background: url(../images/bg-content-top.jpg) no-repeat center top;
 	border-radius: 0;
@@ -458,7 +453,6 @@ div.body div#content {
 	padding: 2px 0 0;
 	width: 710px;
 }
-
 div.body div#content div {
 	background:  #f0ece3 url(../images/bg-content-bottom.gif) no-repeat center bottom;
 	border-radius: 0;
@@ -636,3 +630,94 @@ div.footer div p {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+#suckerfishnav {
+   background:#897b5e repeat-x;
+   font-size:16px;
+  font-family: Arial, Helvetica, sans-serif;
+   font-weight:bold;
+   width:100%;
+   }
+#suckerfishnav, #suckerfishnav ul {
+   float:left;
+   list-style:none;
+   line-height:40px;
+   padding:0;
+   border:1px solid #aaa;
+   margin:0;
+   width:100%;
+   }
+#suckerfishnav a {
+   display:block;
+   color:#dddddd;
+   text-decoration:none;
+   padding:0px 10px;
+   }
+#suckerfishnav li {
+   z-index:999;
+   position: relative;
+   float:left;
+   padding:0;
+   }
+#suckerfishnav ul {
+   position:absolute;
+   left:-999em;
+   height:auto;
+   width:101px;
+   font-weight:normal;
+   margin:0;
+   line-height:1;
+   border:0;
+   border-top:1px solid #666666;
+   }
+#suckerfishnav li li {
+   width:99px;
+   border-bottom:1px solid #666666;
+   border-left:1px solid #666666;
+   border-right:1px solid #666666;
+   font-weight:bold;
+   font-family: Arial, Helvetica, sans-serif;
+   }
+#suckerfishnav li li a {
+   padding:4px 10px;
+   width:80px;
+   font-size:14px;
+   color:#dddddd;
+   }
+#suckerfishnav li ul ul {
+   margin:-21px 0 0 100px;
+   }
+#suckerfishnav li li:hover {
+   background:#6c5b37;
+   }
+#suckerfishnav li ul li:hover a, #suckerfishnav li ul li li:hover a, #suckerfishnav li ul li li li:hover a, #suckerfishnav li ul li li li:hover a {
+   color:#dddddd;
+   }
+#suckerfishnav li:hover a, #suckerfishnav li.sfhover a {
+   color:#dddddd;
+   }
+#suckerfishnav li:hover li a, #suckerfishnav li li:hover li a, #suckerfishnav li li li:hover li a, #suckerfishnav li li li li:hover li a {
+   color:#dddddd;
+   }
+#suckerfishnav li:hover ul ul, #suckerfishnav li:hover ul ul ul, #suckerfishnav li:hover ul ul ul ul, #suckerfishnav li.sfhover ul ul, #suckerfishnav li.sfhover ul ul ul, #suckerfishnav li.sfhover ul ul ul ul {
+   left:-999em;
+   }
+#suckerfishnav li:hover ul, #suckerfishnav li li:hover ul, #suckerfishnav li li li:hover ul, #suckerfishnav li li li li:hover ul, #suckerfishnav li.sfhover ul, #suckerfishnav li li.sfhover ul, #suckerfishnav li li li.sfhover ul, #suckerfishnav li li li li.sfhover ul {
+   left:auto;
+   background:#897b5e;
+   }
+#suckerfishnav li:hover, #suckerfishnav li.sfhover {
+   background:#6c5b37;
+   }

@@ -5,6 +5,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
+<c:if test="${sessionValue==null }">
+<jsp:forward page="/index"></jsp:forward>
+</c:if>
 <head>
 	<meta charset="UTF-8">
 	<title>Recipe - Food &amp; Recipes s</title>
@@ -20,30 +23,42 @@
 			<input type="submit" value="" id="searchbtn">
 		</form>
 	</div>
-	<div class="body">
-		<div>
-			<div class="header">
-				<ul>
-				<li class="current">
-						<a href="home">Home</a>
+	
+	<nav id="nav_wrapper">
+				<ul class="sf-menu" id="suckerfishnav">
+				<li>_____________________________________</li>
+					<li><a href="home">Home</a></li>
+					<li class="haschildren"><a href="#" >A-Z Recipe</a>
+						<ul>
+							<li><a href="userAllRecipe?page=0" >All Recipe</a></li>
+							
+						</ul>
+					</li>
+					<li class="haschildren"><a href="#" >My Recipe</a>
+						<ul>
+							<li><a href="userAddRecipe" >Post</a></li>
+						<li><a href="userRecipe?page=0" >View</a></li>		
+						</ul>
 					</li>
 					
-					<li>
-						<a href="allRecipe?page=0">A to Z Recipes</a>
+					<li class="current_page_ancestor"><a href="allVideo">Videos</a>
 					</li>
-					<li>
-						<a href="featured.html">Featured Recipes</a>
+					<li class="haschildren"><a href="#" >Settings</a>
+						<ul>
+							<li><a href="#" >Profile</a></li>
+						<li><a href="#" >Change Password</a></li>
+						<li><a href="doLogout" >Logout</a></li>
+						</ul>
 					</li>
-					<li>
-						<a href="videos.html">Videos</a>
-					</li>
+					<li>________________________________________________________</li>
 					
-					<li>
-						<a href="doLogout">Logout</a>
-					</li>
 					
 				</ul>
-			</div>
+			</nav>
+	
+	<div class="body">
+		<div>
+			
 			<div class="body">
 				<div id="content">
 					<div>
@@ -76,7 +91,7 @@
 		<div>
 			<div>
 				<h3>Cooking Video</h3>
-				<a href="videos.html"><img src="images/cooking-video.png" alt="Image"></a>
+				<iframe width="200" height="200" src="//www.youtube.com/embed/ngN4TWgL3sY" frameborder="0" allowfullscreen></iframe>
 				<span>Vegetable &amp; Rice Topping</span>
 			</div>
 			<div>
@@ -95,23 +110,7 @@
 				</ul>
 
 			</div>
-			<div>
-				<h3>Blog</h3>
-				<ul id="blog">
-					<li>
-						<a href="blog.html">This is just a place holder, so you can see what the site would look like.</a>
-						<span class="date">Jan 9, by Liza</span>
-					</li>
-					<li>
-						<a href="blog.html">This is just a place holder, so you can see what the site would look like.</a>
-						<span class="date">Feb 16, by Myk</span>
-					</li>
-					<li>
-						<a href="blog.html">This is just a place holder, so you can see what the site would look like.</a>
-						<span class="date">March 15, by Xaxan</span>
-					</li>
-				</ul>
-			</div>
+			
 			<div>
 				<h3>Get Updates</h3>
 				<a href="https://www.facebook.com/pulkit.sharva" target="_blank" id="facebook">Facebook</a>

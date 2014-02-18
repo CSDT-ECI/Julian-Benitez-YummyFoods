@@ -20,33 +20,32 @@
 			<input type="submit" value="" id="searchbtn">
 		</form>
 	</div>
+	<nav id="nav_wrapper">
+				<ul class="sf-menu" id="suckerfishnav">
+				<li>_____________________________________</li>
+					<li><a href="index">Home</a></li>
+					<li class="haschildren"><a href="#" >A-Z Recipe</a>
+						<ul>
+							<li><a href="allRecipe?page=0" >All Recipe</a></li>
+						</ul>
+					</li>
+					<li class="current_page_ancestor"><a href="allVideo">Videos</a>
+					</li>
+					<li><a href="login" >Login</a></li>
+					<li>_____________________________________________________________________</li>
+					
+					
+				</ul>
+			</nav>
+	
 	<div class="body">
 		<div>
-			<div class="header">
-				<ul>
-					<li>
-						<a href="index">Home</a>
-					</li>
-					<li>
-						<a href="allRecipe?page=0">A to Z Recipes</a>
-					</li>
-					<li>
-						<a href="featured.html">Featured Recipes</a>
-					</li>
-					<li>
-						<a href="videos.html">Videos</a>
-					</li>
-					<li>
-						<a href="about.html">About</a>
-					</li>
-					<li class="current">
-						<a href="login">Login</a>
-					</li>
-				</ul>
-			</div>
+			
 			<div class="body">
 				<div id="content" align="center">
-				<br><br><font color="red"></font><c:out value="${ResetPassword}"></c:out><font></font><br>
+				<div>
+				<div>
+				<font color="red"></font><c:out value="${ResetPassword}"></c:out><font></font><br>
 					<form:form action="doLogin" method="POST" modelAttribute="login">
 						<table>
 							<tr><td>User Id:</td><td><form:input path="userId"/></td><td><font color="red"><c:out value="${userIdError}" /></font> </td></tr>
@@ -55,13 +54,15 @@
 							<tr><td align="left"><a href="newUser">New User</a></td><td align="right"><a href="forgotPassword">Forgot Password</a></td></tr>
 						</table>
 					</form:form>
+					</div>
+					</div>
 				</div>
 			</div>
 		</div>
 		<div>
 			<div>
 				<h3>Cooking Video</h3>
-				<a href="videos.html"><img src="images/cooking-video.png" alt="Image"></a>
+				<iframe width="200" height="200" src="//www.youtube.com/embed/ngN4TWgL3sY" frameborder="0" allowfullscreen></iframe>
 				<span>Vegetable &amp; Rice Topping</span>
 			</div>
 			<div>
@@ -80,23 +81,7 @@
 				</ul>
 
 			</div>
-			<div>
-				<h3>Blog</h3>
-				<ul id="blog">
-					<li>
-						<a href="blog.html">This is just a place holder, so you can see what the site would look like.</a>
-						<span class="date">Jan 9, by Liza</span>
-					</li>
-					<li>
-						<a href="blog.html">This is just a place holder, so you can see what the site would look like.</a>
-						<span class="date">Feb 16, by Myk</span>
-					</li>
-					<li>
-						<a href="blog.html">This is just a place holder, so you can see what the site would look like.</a>
-						<span class="date">March 15, by Xaxan</span>
-					</li>
-				</ul>
-			</div>
+			
 			<div>
 				<h3>Get Updates</h3>
 				<a href="https://www.facebook.com/pulkit.sharva" target="_blank" id="facebook">Facebook</a>

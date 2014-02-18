@@ -6,7 +6,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>A to Z Recipes - Food &amp; Recipes Web</title>
+	<title>A to Z Recipes - Food &amp; Recipes</title>
 		<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/style.css" />">
 </head>
 <body>
@@ -19,31 +19,28 @@
 			<input type="submit" value="" id="searchbtn">
 		</form>
 	</div>
+		<nav id="nav_wrapper">
+				<ul class="sf-menu" id="suckerfishnav">
+				<li>_____________________________________</li>
+					<li><a href="index">Home</a></li>
+					<li class="haschildren"><a href="#" >A-Z Recipe</a>
+						<ul>
+							<li><a href="allRecipe?page=0" >All Recipe</a></li>
+						</ul>
+					</li>
+					<li class="current_page_ancestor"><a href="allVideo">Videos</a>
+					</li>
+					<li><a href="login" >Login</a></li>
+					<li>_____________________________________________________________________</li>
+					
+					
+				</ul>
+			</nav>
+	
+			
 	<div class="body">
 		<div>
-			<div class="header">
-				<ul>
-					<li>
-						<a href="index">Home</a>
-					</li>
-					<li class="current">
-						<a href="allRecipe?page=0">A to Z Recipes</a>
-					</li>
-					<li>
-						<a href="featured.html">Featured Recipes</a>
-					</li>
-					<li>
-						<a href="videos.html">Videos</a>
-					</li>
-					<li>
-						<a href="about.html">About</a>
-					</li>
-					<li>
-						<a href="blog.html">Blog</a>
-					</li>
-				</ul>
-			</div>
-			<div class="body">
+		<div class="body">
 				<div id="content">
 					<div>
 						<ul>
@@ -53,7 +50,7 @@
 										<div>
 											<h3><a href="recipe?recipeId=${recipe.recipeId }">${recipe.name }</a></h3>
 											<p>
-											${recipe.directions } this could be long stiasd k ja shd k a hdahk sdh s dha k d s h ka h dkha skd h kas h dk j a shdkhaskdhaskhdkashdkhaskjdhkasjhdk.
+											${recipe.directions }.
 										</p>
 										</div>
 									</li>
@@ -75,7 +72,7 @@
 		<div>
 			<div>
 				<h3>Cooking Video</h3>
-				<a href="videos.html"><img src="images/cooking-video.png" alt="Image"></a>
+				<iframe width="200" height="200" src="//www.youtube.com/embed/ngN4TWgL3sY" frameborder="0" allowfullscreen></iframe>
 				<span>Vegetable &amp; Rice Topping</span>
 			</div>
 			<div>
@@ -94,23 +91,7 @@
 				</ul>
 
 			</div>
-			<div>
-				<h3>Blog</h3>
-				<ul id="blog">
-					<li>
-						<a href="blog.html">This is just a place holder, so you can see what the site would look like.</a>
-						<span class="date">Jan 9, by Liza</span>
-					</li>
-					<li>
-						<a href="blog.html">This is just a place holder, so you can see what the site would look like.</a>
-						<span class="date">Feb 16, by Myk</span>
-					</li>
-					<li>
-						<a href="blog.html">This is just a place holder, so you can see what the site would look like.</a>
-						<span class="date">March 15, by Xaxan</span>
-					</li>
-				</ul>
-			</div>
+			
 			<div>
 				<h3>Get Updates</h3>
 				<a href="https://www.facebook.com/pulkit.sharva" target="_blank" id="facebook">Facebook</a>

@@ -106,6 +106,7 @@ public class NewUserRegistration
 			if(userIdList.get(i).getUserId().equals(userName))
 			{
 				status="Sorry this user id is already taken!!!";
+				return status;
 			}
 			else
 			{

@@ -84,48 +84,16 @@ div.body div:first-child {
 	height: auto;
 	margin: 5px 0 0;
 	width: 716px;
+	overflow:visible;
 }
-div.body div:first-child div.header {
-	background: url(../images/interface.png) no-repeat;
-	height: 35px;
-	padding: 7px 0 0 8px;
-	margin: 0 0 0 3px;
-	width: 702px;
-}
-div.body div:first-child div.header ul {
-	overflow: hidden;
-}
-div.body div:first-child div.header ul li {
-	float: left;
-	margin: 0 13px;
-	text-transform: uppercase;
-}
-div.body div:first-child div.header ul li a {
-	color: #fffcdf;
-	display: block;
-	height: 29px;
-	font-size: 12px;
-	letter-spacing: 0.075em;
-	line-height: 29px;
-	padding: 0 10px;
-	text-align: center;
-	text-decoration: none;
-	text-shadow: 1px 1px 1px #81725c;
-}
-div.body div:first-child div.header ul li.current a {
-	background: url(../images/bg-menuselected.jpg) repeat-x;
-	color: #FFF;
-}
-div.body div:first-child div.header ul li a:hover {
-	color: #FFF;
-}
-div.body div:first-child div.body {
-	background: none;
-	float: none;
-	height: auto;
-	margin: 0;
-	width: auto;
-}
+
+
+
+
+
+
+
+
 div.body div:first-child div.body div {
 	background: url(../images/bg-gallery.png) repeat-y;
 	border-radius: 8px 8px 0 0;

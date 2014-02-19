@@ -99,8 +99,7 @@ public class RecipeController
 	{
 		try 
         {
-			System.out.println("recipe submission");
-        	Blob blob = Hibernate.createBlob(file.getBytes());
+			Blob blob = Hibernate.createBlob(file.getBytes());
         	recipe.setFileName(file.getOriginalFilename());
             recipe.setPic(blob);
             recipe.setContentType(file.getContentType());

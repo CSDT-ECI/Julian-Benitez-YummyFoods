@@ -13,18 +13,13 @@
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/style.css"/>">
 </head>
 <body>
-	<div class="header">
+	
+	
+	<div class="body">
 		<div>
-			<a href="index"><img src="<c:url value="/resources/images/logo.png" />" alt="Logo"></a>
-		</div>
-		<form action="index.html">
-			<input type="text" value="Search from our 10,000+ Recipes around the world" id="search">
-			<input type="submit" value="" id="searchbtn">
-		</form>
-	</div>
-	<nav id="nav_wrapper">
+			<div class="header">
+		<nav id="nav_wrapper">
 				<ul class="sf-menu" id="suckerfishnav">
-				<li>_____________________________________</li>
 					<li><a href="home">Home</a></li>
 					<li class="haschildren"><a href="#" >A-Z Recipe</a>
 						<ul>
@@ -48,23 +43,16 @@
 						<li><a href="doLogout" >Logout</a></li>
 						</ul>
 					</li>
-					<li>________________________________________________________</li>
 					
 					
 				</ul>
 			</nav>
-	
-	<div class="body">
-		<div>
-			
+		
+		</div>
+		
 			<div class="body">
 				<div id="content">
-					<div>
-						
-						<div align="right">
-							
-						</div>
-					</div>
+					
 				</div>
 			</div>
 		</div>

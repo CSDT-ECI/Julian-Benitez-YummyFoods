@@ -21,9 +21,13 @@
 		</form>
 	</div>
 	
-	<nav id="nav_wrapper">
+			
+	<div class="body">
+		<div>
+		<div class="header">
+		<nav id="nav_wrapper">
 				<ul class="sf-menu" id="suckerfishnav">
-				<li>_____________________________________</li>
+				
 					<li class="current"><a href="index">Home</a></li>
 					<li class="haschildren"><a href="#" >A-Z Recipe</a>
 						<ul>
@@ -33,34 +37,11 @@
 					<li class="current_page_ancestor"><a href="allVideo">Videos</a>
 					</li>
 					<li><a href="login" >Login</a></li>
-					<li>_____________________________________________________________________</li>
-					
-					
-				</ul>
+			</ul>
 			</nav>
-			
-	<div class="body">
-		<div>
-				<div class="body">
-					<div>
-						<a href="index"><img src="<c:url value="/resources/images/turkey.jpg" />" alt="Image"></a>
-					</div>
-					<ul>
-					<c:forEach items="${sessionList}" var="recipe">
-					<li>
+	</div>
+		<a href="index"><img src="<c:url value="/resources/images/turkey.jpg" />" alt="Image"></a>
 					
-						<a href="recipe?recipeId=<c:out value="${recipe.recipeId}"/>"><img src="image?recipeId=<c:out value="${recipe.recipeId}"/>" width="60" height="60" alt="Image"></a>
-						<div>					
-							<h2><a href="recipe?recipeId=<c:out value="${recipe.recipeId}"/>"><c:out value="${recipe.name}"/></a></h2>
-							<p>
-								by:- ${recipe.user.userId }
-							</p>
-						</div>
-					</li>
-					</c:forEach>
-					
-				</ul>
-				</div>
 			
 			<div class="footer">
 				<ul>

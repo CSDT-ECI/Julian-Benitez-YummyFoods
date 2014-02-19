@@ -1,8 +1,11 @@
 package com.userportal.spring.controller;
 
 import java.awt.List;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import javax.validation.Validation;
@@ -17,6 +20,8 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.userportal.spring.form.Login;
 import com.userportal.spring.form.User;
@@ -89,4 +94,26 @@ public class NewUserRegistration
 		}
 		return "NewUser";
 	}
+	
+	@RequestMapping(value="/validateUserName", method=RequestMethod.GET)
+    
+    public @ResponseBody String  handleMySuccessRedirect(@RequestParam(value = "userName", required = false)String userName) 
+	{
+		java.util.List<User> userIdList=userService.list();
+		String status=null;
+		for(int i=0;i<userIdList.size();i++)
+		{
+			if(userIdList.get(i).getUserId().equals(userName))
+			{
+				status="Sorry this user id is already taken!!!";
+			}
+			else
+			{
+				status="Ok";
+			}
+		}
+		
+		
+       return status;
+            } 
 }

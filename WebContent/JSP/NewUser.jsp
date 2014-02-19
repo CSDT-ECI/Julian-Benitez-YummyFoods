@@ -4,7 +4,48 @@
         <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<script type="text/javascript">
 
+var xmlHttp;
+
+function updateOutput(inputString) {
+    if (inputString.length == 0) {
+        document.getElementById("userName").innerHTML = "";
+        return;
+    }
+    try {
+        if (window.XMLHttpRequest)
+            xmlHttp = new XMLHttpRequest();
+        else if (window.ActiveXObject)
+            xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+        if (!xmlHttp || xmlHttp == null) {
+            return;
+        }
+        var url = "validateUserName?userName=" + inputString; // Here, I have mapped servlet as "validate".
+        xmlHttp.onreadystatechange = StateChanged;
+        xmlHttp.open("GET", url, true);
+        xmlHttp.send(null);
+    } catch (e) {
+        document.getElementById("userNameMessage").innerHTML = "An error occured";
+    }
+}
+function StateChanged() {
+    if ((xmlHttp.readyState == 4) && (xmlHttp.status == 200)) {
+       if(xmlHttp.responseText=='Ok')
+    	   {
+    	   
+    	   }
+       else
+    	   {
+    	   alert(xmlHttp.responseText);
+    	   document.getElementById("userName").value='';
+    	   }
+    	
+        
+        
+    }
+}
+</script>
 <head>
 	<meta charset="UTF-8">
 	<title>Recipe - Food &amp; Recipes s</title>
@@ -20,10 +61,14 @@
 			<input type="submit" value="" id="searchbtn">
 		</form>
 	</div>
-	<nav id="nav_wrapper">
+	
+	<div class="body">
+		<div>
+		<div class="header">
+		<nav id="nav_wrapper">
 				<ul class="sf-menu" id="suckerfishnav">
-				<li>_____________________________________</li>
-					<li><a href="index">Home</a></li>
+				
+					<li class="current"><a href="index">Home</a></li>
 					<li class="haschildren"><a href="#" >A-Z Recipe</a>
 						<ul>
 							<li><a href="allRecipe?page=0" >All Recipe</a></li>
@@ -32,23 +77,17 @@
 					<li class="current_page_ancestor"><a href="allVideo">Videos</a>
 					</li>
 					<li><a href="login" >Login</a></li>
-					<li>_____________________________________________________________________</li>
-					
-					
-				</ul>
+			</ul>
 			</nav>
-	
-	<div class="body">
-		<div>
-			<div class="body">
+			</div>
 			
 				<div id="content" align="center">
 				<div><div>
 				<br>
 					<form:form action="newUserAdd" method="POST" modelAttribute="user">
-		<center>
+		
 		<table>
-			<tr><td>Name:</td><td><form:input path="userName"/></td><td><font color="red"><c:out value="${userNameError}" /></font></td></tr>
+			<tr><td>Name:</td><td><form:input path="userName" id="userName" onblur="updateOutput(this.value)"/></td><td><font color="red"><c:out value="${userNameError}" /></br></font></td></tr>
 			<tr><td>Email ID:</td><td><form:input path="userEmailId"/></td><td><font color="red"><c:out value="${userEmailIdError}" /></font></td></tr>
 			<tr><td>User Id:</td><td><form:input path="userId"/></td><td><font color="red"><c:out value="${userIdError}" /></font> </td></tr>
 			<tr><td>Password:</td><td><form:password path="userPassword"/></td><td><font color="red"><c:out value="${userPasswordError}" /><c:out value="${userPasswordMismatchError}"/></font></td></tr>
@@ -56,12 +95,14 @@
 			
 			<tr><td></td><td><input type="submit" value="Create"/></td></tr>
 		</table>
+		
+		
 		</center>
 	</form:form>
 </div></div>
 				</div>
 			</div>
-		</div>
+		
 		<div>
 			<div>
 				<h3>Cooking Video</h3>
@@ -85,6 +126,7 @@
 
 			</div>
 			
+			
 			<div>
 				<h3>Get Updates</h3>
 				<a href="https://www.facebook.com/pulkit.sharva" target="_blank" id="facebook">Facebook</a>
@@ -94,7 +136,7 @@
 				<a href="https://github.com/pulkitsharva" target="_blank" id="github">Github</a>
 			</div>
 		</div>
-	</div>
+</div>
 	<div class="footer">
 		<div>
 			<p>

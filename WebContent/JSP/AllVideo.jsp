@@ -19,10 +19,15 @@
 			<input type="submit" value="" id="searchbtn">
 		</form>
 	</div>
-	<nav id="nav_wrapper">
+	
+	
+	<div class="body">
+		<div>
+		<div class="header">
+		<nav id="nav_wrapper">
 				<ul class="sf-menu" id="suckerfishnav">
-				<li>_____________________________________</li>
-					<li><a href="index">Home</a></li>
+				
+					<li class="current"><a href="index">Home</a></li>
 					<li class="haschildren"><a href="#" >A-Z Recipe</a>
 						<ul>
 							<li><a href="allRecipe?page=0" >All Recipe</a></li>
@@ -31,30 +36,24 @@
 					<li class="current_page_ancestor"><a href="allVideo">Videos</a>
 					</li>
 					<li><a href="login" >Login</a></li>
-					<li>_____________________________________________________________________</li>
-					
-					
-				</ul>
+			</ul>
 			</nav>
-	
-	<div class="body">
-		<div>
-			
-			<div class="body">
+			</div>
 				<div id="content">
 					<div><center>
 					
-					<iframe width="800" height="400" src="//www.youtube.com/embed/ngN4TWgL3sY" frameborder="0" allowfullscreen></iframe>
+					<iframe width="700" height="400" src="//www.youtube.com/embed/ngN4TWgL3sY" frameborder="0" allowfullscreen></iframe>
 					</center>
 					
 					</div>
 				</div>
 			</div>
-		</div>
+		
 		<div>
 			<div>
 				<h3>Cooking Video</h3>
 				<a href="videos.html"><img src="images/cooking-video.png" alt="Image"></a>
+				<iframe width="200" height="200" src="//www.youtube.com/embed/ngN4TWgL3sY" frameborder="0" allowfullscreen></iframe>
 				<span>Vegetable &amp; Rice Topping</span>
 			</div>
 			<div>

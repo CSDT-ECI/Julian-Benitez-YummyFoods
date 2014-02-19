@@ -24,9 +24,11 @@
 			<input type="submit" value="" id="searchbtn">
 		</form>
 	</div>
-	<nav id="nav_wrapper">
+	<div class="body">
+		<div>
+		<div class="header">
+		<nav id="nav_wrapper">
 				<ul class="sf-menu" id="suckerfishnav">
-				<li>_____________________________________</li>
 					<li><a href="home">Home</a></li>
 					<li class="haschildren"><a href="#" >A-Z Recipe</a>
 						<ul>
@@ -50,16 +52,13 @@
 						<li><a href="doLogout" >Logout</a></li>
 						</ul>
 					</li>
-					<li>________________________________________________________</li>
 					
 					
 				</ul>
 			</nav>
-	
-	<div class="body">
-		<div>
+		
+		</div>
 			
-			<div class="body">
 				<div id="content">
 					<div>
 						<div>
@@ -97,7 +96,6 @@
 				
 				</div>
 			</div>
-		</div>
 		<div>
 			<div>
 				<h3>Cooking Video</h3>

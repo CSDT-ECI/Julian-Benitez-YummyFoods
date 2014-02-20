@@ -121,18 +121,26 @@ public class RecipeController
 	public String viewRecipeById(Model model,HttpServletRequest request)
 	{
 		Integer recipeId=Integer.parseInt(request.getParameter("recipeId"));
-		List<Recipe>sessionList=(List<Recipe>) request.getSession().getAttribute("sessionList");
-		for(int i=0;i<sessionList.size();i++)
+		List<Recipe>sessionFullList=(List<Recipe>) request.getSession().getAttribute("sessionFullList");
+		String sessionValue=(String)request.getSession(false).getAttribute("sessionValue");
+		for(int i=0;i<sessionFullList.size();i++)
 		{
-			if(sessionList.get(i).getRecipeId().equals(recipeId))
+			if(sessionFullList.get(i).getRecipeId().equals(recipeId))
 			{
 				List<Recipe> recipeDetails= new ArrayList<Recipe>();
-				recipeDetails.add(sessionList.get(i));
+				recipeDetails.add(sessionFullList.get(i));
 				model.addAttribute("recipeDetails", recipeDetails);
-				return "ViewRecipe";
 			}
 		}
-		return "main";
+		if(sessionValue==null)
+		{
+			return "ViewRecipe";
+		}
+		else
+		{
+			return "UserViewRecipe";
+		}
+		
 	}
 	
 	@RequestMapping(value="allRecipe")
@@ -142,12 +150,25 @@ public class RecipeController
 		List<Recipe> recipeList=null;
 		List<Recipe> featuredRecipeList=null;
 		recipeList=recipeService.getAllRecipe();
-		
-			featuredRecipeList=recipeService.getFeaturedList();
-			request.getSession().setAttribute("sessionList", featuredRecipeList);
+		featuredRecipeList=recipeService.getFeaturedList();
+		request.getSession().setAttribute("sessionList", featuredRecipeList);
 		request.getSession().setAttribute("sessionFullList", recipeList);
 		
-		model.addAttribute("recipeList", recipeService.getRecipeForPagination(page));
+		List<Recipe> paginationRecipeList=recipeService.getRecipeForPagination(page);
+		for(int i=0;i<paginationRecipeList.size();i++)
+		{
+			int length=paginationRecipeList.get(i).getDirections().length();
+			if(length<275)
+			{
+				
+			}
+			else
+			{
+				paginationRecipeList.get(i).setDirections(paginationRecipeList.get(i).getDirections().substring(0,275));
+			}
+			
+		}
+		model.addAttribute("recipeList", paginationRecipeList);
 	
 		if(page==-1)
 		{

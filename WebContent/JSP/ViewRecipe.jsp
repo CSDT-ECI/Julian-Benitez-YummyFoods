@@ -4,9 +4,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
-<c:if test="${sessionValue==null }">
-<jsp:forward page="/index"></jsp:forward>
-</c:if>
 <head>
 	<meta charset="UTF-8">
 	<title>Recipe - Food &amp; Recipes s</title>
@@ -14,6 +11,15 @@
 </head>
 <body>
 
+	<div class="header">
+		<div>
+			<a href="index"><img src="<c:url value="/resources/images/logo.png" />" alt="Logo"></a>
+		</div>
+		<form action="index.html">
+			<input type="text" value="Search from our 10,000+ Recipes around the world" id="search">
+			<input type="submit" value="" id="searchbtn">
+		</form>
+	</div>
 	
 	<div class="body">
 		<div>
@@ -36,7 +42,7 @@
 				<div id="content">
 					<c:forEach items="${recipeDetails }" var="recipe">
 					<div>
-						<div>
+						<div><br><br>
 							<center><h2>${recipe.name }</h2>
 								by:- ${recipe.user.userId }
 							</center>
@@ -61,7 +67,7 @@
 			<div>
 				<h3>Cooking Video</h3>
 				<iframe width="200" height="200" src="//www.youtube.com/embed/ngN4TWgL3sY" frameborder="0" allowfullscreen></iframe>
-				<span>Vegetable &amp; Rice Topping</span>
+				
 			</div>
 			<div>
 				<h3>Featured Recipes</h3>

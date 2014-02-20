@@ -43,6 +43,7 @@
 				<div id="content" align="center">
 				<div>
 				<div>
+				<br><br>
 				<font color="red"></font><c:out value="${ResetPassword}"></c:out><font></font><br>
 					<form:form action="doLogin" method="POST" modelAttribute="login">
 						<table>
@@ -61,7 +62,7 @@
 			<div>
 				<h3>Cooking Video</h3>
 				<iframe width="200" height="200" src="//www.youtube.com/embed/ngN4TWgL3sY" frameborder="0" allowfullscreen></iframe>
-				<span>Vegetable &amp; Rice Topping</span>
+				
 			</div>
 			<div>
 				<h3>Featured Recipes</h3>

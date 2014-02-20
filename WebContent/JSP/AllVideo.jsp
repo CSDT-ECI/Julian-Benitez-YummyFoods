@@ -26,19 +26,31 @@
 		<div class="header">
 		<nav id="nav_wrapper">
 				<ul class="sf-menu" id="suckerfishnav">
-				
-					<li class="current"><a href="index">Home</a></li>
+					<li><a href="home">Home</a></li>
 					<li class="haschildren"><a href="#" >A-Z Recipe</a>
 						<ul>
-							<li><a href="allRecipe?page=0" >All Recipe</a></li>
+							<li><a href="userAllRecipe?page=0" >All Recipe</a></li>
 						</ul>
 					</li>
-					<li class="current_page_ancestor"><a href="allVideo">Videos</a>
+					<li class="haschildren"><a href="#" >My Recipe</a>
+						<ul>
+							<li><a href="userAddRecipe" >Post</a></li>
+							<li><a href="userRecipe?page=0" >View</a></li>		
+						</ul>
 					</li>
-					<li><a href="login" >Login</a></li>
-			</ul>
-			</nav>
-			</div>
+					
+					<li class="current_page_ancestor"><a href="userAllVideo">Videos</a>
+					</li>
+					<li class="haschildren"><a href="#" >Settings</a>
+						<ul>
+							<li><a href="#" >Profile</a></li>
+							<li><a href="#" >Change Password</a></li>
+							<li><a href="doLogout" >Logout</a></li>
+						</ul>
+					</li>
+				</ul>
+			</nav>	
+		</div>
 				<div id="content">
 					<div><center>
 					
@@ -54,7 +66,7 @@
 				<h3>Cooking Video</h3>
 				<a href="videos.html"><img src="images/cooking-video.png" alt="Image"></a>
 				<iframe width="200" height="200" src="//www.youtube.com/embed/ngN4TWgL3sY" frameborder="0" allowfullscreen></iframe>
-				<span>Vegetable &amp; Rice Topping</span>
+				
 			</div>
 			<div>
 				<h3>Featured Recipes</h3>

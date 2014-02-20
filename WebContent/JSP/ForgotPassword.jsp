@@ -10,6 +10,20 @@
 	<title>Recipe - Food &amp; Recipes s</title>
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/style.css"/>">
 </head>
+<script type="text/javascript">
+function validateEmail()
+{
+	var x=document.getElementById("emailId").value;
+	var atpos=x.indexOf("@");
+	var dotpos=x.lastIndexOf(".");
+	if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length)
+	{
+	  	alert("Please enter a valid e-mail address");
+	  	return false;
+	 }
+}
+
+</script>
 <body>
 	<div class="header">
 		<div>
@@ -20,45 +34,46 @@
 			<input type="submit" value="" id="searchbtn">
 		</form>
 	</div>
-	
 	<div class="body">
 		<div>
-		<div class="header">
-		<nav id="nav_wrapper">
-				<ul class="sf-menu" id="suckerfishnav">
-				
-					<li class="current"><a href="index">Home</a></li>
-					<li class="haschildren"><a href="#" >A-Z Recipe</a>
-						<ul>
-							<li><a href="allRecipe?page=0" >All Recipe</a></li>
-						</ul>
-					</li>
-					<li class="current_page_ancestor"><a href="allVideo">Videos</a>
-					</li>
-					<li><a href="login" >Login</a></li>
-			</ul>
-			</nav>
+			<div class="header">
+				<nav id="nav_wrapper">
+					<ul class="sf-menu" id="suckerfishnav">
+						<li class="current"><a href="index">Home</a></li>
+						<li class="haschildren"><a href="#" >A-Z Recipe</a>
+							<ul>
+								<li><a href="allRecipe?page=0" >All Recipe</a></li>
+							</ul>
+						</li>
+						<li class="current_page_ancestor"><a href="allVideo">Videos</a>
+						</li>
+						<li><a href="login" >Login</a></li>
+					</ul>
+				</nav>
 			</div>
-				<div id="content" align="center">
-				<div><div>
-				<br><center>
-							
-								<form:form action="resetPassword" method="post" modelAttribute="user">
-									<table>
-										<tr><td>Email ID</td><td><form:input path="userEmailId"/></td></tr>	
-									</table>
-									<input type="submit" value="Reset Password"/>
-								</form:form>
-							</center>
+			<div id="content" align="center">
+				<div>
+					<div>
+						<br><br><br>
+						<center>
+							<form:form action="resetPassword" method="post" modelAttribute="user" onSubmit="return validateEmail();">
+								<table>
+									<tr><td align="left">Email ID</td><td align="left"><form:input id="emailId" path="userEmailId" onblur="validateEmail()"/></td></tr>	
+									<tr><td></td><td align="left"><input type="submit" value="Reset Password"/></td>
+								</table>
+								
+							</form:form>
+						</center>
+					</div>
 				</div>
-				</div></div>
 			</div>
+		</div>
 		
 		<div>
 			<div>
 				<h3>Cooking Video</h3>
 				<iframe width="200" height="200" src="//www.youtube.com/embed/ngN4TWgL3sY" frameborder="0" allowfullscreen></iframe>
-				<span>Vegetable &amp; Rice Topping</span>
+				
 			</div>
 			<div>
 				<h3>Featured Recipes</h3>

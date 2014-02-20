@@ -42,15 +42,18 @@ public class ResetPassword
 				{
 					if(login.getUserId().equals(tempUser.getUserId()))
 					{
-						Email.sendEmail(user.getUserEmailId(), "Password Details", "Hi user,\n\nYour password details are Password:"+login.getUserPassword()+"\n\nRegards\nYummyFoods Admin", "Admin<admin@userportal.mailgun.org>");
+						Email.sendEmail(user.getUserEmailId(), "Password Details", "Hi "+tempUser.getUserId()+",\n\nYour password details are Password:"+login.getUserPassword()+"\n\nRegards\nYummyFoods Admin", "Admin<admin@userportal.mailgun.org>");
 						
 					}
 				}
 				model.addAttribute("login",new Login());
-				model.addAttribute("ResetPassword", "Password detail have been sent to "+user.getUserEmailId());
+				model.addAttribute("ResetPassword", "Password detail have been sent to "+user.getUserEmailId()+".");
+				return "Login";
+				
 			}
 		}
-		
+		model.addAttribute("login",new Login());
+		model.addAttribute("ResetPassword", "Email address doesn't exist.");
 		return "Login";
 	}
 }

@@ -33,30 +33,26 @@
 					<li class="haschildren"><a href="#" >A-Z Recipe</a>
 						<ul>
 							<li><a href="userAllRecipe?page=0" >All Recipe</a></li>
-							
 						</ul>
 					</li>
 					<li class="haschildren"><a href="#" >My Recipe</a>
 						<ul>
 							<li><a href="userAddRecipe" >Post</a></li>
-						<li><a href="userRecipe?page=0" >View</a></li>		
+							<li><a href="userRecipe?page=0" >View</a></li>		
 						</ul>
 					</li>
 					
-					<li class="current_page_ancestor"><a href="allVideo">Videos</a>
+					<li class="current_page_ancestor"><a href="userAllVideo">Videos</a>
 					</li>
 					<li class="haschildren"><a href="#" >Settings</a>
 						<ul>
 							<li><a href="#" >Profile</a></li>
-						<li><a href="#" >Change Password</a></li>
-						<li><a href="doLogout" >Logout</a></li>
+							<li><a href="#" >Change Password</a></li>
+							<li><a href="doLogout" >Logout</a></li>
 						</ul>
 					</li>
-					
-					
 				</ul>
 			</nav>
-		
 		</div>
 			
 				<div id="content">
@@ -70,21 +66,24 @@
 				<td>Name</td><td><form:input path="name"/></td>
 			</tr>
 			<tr>
-				<td>No. of People</td><td>
+				<td align="left">No. of People</td>
+				<td align="left">
 					<form:select path="forPeople">
 						<form:option value="1">1</form:option>
 						<form:option value="2">2</form:option>
 						<form:option value="3">3</form:option>
+						<form:option value="4">4</form:option>
+						<form:option value="5">5</form:option>
 					</form:select></td>
 			</tr>
 			<tr>
-				<td>Ingredients</td><td><form:textarea path="ingredients"/></td>
+				<td align="left">Ingredients</td><td align="left"><form:textarea path="ingredients" rows="6" cols="50"/></td>
 			</tr>
 			<tr>
-				<td>Directions</td><td><form:textarea path="directions"/></td>
+				<td align="left">Directions</td><td align="left"><form:textarea path="directions" rows="6" cols="50"/></td>
 			</tr>
 			<tr>
-				<td>Image</td><td><input type="file" name="file"></td>
+				<td>Image</td><td align="left"><input type="file" name="file"></td>
 			</tr>
 		
 		</table>
@@ -100,7 +99,7 @@
 			<div>
 				<h3>Cooking Video</h3>
 				<iframe width="200" height="200" src="//www.youtube.com/embed/ngN4TWgL3sY" frameborder="0" allowfullscreen></iframe>
-				<span>Vegetable &amp; Rice Topping</span>
+				
 			</div>
 			<div>
 				<h3>Featured Recipes</h3>

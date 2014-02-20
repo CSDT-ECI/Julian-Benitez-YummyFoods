@@ -2,16 +2,17 @@
     pageEncoding="ISO-8859-1"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- Website template by freewebsitetemplates.com -->
 <html>
-
 <head>
+	<meta charset="UTF-8">
+	<title>A to Z Recipes - Food &amp; Recipes</title>
+		<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/style.css" />">
+</head>
 <c:if test="${sessionValue==null }">
 <jsp:forward page="/index"></jsp:forward>
 </c:if>
-	<meta charset="UTF-8">
-	<title>Recipe - Food &amp; Recipes s</title>
-	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/style.css"/>">
-</head>
+
 <body>
 	<div class="header">
 		<div>
@@ -26,7 +27,7 @@
 	
 	<div class="body">
 		<div>
-			<div class="header">
+		<div class="header">
 		<nav id="nav_wrapper">
 				<ul class="sf-menu" id="suckerfishnav">
 					<li><a href="home">Home</a></li>
@@ -52,18 +53,21 @@
 						</ul>
 					</li>
 				</ul>
-			</nav>
-		</div>
-		
-			<div class="body">
+			</nav>	</div>
 				<div id="content">
+					<div><center>
 					
+					<iframe width="700" height="400" src="//www.youtube.com/embed/ngN4TWgL3sY" frameborder="0" allowfullscreen></iframe>
+					</center>
+					
+					</div>
 				</div>
 			</div>
-		</div>
+		
 		<div>
 			<div>
 				<h3>Cooking Video</h3>
+				<a href="videos.html"><img src="images/cooking-video.png" alt="Image"></a>
 				<iframe width="200" height="200" src="//www.youtube.com/embed/ngN4TWgL3sY" frameborder="0" allowfullscreen></iframe>
 				
 			</div>
@@ -91,9 +95,10 @@
 				<a href="https://plus.google.com/117192008917331015868/posts" target="_blank" id="googleplus">Google&#43;</a>
 				<a href="http://stackoverflow.com/users/2219920/pulkit" target="_blank" id="stackoverflow">Stack Overflow</a>
 				<a href="https://github.com/pulkitsharva" target="_blank" id="github">Github</a>
-			</div>
+				</div>
 		</div>
-	</div>	<div class="footer">
+	</div>
+	<div class="footer">
 		<div>
 			<p>
 				&copy; Copyright 2012. All rights reserved

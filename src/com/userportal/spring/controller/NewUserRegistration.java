@@ -95,15 +95,14 @@ public class NewUserRegistration
 		return "NewUser";
 	}
 	
-	@RequestMapping(value="/validateUserName", method=RequestMethod.GET)
-    
-    public @ResponseBody String  handleMySuccessRedirect(@RequestParam(value = "userName", required = false)String userName) 
+	@RequestMapping(value="/validateUserId", method=RequestMethod.GET)
+    public @ResponseBody String  handleMySuccessRedirect(@RequestParam(value = "userId", required = false)String userId) 
 	{
 		java.util.List<User> userIdList=userService.list();
 		String status=null;
 		for(int i=0;i<userIdList.size();i++)
 		{
-			if(userIdList.get(i).getUserId().equals(userName))
+			if(userIdList.get(i).getUserId().equals(userId))
 			{
 				status="Sorry this user id is already taken!!!";
 				return status;

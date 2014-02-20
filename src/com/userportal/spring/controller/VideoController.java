@@ -13,4 +13,10 @@ public class VideoController
 	{
 		return "AllVideo";
 	}
+	
+	@RequestMapping(value="userAllVideo")
+	public String userVideoPage()
+	{
+		return "UserAllVideo";
+	}
 }

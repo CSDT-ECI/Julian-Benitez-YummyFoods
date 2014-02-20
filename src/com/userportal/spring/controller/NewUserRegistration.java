@@ -55,6 +55,7 @@ public class NewUserRegistration
 	@RequestMapping(value="/newUserAdd", method=RequestMethod.POST)
 	public String addUser(@ModelAttribute("user")@Valid User user,BindingResult result,Login login, Model model,HttpSession session)
 	{
+		
 		if(result.hasErrors())
 		{
 			if(result.hasFieldErrors("userId"))

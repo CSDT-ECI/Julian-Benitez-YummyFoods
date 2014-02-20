@@ -98,7 +98,7 @@
 						<form:form action="newUserAdd" method="POST" modelAttribute="user" onsubmit="return validateEmail();">
 							<center>
 								<table>
-									<tr><td>Name:</td><td><form:input path="userName" /></td><td><font color="red"><c:out value="${userNameError}" /></br></font></td></tr>
+									<tr><td>Name:</td><td><form:input path="userName" /></td><td><font color="red"><c:out value="${userNameError}" /></font></td></tr>
 									<tr><td>Email ID:</td><td><form:input id="emailId" onblur="validateEmail()" path="userEmailId"/></td><td><font color="red"><c:out value="${userEmailIdError}" /></font></td></tr>
 									<tr><td>User Id:</td><td><form:input path="userId" id="userId" onblur="updateOutput(this.value)"/></td><td><font color="red"><c:out value="${userIdError}" /></font> </td></tr>
 									<tr><td>Password:</td><td><form:password path="userPassword"/></td><td><font color="red"><c:out value="${userPasswordError}" /><c:out value="${userPasswordMismatchError}"/></font></td></tr>

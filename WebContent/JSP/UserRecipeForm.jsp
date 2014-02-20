@@ -47,7 +47,7 @@
 					<li class="haschildren"><a href="#" >Settings</a>
 						<ul>
 							<li><a href="#" >Profile</a></li>
-							<li><a href="#" >Change Password</a></li>
+							<li><a href="changePassword" >Change Password</a></li>
 							<li><a href="doLogout" >Logout</a></li>
 						</ul>
 					</li>
@@ -88,7 +88,7 @@
 		
 		</table>
 		<input type="submit" value="Add">
-	</form:form>
+	</form:form></center>
 						
 						</div>
 					</div>

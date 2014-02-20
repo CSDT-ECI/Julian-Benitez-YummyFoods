@@ -40,4 +40,11 @@ public class UserDAOImpl implements UserDAO
 		return (User) sessionFactory.getCurrentSession().createQuery("from User where userId='"+userId+"'").list().get(0);
 	}
 
+	@Override
+	public void update(User user) 
+	{
+		sessionFactory.getCurrentSession().update(user);
+		
+	}
+
 }

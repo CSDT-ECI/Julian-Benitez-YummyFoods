@@ -10,4 +10,5 @@ public interface UserService
 	public void save(User user);
 	public void delete(User user);
 	public User getUserById(String userId);
+	public void update(User user);
 }

@@ -54,7 +54,7 @@
 				<div id="content">
 					<div><center>
 					
-					<iframe width="700" height="400" src="//www.youtube.com/embed/ngN4TWgL3sY" frameborder="0" allowfullscreen></iframe>
+					<iframe width="700" height="400" src="//www.youtube.com/embed/ngN4TWgL3sY" frameborder="0"></iframe>
 					</center>
 					
 					</div>
@@ -65,7 +65,7 @@
 			<div>
 				<h3>Cooking Video</h3>
 				<a href="videos.html"><img src="images/cooking-video.png" alt="Image"></a>
-				<iframe width="200" height="200" src="//www.youtube.com/embed/ngN4TWgL3sY" frameborder="0" allowfullscreen></iframe>
+				<iframe width="200" height="200" src="//www.youtube.com/embed/ngN4TWgL3sY" frameborder="0" ></iframe>
 				
 			</div>
 			<div>

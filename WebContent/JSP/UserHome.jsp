@@ -47,7 +47,7 @@
 					<li class="haschildren"><a href="#" >Settings</a>
 						<ul>
 							<li><a href="#" >Profile</a></li>
-							<li><a href="#" >Change Password</a></li>
+							<li><a href="changePassword" >Change Password</a></li>
 							<li><a href="doLogout" >Logout</a></li>
 						</ul>
 					</li>
@@ -55,11 +55,14 @@
 			</nav>
 		</div>
 		
-			<div class="body">
 				<div id="content">
-					
+					<div>
+						<div><center>
+						<font color="red">${Message }</font></center>
+						</div>
+					</div>
 				</div>
-			</div>
+			
 		</div>
 		<div>
 			<div>
@@ -93,7 +96,8 @@
 				<a href="https://github.com/pulkitsharva" target="_blank" id="github">Github</a>
 			</div>
 		</div>
-	</div>	<div class="footer">
+	</div>	
+	<div class="footer">
 		<div>
 			<p>
 				&copy; Copyright 2012. All rights reserved

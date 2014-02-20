@@ -70,7 +70,7 @@
 		<div>
 			<div>
 				<h3>Cooking Video</h3>
-				<iframe width="200" height="200" src="//www.youtube.com/embed/ngN4TWgL3sY" frameborder="0" allowfullscreen></iframe>
+				<iframe width="200" height="200" src="//www.youtube.com/embed/ngN4TWgL3sY" frameborder="0" ></iframe>
 				
 			</div>
 			<div>

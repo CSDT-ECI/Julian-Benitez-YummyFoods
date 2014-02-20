@@ -40,6 +40,15 @@ public class User
 	@Transient
 	private String userConfirmPassword;
 	
+	@Transient
+	private String userNewPassword;
+	
+	public String getUserNewPassword() {
+		return userNewPassword;
+	}
+	public void setUserNewPassword(String userNewPassword) {
+		this.userNewPassword = userNewPassword;
+	}
 	public Set<Recipe> getRecipe() {
 		return recipe;
 	}

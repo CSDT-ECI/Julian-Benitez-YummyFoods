@@ -29,10 +29,10 @@ function validateEmail()
 		<div>
 			<a href="index"><img src="<c:url value="/resources/images/logo.png" />" alt="Logo"></a>
 		</div>
-		<form action="index.html">
-			<input type="text" value="Search from our 10,000+ Recipes around the world" id="search">
+		<form:form action="doSearch?page=0" method="post">
+			<input type="text" name="recipeName" id="search"/>
 			<input type="submit" value="" id="searchbtn">
-		</form>
+		</form:form>
 	</div>
 	<div class="body">
 		<div>
@@ -105,7 +105,7 @@ function validateEmail()
 	<div class="footer">
 		<div>
 			<p>
-				&copy; Copyright 2012. All rights reserved
+				&copy; Copyright 2014. All rights reserved
 			</p>
 		</div>
 	</div>

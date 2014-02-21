@@ -13,4 +13,5 @@ public interface RecipeService
 	public List<Recipe> getRecipeForPagination(int page);
 	public List<Recipe> getFeaturedList();
 	public List<Recipe> getRecipeForPaginationByUserId(int page, String userId);
+	public List<Recipe> getRecipeByName(String recipeName,int page);
 }

@@ -61,4 +61,17 @@ public class RecipeDAOImpl implements RecipeDAO
 		
 	}
 
+	@Override
+	public List<Recipe> getRecipeByName(String recipeName,int page) {
+		
+		  
+		Query qry = sessionFactory.getCurrentSession().createQuery("From Recipe where name like :name");
+		qry.setParameter("name",'%'+recipeName+'%');
+		qry.setFirstResult(page * limitResultsPerPage); 
+        qry.setMaxResults(limitResultsPerPage);
+		return qry.list();
+				
+		
+	}
+
 }

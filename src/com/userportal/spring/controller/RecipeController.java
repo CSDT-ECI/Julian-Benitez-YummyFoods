@@ -218,7 +218,21 @@ public class RecipeController
 			request.getSession().setAttribute("sessionList", featuredRecipeList);
 		request.getSession().setAttribute("sessionFullList", recipeList);
 		
-		model.addAttribute("recipeList", recipeService.getRecipeForPagination(page));
+		List<Recipe> paginationRecipeList=recipeService.getRecipeForPagination(page);
+		for(int i=0;i<paginationRecipeList.size();i++)
+		{
+			int length=paginationRecipeList.get(i).getDirections().length();
+			if(length<275)
+			{
+				
+			}
+			else
+			{
+				paginationRecipeList.get(i).setDirections(paginationRecipeList.get(i).getDirections().substring(0,275));
+			}
+			
+		}
+		model.addAttribute("recipeList", paginationRecipeList);
 	
 		if(page==-1)
 		{
@@ -263,6 +277,88 @@ public class RecipeController
 		return "UserHome";
 	}
 	
-	
+	@RequestMapping(value="/doSearch")
+	public String doSearch(Model model, HttpServletRequest request)
+	{
+		int page1=0,page2=0,page3=0;
+		String recipeName=request.getParameter("recipeName");
+		String temp="";
+		int page=Integer.parseInt((String)request.getParameter("page"));
+		if(temp.equals(recipeName)||recipeName==null)
+		{
+			if(request.getSession(false).getAttribute("sessionValue")==null)
+			{
+				return"redirect:allRecipe?page=0";
+			}
+			else
+			{
+				return"redirect:userAllRecipe?page=0";
+			}
+		}
+		else
+		{
+			List <Recipe> searchRecipeList=recipeService.getRecipeByName(recipeName,page);
+			for(int i=0;i<searchRecipeList.size();i++)
+			{
+				int length=searchRecipeList.get(i).getDirections().length();
+				if(length<275)
+				{
+					
+				}
+				else
+				{
+					searchRecipeList.get(i).setDirections(searchRecipeList.get(i).getDirections().substring(0,275));
+				}
+				
+			}
+			model.addAttribute("searchRecipeList", searchRecipeList);
+			request.getSession(false).setAttribute("sessionRecipeList",recipeService.getRecipeByName(recipeName,page));
+			if(page==-1)
+			{
+				page1=(Integer) request.getSession().getAttribute("PageValue1");
+				page2=(Integer) request.getSession().getAttribute("PageValue2");
+				page3=(Integer) request.getSession().getAttribute("PageValue3");
+				page1=page1-1;
+				page2=page2-1;
+				page3=page3-1;
+				request.getSession().setAttribute("PageValue1", page1);
+				request.getSession().setAttribute("PageValue2", page2);
+				request.getSession().setAttribute("PageValue3", page3);
+				
+			}
+			else if(page<-1)
+			{
+				page1=1;
+				page2=2;
+				page3=3;
+			}
+			else if(page>=0)
+			{
+				page1=page+1;
+				page2=page1+1;
+				page3=page2+1;
+				request.getSession().setAttribute("PageValue1", page1);
+				request.getSession().setAttribute("PageValue2", page2);
+				request.getSession().setAttribute("PageValue3", page3);
+				
+			}
+				model.addAttribute("pageValue1",page1);
+				model.addAttribute("pageValue2",page2);
+				model.addAttribute("pageValue3",page3);
+			
+			if(request.getSession(false).getAttribute("sessionValue")==null)
+			{
+				return"SearchRecipe";
+			}
+			else
+			{
+				return "UserSearchRecipe";
+			}
+			
+			
+		}
+		
+	}
+
  	
 }

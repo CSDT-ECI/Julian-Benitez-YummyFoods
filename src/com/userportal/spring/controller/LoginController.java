@@ -63,6 +63,7 @@ public class LoginController
 			
 		session.setAttribute("sessionFullList", recipeList);
 		model.addAttribute("login", new Login());
+
 		return "main";
 	}
 	
@@ -133,4 +134,5 @@ public class LoginController
 		return "Login";
 	}
 	
+		
 }

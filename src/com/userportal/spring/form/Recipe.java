@@ -47,7 +47,30 @@ public class Recipe
 	@ManyToOne
 	@JoinColumn(name="userId")
 	private User user;
+	
+	@Column(name="currentRating",nullable=true)
+	private int currentRating;
+	
+	@Column(name="noOfPeopleRated",nullable=true)
+	private int noOfPeopleRated;
 
+	public int getCurrentRating() {
+		return currentRating;
+	}
+
+	public void setCurrentRating(int currentRating) {
+		this.currentRating = currentRating;
+	}
+
+	public int getNoOfPeopleRated() {
+		return noOfPeopleRated;
+	}
+
+	public void setNoOfPeopleRated(int noOfPeopleRated) {
+		this.noOfPeopleRated = noOfPeopleRated;
+	}
+
+	
 	public String getContentType() {
 		return contentType;
 	}

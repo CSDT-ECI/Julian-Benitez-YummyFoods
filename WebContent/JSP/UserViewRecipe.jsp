@@ -8,6 +8,43 @@
 <c:if test="${sessionValue==null }">
 <jsp:forward page="/index"></jsp:forward>
 </c:if>
+<script type="text/javascript">
+var xmlHttp;
+function ratingAssigned()
+{
+	var userRating=document.getElementById("userRating").value;
+	
+	try 
+    {
+        if (window.XMLHttpRequest)
+            xmlHttp = new XMLHttpRequest();
+        else if (window.ActiveXObject)
+            xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+        if (!xmlHttp || xmlHttp == null) 
+        {
+            return;
+        }
+        var url = "assignUserRating?userRating=" + userRating; // Here, I have mapped controller as "assignUserRating".
+        xmlHttp.onreadystatechange = StateChanged;
+        xmlHttp.open("GET", url, true);
+        xmlHttp.send(null);
+    }
+    catch (e)
+    {
+        alert("Some error occurred! Please try again");
+    }
+}
+    function StateChanged()
+	{
+	    if ((xmlHttp.readyState == 4) && (xmlHttp.status == 200)) 
+	    {
+	       
+	    	  alert(xmlHttp.responseText);
+	       }
+	    }
+
+
+</script>
 <head>
 	<meta charset="UTF-8">
 	<title>Recipe - Food &amp; Recipes s</title>
@@ -33,7 +70,7 @@
 					<li><a href="home">Home</a></li>
 					<li class="haschildren"><a href="#" >A-Z Recipe</a>
 						<ul>
-							<li><a href="userAllRecipe?page=0" >All Recipe</a></li>
+							<li><a href="allRecipe?page=0" >All Recipe</a></li>
 						</ul>
 					</li>
 					<li class="haschildren"><a href="#" >My Recipe</a>
@@ -73,7 +110,16 @@
 								<br><b><u>Directions:</u></b> ${recipe.directions }.
 							</p>
 							<p>
+								<br><font color="red">Current Rating:</font> ${recipe.currentRating }&nbsp;&nbsp;&nbsp;&nbsp; <font color="red">Your Rating: </font>
+								<select name="userRating" id="userRating" onchange="ratingAssigned();">
+									<option value=1>1</option>
+									<option value=2>2</option>
+									<option value=3>3</option>
+									<option value=4>4</option>
+									<option value=5 selected="selected">5</option>
+								</select>
 								<br>
+								<font color=red>Note: 5 is best and 1 is worst</font>
 							</p>
 						</div>
 					</div>

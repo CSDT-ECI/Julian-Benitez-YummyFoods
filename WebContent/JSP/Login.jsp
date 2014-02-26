@@ -44,7 +44,7 @@
 				<div>
 				<div>
 				<br><br>
-				<font color="red"></font><c:out value="${ResetPassword}"></c:out><font></font><br>
+				<font color="red"><c:out value="${ResetPassword}"/></font><br>
 					<form:form action="doLogin" method="POST" modelAttribute="login">
 						<table>
 							<tr><td>User Id:</td><td><form:input path="userId"/></td><td><font color="red"><c:out value="${userIdError}" /></font> </td></tr>

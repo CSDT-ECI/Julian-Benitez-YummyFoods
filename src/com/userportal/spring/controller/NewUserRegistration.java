@@ -98,7 +98,7 @@ public class NewUserRegistration
 	}
 	
 	@RequestMapping(value="/validateUserId", method=RequestMethod.GET)
-    public @ResponseBody String  handleMySuccessRedirect(@RequestParam(value = "userId", required = false)String userId) 
+    public @ResponseBody String  validateUSerId(@RequestParam(value = "userId", required = false)String userId) 
 	{
 		java.util.List<User> userIdList=userService.list();
 		String status=null;

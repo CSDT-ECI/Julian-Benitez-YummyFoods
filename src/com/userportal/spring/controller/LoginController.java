@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.context.request.WebRequest;
 
@@ -69,8 +70,9 @@ public class LoginController
 	
 
 	@RequestMapping(value="/doLogin", method=RequestMethod.POST)
-	public String doLogin(@ModelAttribute("login")@Valid Login login,BindingResult result, Model model,HttpServletRequest request)
+	public String doLogin(@ModelAttribute("login")@Valid Login login,BindingResult result, Model model,HttpServletRequest request,HttpSession session)
 	{
+		session=request.getSession();
 		if(result.hasErrors())
 		{
 			if(result.hasFieldErrors("userId"))
@@ -94,7 +96,16 @@ public class LoginController
 				{
 					
 					request.getSession().setAttribute("sessionValue", login.getUserId());
-					return "UserHome";
+					if(session.getAttribute("recipeIdForRating")!=null)
+					{
+						return "redirect:recipe";
+						
+					}
+					else
+					{
+						return "UserHome";
+					}
+					
 				}
 				else
 				{
@@ -131,6 +142,14 @@ public class LoginController
 			session.setAttribute("sessionFullList", recipeList);
 		
 		model.addAttribute("login", new Login());
+		return "Login";
+	}
+	
+	@RequestMapping(value="loginForRating")
+	public String loginForRecipe(@RequestParam(value="recipeId")String recipeId,HttpServletRequest request,Model model)
+	{
+		request.getSession().setAttribute("recipeIdForRating", recipeId);
+		model.addAttribute("login",new Login());
 		return "Login";
 	}
 	

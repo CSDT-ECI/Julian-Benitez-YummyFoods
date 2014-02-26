@@ -7,7 +7,7 @@ import com.userportal.spring.form.User;
 
 public interface RecipeDAO 
 {
-	static final int limitResultsPerPage = 2;
+	static final int limitResultsPerPage = 6;
 	public void add(Recipe recipe);
 	public List<Recipe> list(User user);
 	public List<Recipe> getAllRecipe();

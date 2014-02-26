@@ -57,7 +57,7 @@
 								<br><b><u>Directions:</u></b> ${recipe.directions }.
 							</p>
 							<p>
-								<br>
+								<br><font color="red">Current Rating:</font> ${recipe.currentRating }&nbsp;&nbsp;&nbsp;&nbsp; <font color="red">Your Rating: </font><a href="loginForRating?recipeId=${recipe.recipeId }">Please Login</a>
 							</p>
 						</div>
 					</div>

@@ -34,7 +34,7 @@
 					<li><a href="home">Home</a></li>
 					<li class="haschildren"><a href="#" >A-Z Recipe</a>
 						<ul>
-							<li><a href="userAllRecipe?page=0" >All Recipe</a></li>
+							<li><a href="allRecipe?page=0" >All Recipe</a></li>
 						</ul>
 					</li>
 					<li class="haschildren"><a href="#" >My Recipe</a>

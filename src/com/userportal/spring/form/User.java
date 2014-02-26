@@ -43,6 +43,15 @@ public class User
 	@Transient
 	private String userNewPassword;
 	
+	@Column(name="recipeRated")
+	private String recipeRated;
+	
+	public String getRecipeRated() {
+		return recipeRated;
+	}
+	public void setRecipeRated(String recipeRated) {
+		this.recipeRated = recipeRated;
+	}
 	public String getUserNewPassword() {
 		return userNewPassword;
 	}

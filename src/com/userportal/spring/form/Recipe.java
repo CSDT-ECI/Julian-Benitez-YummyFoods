@@ -49,16 +49,16 @@ public class Recipe
 	private User user;
 	
 	@Column(name="currentRating",nullable=true)
-	private int currentRating;
+	private float currentRating;
 	
 	@Column(name="noOfPeopleRated",nullable=true)
 	private int noOfPeopleRated;
 
-	public int getCurrentRating() {
+	public float getCurrentRating() {
 		return currentRating;
 	}
 
-	public void setCurrentRating(int currentRating) {
+	public void setCurrentRating(float currentRating) {
 		this.currentRating = currentRating;
 	}
 

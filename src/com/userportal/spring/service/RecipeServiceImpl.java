@@ -64,5 +64,20 @@ public class RecipeServiceImpl implements RecipeService
 	{
 		return recipeDAO.getRecipeByName(recipeName,page);
 	}
+	
+	@Override
+	@Transactional
+	public Recipe getRecipeById(int recipeId)
+	{
+		return recipeDAO.getRecipeById(recipeId);
+	}
+
+	@Override
+	@Transactional
+	public void update(Recipe recipe) 
+	{
+		recipeDAO.update(recipe);
+		
+	}
 
 }

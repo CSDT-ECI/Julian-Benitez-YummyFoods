@@ -13,7 +13,8 @@ var xmlHttp;
 function ratingAssigned()
 {
 	var userRating=document.getElementById("userRating").value;
-	
+	var recipeId=document.getElementById("recipeId").value;
+	alert("here");
 	try 
     {
         if (window.XMLHttpRequest)
@@ -24,7 +25,7 @@ function ratingAssigned()
         {
             return;
         }
-        var url = "assignUserRating?userRating=" + userRating; // Here, I have mapped controller as "assignUserRating".
+        var url = "assignUserRating?userRating=" +userRating+"&recipeId="+recipeId; // Here, I have mapped controller as "assignUserRating".
         xmlHttp.onreadystatechange = StateChanged;
         xmlHttp.open("GET", url, true);
         xmlHttp.send(null);
@@ -42,7 +43,6 @@ function ratingAssigned()
 	    	  alert(xmlHttp.responseText);
 	       }
 	    }
-
 
 </script>
 <head>
@@ -95,6 +95,7 @@ function ratingAssigned()
 				
 				<div id="content">
 					<c:forEach items="${recipeDetails }" var="recipe">
+					<input type="hidden" id="recipeId" value=${recipe.recipeId }>
 					<div>
 						<div><br><br>
 							<center><h2>${recipe.name }</h2>
@@ -111,12 +112,16 @@ function ratingAssigned()
 							</p>
 							<p>
 								<br><font color="red">Current Rating:</font> ${recipe.currentRating }&nbsp;&nbsp;&nbsp;&nbsp; <font color="red">Your Rating: </font>
-								<select name="userRating" id="userRating" onchange="ratingAssigned();">
+								<c:if test="${recipeAlreadyRated=='true' }">
+									${userOldRating}
+								</c:if>
+								<select name="userRating" id="userRating" onchange="ratingAssigned()">
+									<option selected="selected"/>
 									<option value=1>1</option>
 									<option value=2>2</option>
 									<option value=3>3</option>
 									<option value=4>4</option>
-									<option value=5 selected="selected">5</option>
+									<option value=5>5</option>
 								</select>
 								<br>
 								<font color=red>Note: 5 is best and 1 is worst</font>

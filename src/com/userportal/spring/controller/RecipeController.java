@@ -1,38 +1,25 @@
 package com.userportal.spring.controller;
 
-import java.io.BufferedOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Blob;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.ServletRequestDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
-
-
 import com.userportal.spring.form.Recipe;
 import com.userportal.spring.form.User;
 import com.userportal.spring.service.RecipeService;
 import com.userportal.spring.service.UserService;
-import com.userportal.spring.service.UserServiceImpl;
 
 @Controller
 public class RecipeController 
@@ -149,6 +136,20 @@ public class RecipeController
 		}
 		else
 		{
+			String userId=(String)request.getSession(false).getAttribute("sessionValue");
+			User user=userService.getUserById(userId);
+			if(user.getRecipeRated().contains(","+recipeId+"="))
+			{
+				session.setAttribute("recipeAlreadyRated", true);
+				String temp=""+recipeId;
+				int begin=0,end=0;
+				System.out.println(user.getRecipeRated().indexOf(","+recipeId+"="));
+				begin=user.getRecipeRated().indexOf(","+recipeId+"=")+temp.length()+2;
+				end=begin+1;
+				System.out.println("begin:"+begin);
+				System.out.println("End:"+end);
+				session.setAttribute("userOldRating", user.getRecipeRated().substring(begin,end));
+			}
 			return "UserViewRecipe";
 		}
 		
@@ -322,9 +323,38 @@ public class RecipeController
 	@RequestMapping(value="/assignUserRating")
 	public @ResponseBody String assignUserRating(HttpServletRequest request)
 	{
-		System.out.println("Came in controller");
-		String status="rating chaned";
-		return status;
+		String userId=(String)request.getSession(false).getAttribute("sessionValue");
+		int recipeId=Integer.parseInt((String)request.getParameter("recipeId"));
+		float userRating=Float.parseFloat((String)request.getParameter("userRating"));
+		Recipe recipe=recipeService.getRecipeById(recipeId);
+		User user=userService.getUserById(userId);
+		System.out.println("2nd condition:"+user.getRecipeRated().contains(","+recipeId+","));
+		
+		if(user.getRecipeRated().contains(","+recipeId+"="))
+		{
+			System.out.println("Recipe is already reated by user");
+			return "recipe already rated";
+		}
+		System.out.println("Recipe id:"+recipeId);
+		System.out.println("Rating:"+userRating);
+		System.out.println("Current Rating:"+recipe.getCurrentRating());
+		float rating;
+		rating=(float) ((recipe.getCurrentRating()*recipe.getNoOfPeopleRated()+userRating)/(recipe.getNoOfPeopleRated()+1.0));
+		recipe.setCurrentRating(rating);
+		recipe.setNoOfPeopleRated(recipe.getNoOfPeopleRated()+1);
+		recipeService.update(recipe);
+		
+		if("".equals(user.getRecipeRated()))
+		{
+			user.setRecipeRated(","+recipeId+"="+userRating+",");
+		}
+		else
+		{
+			user.setRecipeRated(user.getRecipeRated()+recipeId+"="+userRating+",");
+		}
+		
+		userService.update(user);
+		return "status is ok";
 		
 	}
 	

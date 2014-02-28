@@ -143,11 +143,8 @@ public class RecipeController
 				session.setAttribute("recipeAlreadyRated", true);
 				String temp=""+recipeId;
 				int begin=0,end=0;
-				System.out.println(user.getRecipeRated().indexOf(","+recipeId+"="));
 				begin=user.getRecipeRated().indexOf(","+recipeId+"=")+temp.length()+2;
 				end=begin+1;
-				System.out.println("begin:"+begin);
-				System.out.println("End:"+end);
 				session.setAttribute("userOldRating", user.getRecipeRated().substring(begin,end));
 			}
 			return "UserViewRecipe";
@@ -332,12 +329,15 @@ public class RecipeController
 		
 		if(user.getRecipeRated().contains(","+recipeId+"="))
 		{
-			System.out.println("Recipe is already reated by user");
-			return "recipe already rated";
+			float rating=0,currentRating=0;
+			float oldRating=Float.parseFloat((String)request.getParameter("oldRating"));
+			currentRating=recipe.getCurrentRating();
+			rating=(float)(currentRating*(recipe.getNoOfPeopleRated()-1)+currentRating-oldRating+userRating)/recipe.getNoOfPeopleRated();
+			recipe.setCurrentRating(rating);
+			recipeService.update(recipe);
+			request.getSession(false).setAttribute("userOldRating", userRating);
+			return "new Rating assigned";
 		}
-		System.out.println("Recipe id:"+recipeId);
-		System.out.println("Rating:"+userRating);
-		System.out.println("Current Rating:"+recipe.getCurrentRating());
 		float rating;
 		rating=(float) ((recipe.getCurrentRating()*recipe.getNoOfPeopleRated()+userRating)/(recipe.getNoOfPeopleRated()+1.0));
 		recipe.setCurrentRating(rating);

@@ -14,7 +14,6 @@ function ratingAssigned()
 {
 	var userRating=document.getElementById("userRating").value;
 	var recipeId=document.getElementById("recipeId").value;
-	alert("here");
 	try 
     {
         if (window.XMLHttpRequest)
@@ -25,7 +24,7 @@ function ratingAssigned()
         {
             return;
         }
-        var url = "assignUserRating?userRating=" +userRating+"&recipeId="+recipeId; // Here, I have mapped controller as "assignUserRating".
+        var url = "assignUserRating?userRating=" +userRating+"&recipeId="+recipeId+"&oldRating="+${userOldRating}; // Here, I have mapped controller as "assignUserRating".
         xmlHttp.onreadystatechange = StateChanged;
         xmlHttp.open("GET", url, true);
         xmlHttp.send(null);
@@ -43,6 +42,30 @@ function ratingAssigned()
 	    	  alert(xmlHttp.responseText);
 	       }
 	    }
+    function changeRating()
+    {
+    	var dropdown = document.getElementById("userRating");
+    	var opt1 = document.createElement("option");
+    	var opt2 = document.createElement("option");
+    	var opt3 = document.createElement("option");
+    	var opt4 = document.createElement("option");
+    	var opt5 = document.createElement("option");
+    	opt1.text = '1';
+    	opt1.value = '1';
+    	dropdown.options.add(opt1);
+    	opt2.text = '2';
+    	opt2.value = '2';
+    	dropdown.options.add(opt2);
+    	opt3.text = '3';
+    	opt3.value = '3';
+    	dropdown.options.add(opt3);
+    	opt4.text = '4';
+    	opt4.value = '4';
+    	dropdown.options.add(opt4);
+    	opt5.text = '5';
+    	opt5.value = '5';
+    	dropdown.options.add(opt5);
+    }
 
 </script>
 <head>
@@ -115,14 +138,10 @@ function ratingAssigned()
 								<c:if test="${recipeAlreadyRated=='true' }">
 									${userOldRating}
 								</c:if>
+								<a href="#" onClick="changeRating()">Change</a>
 								<select name="userRating" id="userRating" onchange="ratingAssigned()">
-									<option selected="selected"/>
-									<option value=1>1</option>
-									<option value=2>2</option>
-									<option value=3>3</option>
-									<option value=4>4</option>
-									<option value=5>5</option>
 								</select>
+								
 								<br>
 								<font color=red>Note: 5 is best and 1 is worst</font>
 							</p>

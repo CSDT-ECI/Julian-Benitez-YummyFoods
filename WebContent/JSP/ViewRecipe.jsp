@@ -1,18 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>s
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-
 <head>
 	<meta charset="UTF-8">
 	<title>Recipe - Food &amp; Recipes s</title>
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/style.css"/>">
 </head>
 <body>
-
-	<div class="header">
+<div class="header">
 		<div>
 			<a href="index"><img src="<c:url value="/resources/images/logo.png" />" alt="Logo"></a>
 		</div>
@@ -22,26 +20,28 @@
 		</form:form>
 	</div>
 	
+	
 	<div class="body">
 		<div>
 			<div class="header">
-		<nav id="nav_wrapper">
-				<ul class="sf-menu" id="suckerfishnav">
+				<nav id="nav_wrapper">
+					<ul class="sf-menu" id="suckerfishnav">
+						<li class="current"><a href="index">Home</a></li>
+						<li class="haschildren"><a href="#" >A-Z Recipe</a>
+							<ul>
+								<li><a href="allRecipe?page=0" >All Recipe</a></li>
+							</ul>
+						</li>
+						<li class="current_page_ancestor"><a href="allVideo">Videos</a>
+						</li>
+						<li><a href="login" >Login</a></li>
+					</ul>
+				</nav>
+			</div>
 				
-					<li class="current"><a href="index">Home</a></li>
-					<li class="haschildren"><a href="#" >A-Z Recipe</a>
-						<ul>
-							<li><a href="allRecipe?page=0" >All Recipe</a></li>
-						</ul>
-					</li>
-					<li class="current_page_ancestor"><a href="allVideo">Videos</a>
-					</li>
-					<li><a href="login" >Login</a></li>
-			</ul>
-			</nav></div>
-		
 				<div id="content">
 					<c:forEach items="${recipeDetails }" var="recipe">
+					<input type="hidden" id="recipeId" value=${recipe.recipeId }>
 					<div>
 						<div><br><br>
 							<center><h2>${recipe.name }</h2>
@@ -57,7 +57,11 @@
 								<br><b><u>Directions:</u></b> ${recipe.directions }.
 							</p>
 							<p>
-								<br><font color="red">Current Rating:</font> ${recipe.currentRating }&nbsp;&nbsp;&nbsp;&nbsp; <font color="red">Your Rating: </font><a href="loginForRating?recipeId=${recipe.recipeId }">Please Login</a>
+								<br><font color="red">Current Rating:</font> ${recipe.currentRating }&nbsp;&nbsp;&nbsp;&nbsp; <font color="red">Your Rating: </font>
+								<a href="loginForRating?recipeId=${recipe.recipeId }">Please Login</a>
+								
+								<br>
+								<font color=red>Note: 5 is best and 1 is worst</font>
 							</p>
 						</div>
 					</div>

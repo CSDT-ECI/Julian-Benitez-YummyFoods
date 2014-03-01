@@ -64,7 +64,7 @@ public class LoginController
 			
 		session.setAttribute("sessionFullList", recipeList);
 		model.addAttribute("login", new Login());
-
+		model.addAttribute("recipe", new Recipe());
 		return "main";
 	}
 	

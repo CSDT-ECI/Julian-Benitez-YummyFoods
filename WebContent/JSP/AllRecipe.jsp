@@ -15,8 +15,8 @@
 		<div>
 			<a href="index"><img src="<c:url value="/resources/images/logo.png" />" alt="Logo"></a>
 		</div>
-		<form:form action="doSearch?page=0" method="post">
-			<input type="text" name="recipeName" id="search"/>
+		<form:form action="doSearch?page=0" modelAttribute="recipe" method="post">
+			<form:input path="name" id="search"/>
 			<input type="submit" value="" id="searchbtn">
 		</form:form>
 	</div>
@@ -59,12 +59,12 @@
 							</c:forEach>
 						</ul>
 						<div align="right">
-							<c:if test="${pageValue1>1 }">
+							<c:if test="${PageValue1>1 }">
 								<a href="allRecipe?page=-1">Previous </a>
 							</c:if>
-							<a href="allRecipe?page=${pageValue1-1 }">${pageValue1 }</a> 
-							<a href="allRecipe?page=${pageValue2-1 }">${pageValue2 }</a> 
-							<a href="allRecipe?page=${pageValue3-1 }">${pageValue3 }</a>
+							<a href="allRecipe?page=${PageValue1-1 }">${PageValue1 }</a> 
+							<a href="allRecipe?page=${PageValue2-1 }">${PageValue2 }</a> 
+							<a href="allRecipe?page=${PageValue3-1 }">${PageValue3 }</a>
 						</div>
 					</div>
 				</div>

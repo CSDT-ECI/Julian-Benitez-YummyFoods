@@ -29,8 +29,8 @@ function validateEmail()
 		<div>
 			<a href="index"><img src="<c:url value="/resources/images/logo.png" />" alt="Logo"></a>
 		</div>
-		<form:form action="doSearch?page=0" method="post">
-			<input type="text" name="recipeName" id="search"/>
+		<form:form action="doSearch?page=0" modelAttribute="recipe" method="post">
+			<form:input path="name" id="search"/>
 			<input type="submit" value="" id="searchbtn">
 		</form:form>
 	</div>

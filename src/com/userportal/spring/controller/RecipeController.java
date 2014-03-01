@@ -108,55 +108,40 @@ public class RecipeController
 	@RequestMapping(value="/recipe")
 	public String viewRecipeById(Model model,HttpServletRequest request,HttpSession session)
 	{
-		Integer recipeId=null;
-		session=request.getSession(false);
-		if(session.getAttribute("recipeIdForRating")!=null)
-		{
-			//System.out.println("3. the value we set for session still exists!");
-			recipeId=Integer.parseInt((String)session.getAttribute("recipeIdForRating"));
-		}
-		else
-		{
-			recipeId=Integer.parseInt(request.getParameter("recipeId"));
-		}
-		
-		List<Recipe>sessionFullList=(List<Recipe>) request.getSession().getAttribute("sessionFullList");
-		String sessionValue=(String)request.getSession(false).getAttribute("sessionValue");
-		for(int i=0;i<sessionFullList.size();i++)
-		{
-			if(sessionFullList.get(i).getRecipeId().equals(recipeId))
-			{
-				List<Recipe> recipeDetails= new ArrayList<Recipe>();
-				recipeDetails.add(sessionFullList.get(i));
-				model.addAttribute("recipeDetails", recipeDetails);
-			}
-		}
+		int recipeId=Integer.parseInt(request.getParameter("recipeId"));
+		String sessionValue=(String)session.getAttribute("sessionValue");
+		List<Recipe> recipeDetails=new ArrayList<Recipe>();
+		recipeDetails.add(recipeService.getRecipeById(recipeId));
+		model.addAttribute("recipeDetails", recipeDetails);
 		if(sessionValue==null)
 		{
 			return "ViewRecipe";
 		}
 		else
 		{
-			String userId=(String)request.getSession(false).getAttribute("sessionValue");
-			User user=userService.getUserById(userId);
-			//System.out.println("4. We are going to search for this recipeId:"+recipeId);
-			//System.out.println("5. User has: "+user.getRecipeRated());
-			if(user.getRecipeRated()==null)
+			User user=userService.getUserById(sessionValue);
+			if(user.getRecipeRated()!=null)
 			{
-				session.setAttribute("recipeAlreadyRated", "false");
-				return "UserViewRecipe";
+				if(user.getRecipeRated().contains(","+recipeId+"="))
+				{
+					
+					model.addAttribute("recipeAlreadyRated", "true");
+				}
+				else
+				{
+					model.addAttribute("recipeAlreadyRated", "false");
+				}
 			}
-			else if(user.getRecipeRated().contains(","+recipeId+"="))
+			else
 			{
-				session.setAttribute("recipeAlreadyRated", "true");
-				String temp=""+recipeId;
-				int begin=0,end=0;
-				begin=user.getRecipeRated().indexOf(","+recipeId+"=")+temp.length()+2;
-				end=begin+1;
-				session.setAttribute("userOldRating", user.getRecipeRated().substring(begin,end));
-				return "UserViewRecipe";
+				model.addAttribute("recipeAlreadyRated", "false");
 			}
+			String temp=""+recipeId;
+			int begin=0,end=0;
 			
+			begin=user.getRecipeRated().indexOf(","+recipeId+"=")+temp.length()+2;
+			end=begin+1;
+			model.addAttribute("userOldRating", user.getRecipeRated().substring(begin,end));
 			return "UserViewRecipe";
 		}
 		
@@ -328,7 +313,7 @@ public class RecipeController
 	}
 
 	@RequestMapping(value="/assignUserRating")
-	public @ResponseBody String assignUserRating(HttpServletRequest request)
+	public @ResponseBody String assignUserRating(Model model,HttpServletRequest request)
 	{
 		
 		String userId=(String)request.getSession(false).getAttribute("sessionValue");
@@ -338,7 +323,6 @@ public class RecipeController
 		User user=userService.getUserById(userId);
 		float rating;
 		String recipeAlreadyRated=(String)request.getParameter("recipeAlreadyRated");
-		//System.out.println("is recipe rated:"+recipeAlreadyRated);
 		if(recipeAlreadyRated.equals("true"))
 		{
 			float currentRating=0;
@@ -352,13 +336,11 @@ public class RecipeController
 			int begin=0,end=0;
 			begin=user.getRecipeRated().indexOf(","+recipeId+"=")+1;
 			end=begin+4+temp.length();
-			String newRecipeRated1=user.getRecipeRated().substring(0, begin);
-			String newRecipeRated2=user.getRecipeRated().substring(end);
-			String newRecipeRated=newRecipeRated1+recipeId+"="+userRating+newRecipeRated2;
+			String newRecipeRated=user.getRecipeRated().substring(0, begin)+recipeId+"="+userRating+user.getRecipeRated().substring(end);
 			user.setRecipeRated(newRecipeRated);
 			userService.update(user);
-			request.getSession(false).setAttribute("userOldRating", userRating);
-			return "new Rating assigned";
+			model.addAttribute("userOldRating", userRating);
+			return "Rating changed!!";
 		}
 		rating=(float) ((recipe.getCurrentRating()*recipe.getNoOfPeopleRated()+userRating)/(recipe.getNoOfPeopleRated()+1.0));
 		recipe.setCurrentRating(rating);
@@ -374,10 +356,44 @@ public class RecipeController
 		}
 		
 		userService.update(user);
-		String status="status is ok";
-		
+		String status="Rating Assigned";
+		model.addAttribute("oldRating", userRating);
 		return status;
 				
 	}
-	
+	@RequestMapping(value="recipeForRating")
+	public String recipeForRating(Model model,HttpSession session)
+	{
+		Integer recipeId=Integer.parseInt((String)session.getAttribute("recipeIdForRating"));
+		String userId=(String)session.getAttribute("sessionValue");
+		User user=userService.getUserById(userId);
+		if(user.getRecipeRated()!=null)
+		{
+			if(user.getRecipeRated().contains(","+recipeId+"="))
+			{
+				
+				model.addAttribute("recipeAlreadyRated", "true");
+				String temp=""+recipeId;
+				int begin=0,end=0;
+				begin=user.getRecipeRated().indexOf(","+recipeId+"=")+temp.length()+2;
+				end=begin+1;
+				model.addAttribute("userOldRating", user.getRecipeRated().substring(begin,end));
+				System.out.println("user has rated this recipe with rating:"+user.getRecipeRated().substring(begin,end));
+			}
+			else
+			{
+				model.addAttribute("recipeAlreadyRated", "false");
+				session.setAttribute("recipeAlreadyRated", "false");
+			}
+			
+		}
+		else
+		{
+			session.setAttribute("recipeAlreadyRated", "false");
+		}
+		List<Recipe> recipeDetails=new ArrayList<Recipe>();
+		recipeDetails.add(recipeService.getRecipeById(recipeId));
+		model.addAttribute("recipeDetails", recipeDetails);
+		return "UserViewRecipe";
+	}
 }

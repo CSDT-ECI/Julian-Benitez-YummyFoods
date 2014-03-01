@@ -52,7 +52,7 @@
 							<p>
 							<b><u>Ingredients:</u></b>	${recipe.ingredients }.
 							</p>
-							<a href="index.html"><img src="image?recipeId=${recipe.recipeId }" alt="Image" width="650" height="300"></a>
+							<img src="image?recipeId=${recipe.recipeId }" alt="Image" width="650" height="300">
 							<p>
 								<br><b><u>Directions:</u></b> ${recipe.directions }.
 							</p>

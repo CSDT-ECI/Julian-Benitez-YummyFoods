@@ -13,16 +13,12 @@ var xmlHttp;
 function ratingAssigned()
 {
 	var userRating=document.getElementById("userRating").value;
-	alert(userRating);
 	var recipeId=document.getElementById("recipeId").value;
-	alert(recipeId);
 	var recipeAlreadyRated=document.getElementById("recipeAlreadyRated").value;
-	alert(recipeAlreadyRated);
 	var oldRating=null;
 	if(recipeAlreadyRated=='true')
 	{
 		oldRating=document.getElementById("oldRating").value;
-		alert(oldRating);	
 	}
 	
 	
@@ -37,7 +33,6 @@ function ratingAssigned()
             return;
         }
         var url = "assignUserRating?userRating=" +userRating+"&recipeId="+recipeId+"&oldRating="+oldRating+"&recipeAlreadyRated="+recipeAlreadyRated; // Here, I have mapped controller as "assignUserRating".
-        alert(url);
         xmlHttp.onreadystatechange = StateChanged;
         xmlHttp.open("GET", url, true);
         xmlHttp.send(null);
@@ -144,7 +139,7 @@ function ratingAssigned()
 							<p>
 							<b><u>Ingredients:</u></b>	${recipe.ingredients }.
 							</p>
-							<a href="index.html"><img src="image?recipeId=${recipe.recipeId }" alt="Image" width="650" height="300"></a>
+								<img src="image?recipeId=${recipe.recipeId }" alt="Image" width="650" height="300">
 							<p>
 								<br><b><u>Directions:</u></b> ${recipe.directions }.
 							</p>

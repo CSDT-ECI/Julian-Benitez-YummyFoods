@@ -66,6 +66,7 @@
 											<h3><a href="recipe?recipeId=${recipe.recipeId }">${recipe.name }</a></h3>
 											<p>
 											${recipe.directions }... <a href="recipe?recipeId=${recipe.recipeId }">More</a>
+											<br><font color="red">Current Rating: ${recipe.currentRating }</font>
 										</p>
 										</div>
 									</li>

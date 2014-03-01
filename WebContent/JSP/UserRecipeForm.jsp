@@ -63,7 +63,7 @@
 	<form:form action="userSubmitRecipe" method="POST" enctype="multipart/form-data" modelAttribute="recipe" >
 		<table>
 			<tr>
-				<td>Name</td><td><form:input path="name"/></td>
+				<td align="left">Name</td><td align="left"><form:input path="name"/></td>
 			</tr>
 			<tr>
 				<td align="left">No. of People</td>

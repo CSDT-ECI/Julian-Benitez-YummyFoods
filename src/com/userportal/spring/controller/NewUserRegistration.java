@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.userportal.spring.form.Login;
+import com.userportal.spring.form.Recipe;
 import com.userportal.spring.form.User;
 import com.userportal.spring.service.UserService;
 import com.userportal.spring.validator.NewUserValidator;
@@ -49,12 +50,14 @@ public class NewUserRegistration
 	public String newUser(Model model)
 	{
 		model.addAttribute("user", new User());
+		model.addAttribute("recipe", new Recipe());
 		return "NewUser";
 	}
 	
 	@RequestMapping(value="/newUserAdd", method=RequestMethod.POST)
 	public String addUser(@ModelAttribute("user")@Valid User user,BindingResult result,Login login, Model model,HttpSession session)
 	{
+		model.addAttribute("recipe", new Recipe());
 		
 		if(result.hasErrors())
 		{

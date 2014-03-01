@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.userportal.spring.form.Login;
+import com.userportal.spring.form.Recipe;
 import com.userportal.spring.form.User;
 import com.userportal.spring.service.LoginService;
 import com.userportal.spring.service.UserService;
@@ -47,12 +48,14 @@ public class ResetPassword
 	public String forgotPassword(Model model)
 	{
 		model.addAttribute("user", new User());
+		model.addAttribute("recipe", new Recipe());
 		return "ForgotPassword";
 	}
 	
 	@RequestMapping(value="/resetPassword",method=RequestMethod.POST)
 	public String resetPassword(@ModelAttribute("user")User user,Model model)
 	{
+		model.addAttribute("recipe", new Recipe());
 		for(User tempUser:userService.list())
 		{
 			if(tempUser.getUserEmailId().equals(user.getUserEmailId()))
@@ -80,11 +83,13 @@ public class ResetPassword
 	public String changePassword(Model model)
 	{
 		model.addAttribute("user", new User());
+		model.addAttribute("recipe", new Recipe());
 		return "UserChangePassword";
 	}
 	@RequestMapping(value="/doChangePassword")
 	public String doChangePassword(@ModelAttribute("user")@Valid User user,BindingResult result,Model model,HttpServletRequest request)
 	{
+		model.addAttribute("recipe", new Recipe());
 		if(result.hasErrors())
 		{
 			if(result.hasFieldErrors("userPassword"))

@@ -87,11 +87,12 @@ public class RecipeController
 		String userId=(String)session.getAttribute("sessionValue");
 		List<Recipe> paginationRecipeList=recipeService.getRecipeForPaginationByUserId(page, userId);
 		getRecipeByUser(page,paginationRecipeList,session,model);
+		model.addAttribute("recipe", new Recipe());
 		return "UserRecipe";
 	}
 	
 	@RequestMapping(value="/userSubmitRecipe", method=RequestMethod.POST)
-	public String addRecipe(@ModelAttribute("recipe")Recipe recipe,User user,HttpServletRequest request,@RequestParam("file") MultipartFile file)
+	public String addRecipe(@ModelAttribute("recipe")Recipe recipe,Model model,User user,HttpServletRequest request,@RequestParam("file") MultipartFile file)
 	{
 		try 
         {
@@ -103,6 +104,7 @@ public class RecipeController
         	user=userService.getUserById((String) request.getSession(false).getAttribute("sessionValue"));
         	recipe.setUser(user);
         	recipeService.add(recipe);
+        	model.addAttribute("recipe", new Recipe());
         } 
         
         catch (IOException e) 
@@ -123,6 +125,7 @@ public class RecipeController
 		model.addAttribute("recipeDetails", recipeDetails);
 		if(sessionValue==null)
 		{
+			model.addAttribute("recipe", new Recipe());
 			return "ViewRecipe";
 		}
 		else
@@ -150,6 +153,7 @@ public class RecipeController
 			begin=user.getRecipeRated().indexOf(","+recipeId+"=")+temp.length()+2;
 			end=begin+1;
 			model.addAttribute("userOldRating", user.getRecipeRated().substring(begin,end));
+			model.addAttribute("recipe", new Recipe());
 			return "UserViewRecipe";
 		}
 		
@@ -163,20 +167,21 @@ public class RecipeController
 		getRecipeByUser(page, paginationRecipeList, session, model);
 		if(sessionValue==null)
 		{
+			model.addAttribute("recipe", new Recipe());
 			return "AllRecipe";
 		}
 		else
 		{
+			model.addAttribute("recipe", new Recipe());
 			return "UserAllRecipe";
 		}
 		
 	}
 	
-	
-	
 	@RequestMapping(value="/home")
 	public String home(Model model)
 	{
+		model.addAttribute("recipe", new Recipe());
 		return "UserHome";
 	}
 	
@@ -189,10 +194,12 @@ public class RecipeController
 		{
 			if(request.getSession(false).getAttribute("sessionValue")==null)
 			{
+				
 				return"redirect:allRecipe?page=0";
 			}
 			else
 			{
+				
 				return"redirect:userAllRecipe?page=0";
 			}
 		}
@@ -203,10 +210,12 @@ public class RecipeController
 			getRecipeByUser(page, searchRecipeList, session, model);
 			if(request.getSession(false).getAttribute("sessionValue")==null)
 			{
+				model.addAttribute("recipe", new Recipe());
 				return"SearchRecipe";
 			}
 			else
 			{
+				model.addAttribute("recipe", new Recipe());
 				return "UserSearchRecipe";
 			}
 			
@@ -242,6 +251,7 @@ public class RecipeController
 			user.setRecipeRated(newRecipeRated);
 			userService.update(user);
 			model.addAttribute("userOldRating", userRating);
+			model.addAttribute("recipe", new Recipe());
 			return "Rating changed!!";
 		}
 		rating=(float) ((recipe.getCurrentRating()*recipe.getNoOfPeopleRated()+userRating)/(recipe.getNoOfPeopleRated()+1.0));
@@ -258,9 +268,9 @@ public class RecipeController
 		}
 		
 		userService.update(user);
-		String status="Rating Assigned";
 		model.addAttribute("oldRating", userRating);
-		return status;
+		model.addAttribute("recipe", new Recipe());
+		return "Rating Assigned";
 				
 	}
 	@RequestMapping(value="recipeForRating")
@@ -296,6 +306,7 @@ public class RecipeController
 		List<Recipe> recipeDetails=new ArrayList<Recipe>();
 		recipeDetails.add(recipeService.getRecipeById(recipeId));
 		model.addAttribute("recipeDetails", recipeDetails);
+		model.addAttribute("recipe", new Recipe());
 		return "UserViewRecipe";
 	}
 }

@@ -56,12 +56,9 @@ public class LoginController
 	{
 		HttpSession session =request.getSession();
 		List<Recipe> recipeList=null;
-		
-			recipeList=recipeService.getAllRecipe();
-			List<Recipe> sessionRecipeList=recipeService.getFeaturedList();
-			
-			session.setAttribute("sessionList", sessionRecipeList);
-			
+		recipeList=recipeService.getAllRecipe();
+		List<Recipe> sessionRecipeList=recipeService.getFeaturedList();
+		session.setAttribute("sessionList", sessionRecipeList);
 		session.setAttribute("sessionFullList", recipeList);
 		model.addAttribute("login", new Login());
 		model.addAttribute("recipe", new Recipe());
@@ -72,6 +69,7 @@ public class LoginController
 	@RequestMapping(value="/doLogin", method=RequestMethod.POST)
 	public String doLogin(@ModelAttribute("login")@Valid Login login,BindingResult result, Model model,HttpServletRequest request,HttpSession session)
 	{
+		model.addAttribute("recipe", new Recipe());
 		session=request.getSession();
 		if(result.hasErrors())
 		{
@@ -132,6 +130,7 @@ public class LoginController
 	@RequestMapping(value="/login")
 	public String login(Model model,HttpServletRequest request)
 	{
+		model.addAttribute("recipe", new Recipe());
 		HttpSession session =request.getSession();
 		List<Recipe> recipeList=null;
 		List<Recipe> sessionRecipeList=recipeService.getFeaturedList();
@@ -147,6 +146,7 @@ public class LoginController
 	@RequestMapping(value="loginForRating")
 	public String loginForRecipe(@RequestParam(value="recipeId")String recipeId,HttpServletRequest request,Model model)
 	{
+		model.addAttribute("recipe", new Recipe());
 		HttpSession session=request.getSession();
 		session.setAttribute("recipeIdForRating", recipeId);
 		model.addAttribute("login",new Login());

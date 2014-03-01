@@ -13,7 +13,19 @@ var xmlHttp;
 function ratingAssigned()
 {
 	var userRating=document.getElementById("userRating").value;
+	alert(userRating);
 	var recipeId=document.getElementById("recipeId").value;
+	alert(recipeId);
+	var recipeAlreadyRated=document.getElementById("recipeAlreadyRated").value;
+	alert(recipeAlreadyRated);
+	var oldRating=null;
+	if(recipeAlreadyRated=='true')
+	{
+		oldRating=document.getElementById("oldRating").value;
+		alert(oldRating);	
+	}
+	
+	
 	try 
     {
         if (window.XMLHttpRequest)
@@ -24,7 +36,8 @@ function ratingAssigned()
         {
             return;
         }
-        var url = "assignUserRating?userRating=" +userRating+"&recipeId="+recipeId+"&oldRating="+${userOldRating}; // Here, I have mapped controller as "assignUserRating".
+        var url = "assignUserRating?userRating=" +userRating+"&recipeId="+recipeId+"&oldRating="+oldRating+"&recipeAlreadyRated="+recipeAlreadyRated; // Here, I have mapped controller as "assignUserRating".
+        alert(url);
         xmlHttp.onreadystatechange = StateChanged;
         xmlHttp.open("GET", url, true);
         xmlHttp.send(null);
@@ -119,6 +132,8 @@ function ratingAssigned()
 				<div id="content">
 					<c:forEach items="${recipeDetails }" var="recipe">
 					<input type="hidden" id="recipeId" value=${recipe.recipeId }>
+					<input type="hidden" id="recipeAlreadyRated" value=${recipeAlreadyRated }>
+					
 					<div>
 						<div><br><br>
 							<center><h2>${recipe.name }</h2>
@@ -135,13 +150,25 @@ function ratingAssigned()
 							</p>
 							<p>
 								<br><font color="red">Current Rating:</font> ${recipe.currentRating }&nbsp;&nbsp;&nbsp;&nbsp; <font color="red">Your Rating: </font>
-								<c:if test="${recipeAlreadyRated=='true' }">
-									${userOldRating}
-								</c:if>
-								<a href="#" onClick="changeRating()">Change</a>
-								<select name="userRating" id="userRating" onchange="ratingAssigned()">
-								</select>
-								
+								<c:choose>
+									<c:when test="${recipeAlreadyRated=='true' }">
+										${userOldRating}
+										<input type="hidden" id="oldRating" value=${userOldRating }>
+										<a href="#" onClick="changeRating()">Change</a>
+										<select name="userRating" id="userRating" onchange="ratingAssigned()"></select>
+									</c:when>
+									<c:otherwise>
+										<select name="userRating" id="userRating" onchange="ratingAssigned()">
+											<option selected></option>
+											<option value=1>1</option>
+											<option value=2>2</option>
+											<option value=3>3</option>
+											<option value=4>4</option>
+											<option value=5>5</option>
+										</select>
+										
+									</c:otherwise>
+								</c:choose>		
 								<br>
 								<font color=red>Note: 5 is best and 1 is worst</font>
 							</p>

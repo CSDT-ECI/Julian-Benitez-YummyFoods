@@ -148,7 +148,11 @@ public class LoginController
 	@RequestMapping(value="loginForRating")
 	public String loginForRecipe(@RequestParam(value="recipeId")String recipeId,HttpServletRequest request,Model model)
 	{
-		request.getSession().setAttribute("recipeIdForRating", recipeId);
+		System.out.println("recipe id for session:"+recipeId);
+		HttpSession session=request.getSession();
+		System.out.println("2. Sesison deos not exist, we have to set value");
+		session.setAttribute("recipeIdForRating", recipeId);
+		
 		model.addAttribute("login",new Login());
 		return "Login";
 	}

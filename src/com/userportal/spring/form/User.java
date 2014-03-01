@@ -43,7 +43,7 @@ public class User
 	@Transient
 	private String userNewPassword;
 	
-	@Column(name="recipeRated")
+	@Column(name="recipeRated",nullable=true)
 	private String recipeRated;
 	
 	public String getRecipeRated() {

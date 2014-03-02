@@ -1,6 +1,8 @@
 package com.userportal.spring.controller;
 
 
+import java.io.IOException;
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -9,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
@@ -23,12 +26,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.multipart.MultipartFile;
 
 
 import com.userportal.spring.form.Login;
 import com.userportal.spring.form.Recipe;
+import com.userportal.spring.form.User;
 import com.userportal.spring.service.LoginService;
 import com.userportal.spring.service.RecipeService;
+import com.userportal.spring.service.UserService;
 import com.userportal.spring.validator.LoginValidator;
 
 @Controller
@@ -43,6 +49,9 @@ public class LoginController
 	
 	@Autowired
 	private RecipeService recipeService;
+	
+	@Autowired
+	private UserService userService;
 	
 	@InitBinder("login")
 	public void initBinder(WebDataBinder binder)

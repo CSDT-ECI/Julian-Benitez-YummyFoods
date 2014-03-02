@@ -10,12 +10,15 @@ import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.userportal.spring.form.Recipe;
 import com.userportal.spring.form.User;
 import com.userportal.spring.service.RecipeService;
@@ -97,10 +100,14 @@ public class RecipeController
 		try 
         {
 			Blob blob = Hibernate.createBlob(file.getBytes());
-        	recipe.setFileName(file.getOriginalFilename());
-            recipe.setPic(blob);
-            recipe.setContentType(file.getContentType());
-        	recipe.setPic(blob);
+			if(!file.getOriginalFilename().equals(""))
+			{
+				recipe.setFileName(file.getOriginalFilename());
+	            recipe.setPic(blob);
+	            recipe.setContentType(file.getContentType());
+	        	
+			}
+        	
         	user=userService.getUserById((String) request.getSession(false).getAttribute("sessionValue"));
         	recipe.setUser(user);
         	recipeService.add(recipe);
@@ -309,4 +316,46 @@ public class RecipeController
 		model.addAttribute("recipe", new Recipe());
 		return "UserViewRecipe";
 	}
+	
+	@RequestMapping(value="editRecipe")
+	public String editRecipe(@RequestParam("recipeId")Integer recipeId,@RequestParam(required=false,value="updated")String updated,Model model)
+	{
+		model.addAttribute("recipe", recipeService.getRecipeById(recipeId));
+		model.addAttribute("recipeId", recipeId);
+		model.addAttribute("newUpdate", updated);
+		return "UserEditRecipeForm";
+	}
+	
+	@RequestMapping(value="doEditRecipe")
+	public String doEditRecipe(@ModelAttribute("recipe")Recipe recipe,User user,Model model,@RequestParam("newFile") MultipartFile newFile,HttpSession session)
+	{
+		Recipe newRecipe=null;
+		Integer recipeId=recipe.getRecipeId();
+		try 
+        {
+			newRecipe=recipeService.getRecipeById(recipeId);
+			Blob blob = Hibernate.createBlob(newFile.getBytes());
+			if(!newFile.getOriginalFilename().equals(""))
+			{
+				newRecipe.setFileName(newFile.getOriginalFilename());
+	            newRecipe.setPic(blob);
+	            newRecipe.setContentType(newFile.getContentType());
+	        	
+			}
+			newRecipe.setDirections(recipe.getDirections());
+        	newRecipe.setForPeople(recipe.getForPeople());
+        	newRecipe.setIngredients(recipe.getIngredients());
+        	newRecipe.setName(recipe.getName());
+        	recipeService.update(newRecipe);
+        	
+        	
+        }
+		catch(IOException e) 
+        {
+            e.printStackTrace();
+        }
+		
+		return "redirect:editRecipe?recipeId="+recipeId+"&updated=done";
+	}
+	
 }

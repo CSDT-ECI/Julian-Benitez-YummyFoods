@@ -38,7 +38,7 @@
 					<li class="haschildren"><a href="#" >My Recipe</a>
 						<ul>
 							<li><a href="userAddRecipe" >Post</a></li>
-							<li><a href="userRecipe?page=0" >View</a></li>		
+							<li><a href="userRecipe?page=0" >View/Edit</a></li>		
 						</ul>
 					</li>
 					
@@ -83,10 +83,11 @@
 				<td align="left">Directions</td><td align="left"><form:textarea path="directions" rows="6" cols="50"/></td>
 			</tr>
 			<tr>
-				<td>Image</td><td align="left"><input type="file" name="file"></td>
+				<td align="left">Image</td><td align="left"><input type="file" name="file"></td>
 			</tr>
 		
 		</table>
+		<br><br>
 		<input type="submit" value="Add">
 	</form:form></center>
 						

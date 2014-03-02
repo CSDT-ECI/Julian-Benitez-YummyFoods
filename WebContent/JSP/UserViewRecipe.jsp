@@ -107,7 +107,7 @@ function ratingAssigned()
 					<li class="haschildren"><a href="#" >My Recipe</a>
 						<ul>
 							<li><a href="userAddRecipe" >Post</a></li>
-							<li><a href="userRecipe?page=0" >View</a></li>		
+							<li><a href="userRecipe?page=0" >View/Edit</a></li>		
 						</ul>
 					</li>
 					

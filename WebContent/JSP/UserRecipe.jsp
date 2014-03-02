@@ -39,7 +39,7 @@
 					<li class="haschildren"><a href="#" >My Recipe</a>
 						<ul>
 							<li><a href="userAddRecipe" >Post</a></li>
-							<li><a href="userRecipe?page=0" >View</a></li>		
+							<li><a href="userRecipe?page=0" >View/Edit</a></li>		
 						</ul>
 					</li>
 					
@@ -62,10 +62,12 @@
 							 		<li>
 										<a href="recipe?recipeId=${recipe.recipeId }"><img src="image?recipeId=${recipe.recipeId }" alt="Image" width="160" height="160"></a>
 										<div>
-											<h3><a href="recipe?recipeId=${recipe.recipeId }">${recipe.name }</a></h3>
+											<h3><a href="recipe?recipeId=${recipe.recipeId }">${recipe.name }</a>&nbsp;|&nbsp;<a href="editRecipe?recipeId=${recipe.recipeId }">Edit</a></h3>
 											<p>
-											${recipe.directions }.
+											${recipe.directions }... <a href="recipe?recipeId=${recipe.recipeId }">More</a>
+											<br><font color="red">Current Rating: ${recipe.currentRating }</font>
 										</p>
+										
 										</div>
 									</li>
 								

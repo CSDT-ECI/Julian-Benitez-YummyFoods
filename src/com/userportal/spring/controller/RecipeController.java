@@ -112,6 +112,7 @@ public class RecipeController
         	recipe.setUser(user);
         	recipeService.add(recipe);
         	model.addAttribute("recipe", new Recipe());
+        	model.addAttribute("Message", "Recipe added successfully!!");
         } 
         
         catch (IOException e) 
@@ -212,7 +213,7 @@ public class RecipeController
 		}
 		else
 		{
-			System.out.println("Recipe Name:"+recipeName);
+			
 			List <Recipe> searchRecipeList=recipeService.getRecipeByName(recipeName,page);
 			getRecipeByUser(page, searchRecipeList, session, model);
 			if(request.getSession(false).getAttribute("sessionValue")==null)

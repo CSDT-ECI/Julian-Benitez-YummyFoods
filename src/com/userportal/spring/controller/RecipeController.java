@@ -96,7 +96,7 @@ public class RecipeController
 	}
 	
 	@RequestMapping(value="/userSubmitRecipe", method=RequestMethod.POST)
-	public String addRecipe(@ModelAttribute("recipe")Recipe recipe,Model model,User user,HttpServletRequest request,@RequestParam("file") MultipartFile file)
+	public String addRecipe(@ModelAttribute("recipe")Recipe recipe,Model model,User user,HttpServletRequest request,@RequestParam("file") MultipartFile file,HttpSession session)
 	{
 		try 
         {
@@ -114,6 +114,11 @@ public class RecipeController
         	recipeService.add(recipe);
         	model.addAttribute("recipe", new Recipe());
         	model.addAttribute("Message", "Recipe added successfully!!");
+        	List<Recipe> recipeList=null;
+    		recipeList=recipeService.getAllRecipe();
+    		List<Recipe> sessionRecipeList=recipeService.getFeaturedList();
+    		session.setAttribute("sessionList", sessionRecipeList);
+    		session.setAttribute("sessionFullList", recipeList);
         } 
         
         catch (IOException e) 

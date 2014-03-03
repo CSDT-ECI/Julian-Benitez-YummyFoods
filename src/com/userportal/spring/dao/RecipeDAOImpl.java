@@ -54,6 +54,7 @@ public class RecipeDAOImpl implements RecipeDAO
 	@Override
 	public List<Recipe> getFeaturedList() 
 	{
+		
 		Criteria criteria =sessionFactory.getCurrentSession().createCriteria(Recipe.class);
 		criteria.add(Restrictions.sqlRestriction("1=1 order by rand()"));
 		criteria.setMaxResults(3);

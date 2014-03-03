@@ -48,6 +48,7 @@ function ratingAssigned()
 	    {
 	       
 	    	  alert(xmlHttp.responseText);
+	    	  location.reload();
 	       }
 	    }
     function changeRating()

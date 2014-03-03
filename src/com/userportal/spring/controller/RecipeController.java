@@ -145,6 +145,13 @@ public class RecipeController
 				{
 					
 					model.addAttribute("recipeAlreadyRated", "true");
+					String temp=""+recipeId;
+					int begin=0,end=0;
+					
+					begin=user.getRecipeRated().indexOf(","+recipeId+"=")+temp.length()+2;
+					end=begin+1;
+					model.addAttribute("userOldRating", user.getRecipeRated().substring(begin,end));
+				
 				}
 				else
 				{
@@ -155,12 +162,6 @@ public class RecipeController
 			{
 				model.addAttribute("recipeAlreadyRated", "false");
 			}
-			String temp=""+recipeId;
-			int begin=0,end=0;
-			
-			begin=user.getRecipeRated().indexOf(","+recipeId+"=")+temp.length()+2;
-			end=begin+1;
-			model.addAttribute("userOldRating", user.getRecipeRated().substring(begin,end));
 			model.addAttribute("recipe", new Recipe());
 			return "UserViewRecipe";
 		}
@@ -232,9 +233,9 @@ public class RecipeController
 	}
 
 	@RequestMapping(value="/assignUserRating")
-	public @ResponseBody String assignUserRating(Model model,HttpServletRequest request)
+	public @ResponseBody String assignUserRating(Model model,HttpServletRequest request,HttpSession session)
 	{
-		
+		String status=null;
 		String userId=(String)request.getSession(false).getAttribute("sessionValue");
 		int recipeId=Integer.parseInt((String)request.getParameter("recipeId"));
 		float userRating=Float.parseFloat((String)request.getParameter("userRating"));
@@ -259,26 +260,36 @@ public class RecipeController
 			user.setRecipeRated(newRecipeRated);
 			userService.update(user);
 			model.addAttribute("userOldRating", userRating);
-			model.addAttribute("recipe", new Recipe());
-			return "Rating changed!!";
-		}
-		rating=(float) ((recipe.getCurrentRating()*recipe.getNoOfPeopleRated()+userRating)/(recipe.getNoOfPeopleRated()+1.0));
-		recipe.setCurrentRating(rating);
-		recipe.setNoOfPeopleRated(recipe.getNoOfPeopleRated()+1);
-		recipeService.update(recipe);
-		if(user.getRecipeRated()!=null)
-		{
-			user.setRecipeRated(user.getRecipeRated()+recipeId+"="+userRating+",");
+			status="Rating changed!!";
+			
 		}
 		else
 		{
-			user.setRecipeRated(","+recipeId+"="+userRating+",");
+			rating=(float) ((recipe.getCurrentRating()*recipe.getNoOfPeopleRated()+userRating)/(recipe.getNoOfPeopleRated()+1.0));
+			recipe.setCurrentRating(rating);
+			recipe.setNoOfPeopleRated(recipe.getNoOfPeopleRated()+1);
+			recipeService.update(recipe);
+			if(user.getRecipeRated()!=null)
+			{
+				user.setRecipeRated(user.getRecipeRated()+recipeId+"="+userRating+",");
+			}
+			else
+			{
+				user.setRecipeRated(","+recipeId+"="+userRating+",");
+			}
+			
+			userService.update(user);
+			model.addAttribute("oldRating", userRating);
+			status="Rating Assigned!!";
 		}
-		
-		userService.update(user);
-		model.addAttribute("oldRating", userRating);
+		List<Recipe> recipeList=null;
+		recipeList=recipeService.getAllRecipe();
+		List<Recipe> sessionRecipeList=recipeService.getFeaturedList();
+		session.setAttribute("sessionList", sessionRecipeList);
+		session.setAttribute("sessionFullList", recipeList);
 		model.addAttribute("recipe", new Recipe());
-		return "Rating Assigned";
+		
+		return status;
 				
 	}
 	@RequestMapping(value="recipeForRating")
@@ -355,6 +366,12 @@ public class RecipeController
         {
             e.printStackTrace();
         }
+		List<Recipe> recipeList=null;
+		recipeList=recipeService.getAllRecipe();
+		List<Recipe> sessionRecipeList=recipeService.getFeaturedList();
+		session.setAttribute("sessionList", sessionRecipeList);
+		session.setAttribute("sessionFullList", recipeList);
+		
 		
 		return "redirect:editRecipe?recipeId="+recipeId+"&updated=done";
 	}

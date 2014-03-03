@@ -6,8 +6,28 @@
 <html>
 
 <c:if test="${sessionValue==null }">
-<jsp:forward page="/index"></jsp:forward>
+	<jsp:forward page="/index"/>
 </c:if>
+<script type="text/javascript">
+	function deleteConfirm(recipeId)
+	{
+		var temp=confirm("Are you sure want to delete!");
+
+		var pageValue=document.getElementById("pageValue").value;
+		
+		if (temp==true)
+		{
+			
+			window.location.assign("deleteRecipe?recipeId="+recipeId+"&page="+pageValue);
+			
+		}
+		else
+		{
+		  
+		}
+	}
+
+</script>
 <head>
 	<meta charset="UTF-8">
 	<title>Recipe - Food &amp; Recipes s</title>
@@ -59,10 +79,11 @@
 					<div>
 						<ul>
 							<c:forEach items="${recipeList }" var="recipe">
+								<input type="hidden" id="pageValue" value="<c:out value="${PageValue1-1 }"/>">
 							 		<li>
 										<a href="recipe?recipeId=${recipe.recipeId }"><img src="image?recipeId=${recipe.recipeId }" alt="Image" width="160" height="160"></a>
 										<div>
-											<h3><a href="recipe?recipeId=${recipe.recipeId }">${recipe.name }</a>&nbsp;|&nbsp;<a href="editRecipe?recipeId=${recipe.recipeId }">Edit</a></h3>
+											<h3><a href="recipe?recipeId=${recipe.recipeId }">${recipe.name }</a>&nbsp;|&nbsp;<a href="editRecipe?recipeId=${recipe.recipeId }">Edit</a>&nbsp;|&nbsp;<a href="#" onclick="deleteConfirm(${recipe.recipeId})">Delete</a></h3>
 											<p>
 											${recipe.directions }... <a href="recipe?recipeId=${recipe.recipeId }">More</a>
 											<br><font color="red">Current Rating: ${recipe.currentRating }</font>

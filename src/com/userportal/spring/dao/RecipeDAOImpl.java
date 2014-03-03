@@ -84,5 +84,11 @@ public class RecipeDAOImpl implements RecipeDAO
 	{
 		sessionFactory.getCurrentSession().update(recipe);
 	}
+	
+	@Override
+	public void delete(int recipeId)
+	{
+		sessionFactory.getCurrentSession().delete(getRecipeById(recipeId));
+	}
 
 }

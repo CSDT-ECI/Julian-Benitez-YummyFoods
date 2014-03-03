@@ -2,6 +2,7 @@ package com.userportal.spring.controller;
 
 import java.io.IOException;
 import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -347,6 +348,7 @@ public class RecipeController
         {
 			newRecipe=recipeService.getRecipeById(recipeId);
 			Blob blob = Hibernate.createBlob(newFile.getBytes());
+			
 			if(!newFile.getOriginalFilename().equals(""))
 			{
 				newRecipe.setFileName(newFile.getOriginalFilename());
@@ -371,9 +373,20 @@ public class RecipeController
 		List<Recipe> sessionRecipeList=recipeService.getFeaturedList();
 		session.setAttribute("sessionList", sessionRecipeList);
 		session.setAttribute("sessionFullList", recipeList);
-		
-		
 		return "redirect:editRecipe?recipeId="+recipeId+"&updated=done";
+	}
+	
+	@RequestMapping(value="deleteRecipe")
+	public String deleteRecipe(@RequestParam("recipeId") Integer recipeId,@RequestParam("page")Integer page,HttpSession session)
+	{
+		recipeService.delete(recipeId);
+		List<Recipe> recipeList=null;
+		recipeList=recipeService.getAllRecipe();
+		List<Recipe> sessionRecipeList=recipeService.getFeaturedList();
+		session.setAttribute("sessionList", sessionRecipeList);
+		session.setAttribute("sessionFullList", recipeList);
+		
+		return "redirect:userRecipe?recipeId="+recipeId+"&page="+page;
 	}
 	
 }

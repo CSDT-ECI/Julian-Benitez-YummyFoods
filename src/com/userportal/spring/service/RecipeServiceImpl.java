@@ -80,4 +80,12 @@ public class RecipeServiceImpl implements RecipeService
 		
 	}
 
+	@Override
+	@Transactional
+	public void delete(int recipeId) 
+	{
+		recipeDAO.delete(recipeId);
+		
+	}
+
 }

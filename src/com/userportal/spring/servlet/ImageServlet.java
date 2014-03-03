@@ -3,6 +3,7 @@ package com.userportal.spring.servlet;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -46,6 +47,7 @@ public class ImageServlet extends HttpServlet
 					  response.setBufferSize(DEFAULT_BUFFER_SIZE);
 				     response.setContentType(sessionFullRecipeList.get(i).getContentType());
 				     response.setContentLength((int) image.length());
+				     
 				     //response.setHeader("Content-Disposition", "inline; filename=\"" + sessionRecipeList.get(i).getFileName() + "\"");
 				     output = new BufferedOutputStream(response.getOutputStream(), DEFAULT_BUFFER_SIZE);
 				     output.write(image.getBytes(1, (int) image.length()));

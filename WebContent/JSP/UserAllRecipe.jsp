@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+     <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <!-- Website template by freewebsitetemplates.com -->
@@ -23,7 +23,9 @@
 			<form:input path="name" id="search"/>
 			<input type="submit" value="" id="searchbtn">
 		</form:form>
-	</div>	
+	</div>
+	
+	
 	<div class="body">
 		<div>
 		<div class="header">
@@ -52,9 +54,7 @@
 						</ul>
 					</li>
 				</ul>
-			</nav>
-		
-		</div>
+			</nav>	</div>
 		
 				<div id="content">
 					<div>
@@ -68,27 +68,28 @@
 											${recipe.directions }... <a href="recipe?recipeId=${recipe.recipeId }">More</a>
 											<br><font color="red">Current Rating: ${recipe.currentRating }</font>
 										</p>
+										
 										</div>
 									</li>
 								
 							</c:forEach>
 						</ul>
 						<div align="right">
-							<c:if test="${pageValue1>1 }">
+							<c:if test="${PageValue1>1 }">
 								<a href="allRecipe?page=-1">Previous </a>
 							</c:if>
-							<a href="allRecipe?page=${pageValue1-1 }">${pageValue1 }</a> 
-							<a href="allRecipe?page=${pageValue2-1 }">${pageValue2 }</a> 
-							<a href="allRecipe?page=${pageValue3-1 }">${pageValue3 }</a>
+							<a href="allRecipe?page=${PageValue1-1 }">${PageValue1 }</a> 
+							<a href="allRecipe?page=${PageValue2-1 }">${PageValue2 }</a> 
+							<a href="allRecipe?page=${PageValue3-1 }">${PageValue3 }</a>
 						</div>
 					</div>
 				</div>
-			</div>
-		
+			
+		</div>
 		<div>
 			<div>
 				<h3>Cooking Video</h3>
-				<iframe width="200" height="200" src="//www.youtube.com/embed/ngN4TWgL3sY" frameborder="0" allowfullscreen></iframe>
+				<iframe width="200" height="200" src="//www.youtube.com/embed/ngN4TWgL3sY" frameborder="0" ></iframe>
 				
 			</div>
 			<div>

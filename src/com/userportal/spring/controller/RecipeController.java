@@ -73,6 +73,7 @@ public class RecipeController
 			page2=page1+1;
 			page3=page2+1;
 		}
+		
 		session.setAttribute("PageValue1", page1);
 		session.setAttribute("PageValue2", page2);
 		session.setAttribute("PageValue3", page3);

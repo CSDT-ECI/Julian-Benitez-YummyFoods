@@ -7,13 +7,23 @@
 
 <head>
 <c:if test="${sessionValue==null }">
-<jsp:forward page="/index"></jsp:forward>
+	<jsp:forward page="/index"></jsp:forward>
 </c:if>
+<script type="text/javascript">
+	function messageAlert()
+	{
+		var message=document.getElementById("Message").value;
+		if(message!='')
+		{
+			alert(message);	
+		}
+	}
+</script>
 	<meta charset="UTF-8">
 	<title>Recipe - Food &amp; Recipes s</title>
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/style.css"/>">
 </head>
-<body>
+<body onLoad="messageAlert();">
 	<div class="header">
 		<div>
 			<a href="index"><img src="<c:url value="/resources/images/logo.png" />" alt="Logo"></a>
@@ -47,7 +57,7 @@
 					</li>
 					<li class="haschildren"><a href="#" >Settings</a>
 						<ul>
-							<li><a href="#" >Profile</a></li>
+							<li><a href="editProfile" >Profile</a></li>
 							<li><a href="changePassword" >Change Password</a></li>
 							<li><a href="doLogout" >Logout</a></li>
 						</ul>
@@ -55,16 +65,26 @@
 				</ul>
 			</nav>
 		</div>
-		
-				<div id="content">
-					<div>
-						<div><center>
-						<font color="red">${Message }</font></center>
-						</div>
-					</div>
-				</div>
-			
+		<a href="#"><img src="<c:url value="/resources/images/turkey.jpg" />" alt="Image"></a>
+				
+						<input type=hidden id="Message" value='<c:out value="${Message }" ></c:out>' />
+						
+		<div class="footer">
+			<ul>
+					<li>
+						<h2><a href="allRecipe?page=0">A to Z Recipes</a></h2>
+						<a href="allRecipe"><img src="<c:url value="/resources/images/a-z.jpg" />" alt="Image"></a>
+					</li>
+					<li>
+						<h2><a href="userAllVideo">Videos</a></h2>
+						<a href="userAllVideo"><img src="<c:url value="/resources/images/videos.jpg" />" alt="Image"></a>
+					</li>
+					
+				</ul>
+				</div>	
 		</div>
+		
+				
 		<div>
 			<div>
 				<h3>Cooking Video</h3>

@@ -7,11 +7,16 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,6 +29,7 @@ import com.userportal.spring.form.Recipe;
 import com.userportal.spring.form.User;
 import com.userportal.spring.service.RecipeService;
 import com.userportal.spring.service.UserService;
+import com.userportal.spring.validator.RecipeValidator;
 
 @Controller
 public class RecipeController 
@@ -33,6 +39,15 @@ public class RecipeController
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private RecipeValidator recipeValidator;
+	
+	@InitBinder("recipeSubmit")
+	public void initBinder(WebDataBinder binder)
+	{
+		binder.setValidator(recipeValidator);
+	}
 	
 	public void getRecipeByUser(int page,List<Recipe> paginationRecipeList,HttpSession session,Model model)
 	{
@@ -79,12 +94,6 @@ public class RecipeController
 		session.setAttribute("PageValue3", page3);
 	}
 	
-	@RequestMapping(value="/userAddRecipe")
-	public String recipe(Model model)
-	{
-		model.addAttribute("recipe",new Recipe());
-		return "UserRecipeForm";
-	}
 	
 	@RequestMapping(value="/userRecipe")
 	public String viewRecipe(@RequestParam(value = "page", required = false) Integer page,Model model,HttpSession session)
@@ -96,9 +105,34 @@ public class RecipeController
 		return "UserRecipe";
 	}
 	
-	@RequestMapping(value="/userSubmitRecipe", method=RequestMethod.POST)
-	public String addRecipe(@ModelAttribute("recipe")Recipe recipe,Model model,User user,HttpServletRequest request,@RequestParam("file") MultipartFile file,HttpSession session)
+	@RequestMapping(value="/userAddRecipe")
+	public String recipe(Model model)
 	{
+		model.addAttribute("recipeSubmit",new Recipe());
+		return "UserRecipeForm";
+	}
+	
+	
+	@RequestMapping(value="/userSubmitRecipe", method=RequestMethod.POST)
+	public String addRecipe(@ModelAttribute("recipeSubmit")@Valid Recipe recipe,BindingResult result,Model model,User user,HttpServletRequest request,@RequestParam("file") MultipartFile file,HttpSession session)
+	{
+		if(result.hasErrors())
+		{
+			if(result.hasFieldErrors("name"))
+			{
+				model.addAttribute("recipeNameError", result.getFieldError("name").getDefaultMessage());
+			}
+			else if(result.hasFieldErrors("ingredients"))
+			{
+				model.addAttribute("recipeIngredientsError", result.getFieldError("ingredients").getDefaultMessage());
+			}
+			else if(result.hasFieldErrors("directions"))
+			{
+				model.addAttribute("recipeDirectionsError", result.getFieldError("directions").getDefaultMessage());
+			}
+			return "UserRecipeForm";
+		
+		}
 		try 
         {
 			Blob blob = Hibernate.createBlob(file.getBytes());
@@ -126,7 +160,7 @@ public class RecipeController
         {
             e.printStackTrace();
         }
-         
+        
 		return "UserHome";
 	}
 	

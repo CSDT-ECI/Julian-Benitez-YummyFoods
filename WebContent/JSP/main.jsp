@@ -53,7 +53,7 @@
 					</li>
 					<li>
 						<h2><a href="allVideo">Videos</a></h2>
-						<a href="videos.html"><img src="<c:url value="/resources/images/videos.jpg" />" alt="Image"></a>
+						<a href="allVideo"><img src="<c:url value="/resources/images/videos.jpg" />" alt="Image"></a>
 					</li>
 					
 				</ul>

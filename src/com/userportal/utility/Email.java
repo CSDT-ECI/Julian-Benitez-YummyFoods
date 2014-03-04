@@ -14,8 +14,8 @@ public class Email
 	{
 		try{
 		Client client=Client.create();
-		client.addFilter(new HTTPBasicAuthFilter("api", "key-41ky9rbh16hgacc3r9cr5vadgq9vnc43"));
-		WebResource webResource=client.resource("https://api.mailgun.net/v2/userportal.mailgun.org/messages");
+		client.addFilter(new HTTPBasicAuthFilter("api", "key-87gm0tkpfhb1eel7q7regznhf75ntl44"));
+		WebResource webResource=client.resource("https://api.mailgun.net/v2/yummyfoods.mailgun.org/messages");
 		MultivaluedMapImpl formData=new MultivaluedMapImpl();
 		formData.add("to", to);
 		formData.add("subject",subject);

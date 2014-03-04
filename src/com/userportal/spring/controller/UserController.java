@@ -1,11 +1,7 @@
 package com.userportal.spring.controller;
 
-import java.util.List;
-
-import javax.naming.spi.DirStateFactory.Result;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,19 +11,16 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import com.userportal.spring.form.Login;
 import com.userportal.spring.form.Recipe;
 import com.userportal.spring.form.User;
 import com.userportal.spring.service.LoginService;
 import com.userportal.spring.service.UserService;
-import com.userportal.spring.validator.LoginValidator;
-import com.userportal.spring.validator.NewUserValidator;
 import com.userportal.spring.validator.UserChangePasswordValidator;
 import com.userportal.utility.Email;
 
 @Controller
-public class ResetPassword 
+public class UserController
 {
 	@Autowired
 	private UserService userService;
@@ -43,6 +36,8 @@ public class ResetPassword
 	{
 		binder.setValidator(userChangePasswordValidator);
 	}
+	
+	
 	
 	@RequestMapping(value="/forgotPassword")
 	public String forgotPassword(Model model)
@@ -64,7 +59,7 @@ public class ResetPassword
 				{
 					if(login.getUserId().equals(tempUser.getUserId()))
 					{
-						Email.sendEmail(user.getUserEmailId(), "Password Details", "Hi "+tempUser.getUserId()+",\n\nYour password details are Password:"+login.getUserPassword()+"\n\nRegards\nYummyFoods Admin", "Admin<admin@userportal.mailgun.org>");
+						Email.sendEmail(user.getUserEmailId(), "Password Details", "Hi "+tempUser.getUserId()+",\n\nYour password details are\nPassword:"+login.getUserPassword()+"\n\nRegards\nYummyFoods Admin", "Admin<Admin@yummyfoods.mailgun.org>");
 						
 					}
 				}
@@ -138,4 +133,20 @@ public class ResetPassword
 		}
 		
 	}
+	
+	@RequestMapping(value="allVideo")
+	public String videoPage(Model model)
+	{
+		model.addAttribute("recipe", new Recipe());
+		return "AllVideo";
+	}
+	
+	@RequestMapping(value="userAllVideo")
+	public String userVideoPage(Model model)
+	{
+		model.addAttribute("recipe", new Recipe());
+		return "UserAllVideo";
+	}
+
+
 }

@@ -10,7 +10,7 @@
 </c:if>
 <head>
 	<meta charset="UTF-8">
-	<title>Recipe - Food &amp; Recipes</title>
+	<title> - Food &amp; s</title>
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/style.css"/>">
 </head>
 <body>
@@ -19,7 +19,7 @@
 		<div>
 			<a href="index"><img src="<c:url value="/resources/images/logo.png" />" alt="Logo"></a>
 		</div>
-		<form:form action="doSearch?page=0" modelAttribute="recipe" method="post">
+		<form:form action="doSearch?page=0" modelAttribute="recipeSubmit" method="post">
 			<form:input path="name" id="search"/>
 			<input type="submit" value="" id="searchbtn">
 		</form:form>
@@ -60,10 +60,10 @@
 						<div>
 						<center>
 						<br><br><br>
-	<form:form action="userSubmitRecipe" method="POST" enctype="multipart/form-data" modelAttribute="recipe" >
+	<form:form action="userSubmitRecipe" method="POST" enctype="multipart/form-data" modelAttribute="recipeSubmit" >
 		<table>
 			<tr>
-				<td align="left">Name</td><td align="left"><form:input path="name"/></td>
+				<td align="left">Name</td><td align="left"><form:input path="name"/><font color="red"><c:out value="${recipeNameError}" /></font></td>
 			</tr>
 			<tr>
 				<td align="left">No. of People</td>
@@ -77,10 +77,10 @@
 					</form:select></td>
 			</tr>
 			<tr>
-				<td align="left">Ingredients</td><td align="left"><form:textarea path="ingredients" rows="6" cols="50"/></td>
+				<td align="left">Ingredients</td><td align="left"><form:textarea path="ingredients" rows="6" cols="50"/><font color="red"><c:out value="${recipeIngredientsError}" /></font></td>
 			</tr>
 			<tr>
-				<td align="left">Directions</td><td align="left"><form:textarea path="directions" rows="6" cols="50"/></td>
+				<td align="left">Directions</td><td align="left"><form:textarea path="directions" rows="6" cols="50"/><font color="red"><c:out value="${recipeDirectionsError}" /></font></td>
 			</tr>
 			<tr>
 				<td align="left">Image</td><td align="left"><input type="file" name="file"></td>

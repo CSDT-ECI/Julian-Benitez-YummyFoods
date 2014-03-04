@@ -24,7 +24,7 @@ public class Recipe
 	@Column(name="name")
 	private String name;
 	
-	@Column(name="forPeople")
+	@Column(name="forPeople",nullable=true)
 	private Integer forPeople;
 	
 	@Column(name="ingredients")
@@ -37,7 +37,7 @@ public class Recipe
     private String fileName;
  
 	
-	@Column(name="pic")
+	@Column(name="pic",nullable=true)
 	@Lob
 	private Blob pic;
 	

@@ -88,7 +88,7 @@ public class NewUserRegistration
 
 			user.setLogin(login);
 			userService.save(user);
-			Email.sendEmail(user.getUserEmailId(), "Registration", "Hi,\n\nCongratulations "+user.getUserId()+" for registering!!\n\nRegards\nYummyFoods", "Support<support@userportal.mailgun.org>");
+			Email.sendEmail(user.getUserEmailId(), "Registration", "Hi,\n\nCongratulations "+user.getUserId()+" for registering!!\n\nRegards\nYummyFoods", "Support<Support@yummyfoods.mailgun.org>");
 			session.setAttribute("sessionValue", user.getUserId());
 			model.addAttribute("Message", "Welcome "+user.getUserId()+", registration is successfull");
 			return "UserHome";

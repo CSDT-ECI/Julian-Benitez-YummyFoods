@@ -1,22 +1,13 @@
 package com.userportal.spring.controller;
 
 
-import java.io.IOException;
-import java.sql.Blob;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -24,14 +15,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.multipart.MultipartFile;
-
-
 import com.userportal.spring.form.Login;
 import com.userportal.spring.form.Recipe;
-import com.userportal.spring.form.User;
 import com.userportal.spring.service.LoginService;
 import com.userportal.spring.service.RecipeService;
 import com.userportal.spring.service.UserService;
@@ -65,7 +50,9 @@ public class LoginController
 	{
 		HttpSession session =request.getSession();
 		List<Recipe> recipeList=null;
+		
 		recipeList=recipeService.getAllRecipe();
+		
 		List<Recipe> sessionRecipeList=recipeService.getFeaturedList();
 		session.setAttribute("sessionList", sessionRecipeList);
 		session.setAttribute("sessionFullList", recipeList);

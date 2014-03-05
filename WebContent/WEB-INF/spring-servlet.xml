@@ -38,6 +38,8 @@
 		<property name="basename" value="classpath:messages" />
 		<property name="defaultEncoding" value="UTF-8" />
 	</bean>
+	
+	
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
 		p:location="classpath:jdbc.properties" />

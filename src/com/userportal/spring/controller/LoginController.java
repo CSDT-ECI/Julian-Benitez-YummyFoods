@@ -139,6 +139,13 @@ public class LoginController
 		return "Login";
 	}
 	
+	@RequestMapping(value="error")
+	public String error()
+	{
+		return "Error";
+	}
+	
+	
 		
 }
 

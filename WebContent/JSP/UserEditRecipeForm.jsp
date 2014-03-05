@@ -51,7 +51,7 @@ function updateAlert()
 						</ul>
 					</li>
 					
-					<li class="current_page_ancestor"><a href="userAllVideo">Videos</a>
+					<li class="current_page_ancestor"><a href="allVideo">Videos</a>
 					</li>
 					<li class="haschildren"><a href="#" >Settings</a>
 						<ul>

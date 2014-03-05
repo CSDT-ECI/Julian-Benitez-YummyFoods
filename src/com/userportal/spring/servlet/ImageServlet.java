@@ -30,8 +30,8 @@ public class ImageServlet extends HttpServlet
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
 		Integer recipeId=Integer.parseInt((String)request.getParameter("recipeId"));
-		List<Recipe>sessionRecipeList=(List<Recipe>) request.getSession(false).getAttribute("sessionList");
-		List<Recipe>sessionFullRecipeList=(List<Recipe>) request.getSession(false).getAttribute("sessionFullList");
+		List<Recipe>sessionRecipeList=(List<Recipe>) request.getSession().getAttribute("sessionList");
+		List<Recipe>sessionFullRecipeList=(List<Recipe>) request.getSession().getAttribute("sessionFullList");
 		for(int i=0;i<sessionFullRecipeList.size();i++)
 		{
 			Blob image=sessionFullRecipeList.get(i).getPic();

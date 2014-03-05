@@ -46,16 +46,14 @@ public class LoginController
 	
 	
 	@RequestMapping(value="/index")
-	public String index(Model model,HttpServletRequest request)
+	public String index(Model model,HttpSession session)
 	{
-		HttpSession session =request.getSession();
-		List<Recipe> recipeList=null;
+		if(session.getAttribute("sessionList")==null)
+		{
+			session.setAttribute("sessionList", recipeService.getFeaturedList());
+			session.setAttribute("sessionFullList", recipeService.getAllRecipe());
+		}
 		
-		recipeList=recipeService.getAllRecipe();
-		
-		List<Recipe> sessionRecipeList=recipeService.getFeaturedList();
-		session.setAttribute("sessionList", sessionRecipeList);
-		session.setAttribute("sessionFullList", recipeList);
 		model.addAttribute("login", new Login());
 		model.addAttribute("recipe", new Recipe());
 		return "main";
@@ -124,18 +122,15 @@ public class LoginController
 		
 	}
 	@RequestMapping(value="/login")
-	public String login(Model model,HttpServletRequest request)
+	public String login(Model model,HttpSession session)
 	{
-		model.addAttribute("recipe", new Recipe());
-		HttpSession session =request.getSession();
-		List<Recipe> recipeList=null;
-		List<Recipe> sessionRecipeList=recipeService.getFeaturedList();
-		recipeList=recipeService.getAllRecipe();
-		
-		session.setAttribute("sessionList", sessionRecipeList);
-			session.setAttribute("sessionFullList", recipeList);
-		
+		if(session.getAttribute("sessionFullList")==null)
+		{
+			session.setAttribute("sessionList", recipeService.getFeaturedList());
+			session.setAttribute("sessionFullList", recipeService.getAllRecipe());
+		}
 		model.addAttribute("login", new Login());
+		model.addAttribute("recipe", new Recipe());
 		return "Login";
 	}
 	
@@ -151,3 +146,4 @@ public class LoginController
 	
 		
 }
+

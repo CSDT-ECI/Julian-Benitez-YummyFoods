@@ -95,7 +95,7 @@
 				<div>
 					<div>
 						<br><br><br>
-						<form:form action="newUserAdd" method="POST" modelAttribute="user" onsubmit="return validateEmail();">
+						<form:form action="newUserAdd" method="POST" modelAttribute="newUser" onsubmit="return validateEmail();">
 							<center>
 								<table>
 									<tr><td align="left">Name:</td><td align="left"><form:input path="userName" /></td><td><font color="red"><c:out value="${userNameError}" /></font></td></tr>

@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.userportal.spring.form.Login;
 import com.userportal.spring.form.Recipe;
 import com.userportal.spring.form.User;
+import com.userportal.spring.service.RecipeService;
 import com.userportal.spring.service.UserService;
 import com.userportal.spring.validator.NewUserValidator;
 import com.userportal.utility.Email;
@@ -38,24 +39,32 @@ public class NewUserRegistration
 	
 	@Autowired
 	private NewUserValidator newUserValidator;
+
+	@Autowired
+	private RecipeService recipeService;
 	
-	
-	@InitBinder("user")
+	@InitBinder("newUser")
 	public void initBinder(WebDataBinder binder)
 	{
 		binder.setValidator(newUserValidator);
 	}
 	
 	@RequestMapping(value="/newUser")
-	public String newUser(Model model)
+	public String newUser(Model model,HttpSession session)
 	{
-		model.addAttribute("user", new User());
+		if(session.getAttribute("sessionFullList")==null)
+		{
+			session.setAttribute("sessionList", recipeService.getFeaturedList());
+			session.setAttribute("sessionFullList", recipeService.getAllRecipe());
+		}
+		
+		model.addAttribute("newUser", new User());
 		model.addAttribute("recipe", new Recipe());
 		return "NewUser";
 	}
 	
 	@RequestMapping(value="/newUserAdd", method=RequestMethod.POST)
-	public String addUser(@ModelAttribute("user")@Valid User user,BindingResult result,Login login, Model model,HttpSession session)
+	public String addUser(@ModelAttribute("newUser")@Valid User user,BindingResult result,Login login, Model model,HttpSession session)
 	{
 		model.addAttribute("recipe", new Recipe());
 		

@@ -16,6 +16,7 @@ import com.userportal.spring.form.Login;
 import com.userportal.spring.form.Recipe;
 import com.userportal.spring.form.User;
 import com.userportal.spring.service.LoginService;
+import com.userportal.spring.service.RecipeService;
 import com.userportal.spring.service.UserService;
 import com.userportal.spring.validator.NewUserValidator;
 import com.userportal.spring.validator.UserChangePasswordValidator;
@@ -29,6 +30,9 @@ public class UserController
 	
 	@Autowired
 	private LoginService loginService;
+	
+	@Autowired
+	private RecipeService recipeService;
 	
 	@Autowired
 	private UserChangePasswordValidator userChangePasswordValidator;
@@ -52,8 +56,14 @@ public class UserController
 	
 	
 	@RequestMapping(value="/forgotPassword")
-	public String forgotPassword(Model model)
+	public String forgotPassword(Model model,HttpSession session)
 	{
+		if(session.getAttribute("sessionFullList")==null)
+		{
+			session.setAttribute("sessionList", recipeService.getFeaturedList());
+			session.setAttribute("sessionFullList", recipeService.getAllRecipe());
+		}
+		
 		model.addAttribute("user", new User());
 		model.addAttribute("recipe", new Recipe());
 		return "ForgotPassword";
@@ -87,15 +97,23 @@ public class UserController
 	}
 	
 	@RequestMapping(value="/changePassword")
-	public String changePassword(Model model)
+	public String changePassword(Model model,HttpSession session)
 	{
+		if(session.getAttribute("sessionValue")==null)
+		{
+			return "redirect:/";
+		}
 		model.addAttribute("user", new User());
 		model.addAttribute("recipe", new Recipe());
 		return "UserChangePassword";
 	}
 	@RequestMapping(value="/doChangePassword")
-	public String doChangePassword(@ModelAttribute("user")@Valid User user,BindingResult result,Model model,HttpServletRequest request)
+	public String doChangePassword(@ModelAttribute("user")@Valid User user,BindingResult result,Model model,HttpServletRequest request,HttpSession session)
 	{
+		if(session.getAttribute("sessionValue")==null)
+		{
+			return "redirect:/";
+		}
 		model.addAttribute("recipe", new Recipe());
 		if(result.hasErrors())
 		{
@@ -147,22 +165,36 @@ public class UserController
 	}
 	
 	@RequestMapping(value="allVideo")
-	public String videoPage(Model model)
+	public String videoPage(Model model,HttpSession session)
 	{
+		if(session.getAttribute("sessionList")==null)
+		{
+			session.setAttribute("sessionList", recipeService.getFeaturedList());
+			session.setAttribute("sessionFullList", recipeService.getAllRecipe());
+		}
 		model.addAttribute("recipe", new Recipe());
-		return "AllVideo";
-	}
-	
-	@RequestMapping(value="userAllVideo")
-	public String userVideoPage(Model model)
-	{
-		model.addAttribute("recipe", new Recipe());
-		return "UserAllVideo";
+		if(session.getAttribute("sessionValue")==null)
+		{
+			return "AllVideo";
+		}
+		else
+		{
+			if(session.getAttribute("sessionValue")==null)
+			{
+				return "redirect:/";
+			}
+			return "UserAllVideo";
+		}
+		
 	}
 	
 	@RequestMapping(value="editProfile")
-	public String editProfile(Model model)
+	public String editProfile(Model model,HttpSession session)
 	{
+		if(session.getAttribute("sessionValue")==null)
+		{
+			return "redirect:/";
+		}
 		model.addAttribute("userEdit", new User());
 		model.addAttribute("recipe", new Recipe());
 		return "UserEditProfile";

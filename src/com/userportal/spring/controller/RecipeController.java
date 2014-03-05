@@ -98,6 +98,10 @@ public class RecipeController
 	@RequestMapping(value="/userRecipe")
 	public String viewRecipe(@RequestParam(value = "page", required = false) Integer page,Model model,HttpSession session)
 	{
+		if(session.getAttribute("sessionValue")==null)
+		{
+			return "redirect:/";
+		}
 		String userId=(String)session.getAttribute("sessionValue");
 		List<Recipe> paginationRecipeList=recipeService.getRecipeForPaginationByUserId(page, userId);
 		getRecipeByUser(page,paginationRecipeList,session,model);
@@ -106,8 +110,12 @@ public class RecipeController
 	}
 	
 	@RequestMapping(value="/userAddRecipe")
-	public String recipe(Model model)
+	public String recipe(Model model,HttpSession session)
 	{
+		if(session.getAttribute("sessionValue")==null)
+		{
+			return "redirect:/";
+		}
 		model.addAttribute("recipeSubmit",new Recipe());
 		return "UserRecipeForm";
 	}
@@ -116,6 +124,10 @@ public class RecipeController
 	@RequestMapping(value="/userSubmitRecipe", method=RequestMethod.POST)
 	public String addRecipe(@ModelAttribute("recipeSubmit")@Valid Recipe recipe,BindingResult result,Model model,User user,HttpServletRequest request,@RequestParam("file") MultipartFile file,HttpSession session)
 	{
+		if(session.getAttribute("sessionValue")==null)
+		{
+			return "redirect:/";
+		}
 		if(result.hasErrors())
 		{
 			if(result.hasFieldErrors("name"))
@@ -149,11 +161,7 @@ public class RecipeController
         	recipeService.add(recipe);
         	model.addAttribute("recipe", new Recipe());
         	model.addAttribute("Message", "Recipe added successfully!!");
-        	List<Recipe> recipeList=null;
-    		recipeList=recipeService.getAllRecipe();
-    		List<Recipe> sessionRecipeList=recipeService.getFeaturedList();
-    		session.setAttribute("sessionList", sessionRecipeList);
-    		session.setAttribute("sessionFullList", recipeList);
+        	session.setAttribute("sessionFullList", recipeService.getAllRecipe());
         } 
         
         catch (IOException e) 
@@ -167,6 +175,11 @@ public class RecipeController
 	@RequestMapping(value="/recipe")
 	public String viewRecipeById(Model model,HttpServletRequest request,HttpSession session)
 	{
+		if(session.getAttribute("sessionFullList")==null)
+		{
+			session.setAttribute("sessionList", recipeService.getFeaturedList());
+			session.setAttribute("sessionFullList", recipeService.getAllRecipe());
+		}
 		int recipeId=Integer.parseInt(request.getParameter("recipeId"));
 		String sessionValue=(String)session.getAttribute("sessionValue");
 		List<Recipe> recipeDetails=new ArrayList<Recipe>();
@@ -212,6 +225,11 @@ public class RecipeController
 	@RequestMapping(value="allRecipe")
 	public String allRecipe(@RequestParam(value = "page", required = false) Integer page,Model model,HttpServletRequest request,HttpSession session)
 	{
+		if(session.getAttribute("sessionList")==null)
+		{
+			session.setAttribute("sessionList", recipeService.getFeaturedList());
+			session.setAttribute("sessionFullList", recipeService.getAllRecipe());
+		}
 		String sessionValue=(String)request.getSession(false).getAttribute("sessionValue");
 		List<Recipe> paginationRecipeList=recipeService.getRecipeForPagination(page);
 		getRecipeByUser(page, paginationRecipeList, session, model);
@@ -222,6 +240,7 @@ public class RecipeController
 		}
 		else
 		{
+			
 			model.addAttribute("recipe", new Recipe());
 			return "UserAllRecipe";
 		}
@@ -229,8 +248,12 @@ public class RecipeController
 	}
 	
 	@RequestMapping(value="/home")
-	public String home(Model model)
+	public String home(Model model,HttpSession session)
 	{
+		if(session.getAttribute("sessionValue")==null)
+		{
+			return "redirect:/";
+		}
 		model.addAttribute("recipe", new Recipe());
 		return "UserHome";
 	}
@@ -276,6 +299,10 @@ public class RecipeController
 	@RequestMapping(value="/assignUserRating")
 	public @ResponseBody String assignUserRating(Model model,HttpServletRequest request,HttpSession session)
 	{
+		if(session.getAttribute("sessionValue")==null)
+		{
+			return "redirect:/";
+		}
 		String status=null;
 		String userId=(String)request.getSession(false).getAttribute("sessionValue");
 		int recipeId=Integer.parseInt((String)request.getParameter("recipeId"));
@@ -336,6 +363,10 @@ public class RecipeController
 	@RequestMapping(value="recipeForRating")
 	public String recipeForRating(Model model,HttpSession session)
 	{
+		if(session.getAttribute("sessionValue")==null)
+		{
+			return "redirect:/";
+		}
 		Integer recipeId=Integer.parseInt((String)session.getAttribute("recipeIdForRating"));
 		String userId=(String)session.getAttribute("sessionValue");
 		User user=userService.getUserById(userId);
@@ -371,8 +402,12 @@ public class RecipeController
 	}
 	
 	@RequestMapping(value="editRecipe")
-	public String editRecipe(@RequestParam("recipeId")Integer recipeId,@RequestParam(required=false,value="updated")String updated,Model model)
+	public String editRecipe(@RequestParam("recipeId")Integer recipeId,@RequestParam(required=false,value="updated")String updated,Model model,HttpSession session)
 	{
+		if(session.getAttribute("sessionValue")==null)
+		{
+			return "redirect:/";
+		}
 		model.addAttribute("recipe", recipeService.getRecipeById(recipeId));
 		model.addAttribute("recipeId", recipeId);
 		model.addAttribute("newUpdate", updated);
@@ -382,6 +417,10 @@ public class RecipeController
 	@RequestMapping(value="doEditRecipe")
 	public String doEditRecipe(@ModelAttribute("recipe")Recipe recipe,User user,Model model,@RequestParam("newFile") MultipartFile newFile,HttpSession session)
 	{
+		if(session.getAttribute("sessionValue")==null)
+		{
+			return "redirect:/";
+		}
 		Recipe newRecipe=null;
 		Integer recipeId=recipe.getRecipeId();
 		try 
@@ -408,23 +447,22 @@ public class RecipeController
         {
             e.printStackTrace();
         }
-		List<Recipe> recipeList=null;
-		recipeList=recipeService.getAllRecipe();
-		List<Recipe> sessionRecipeList=recipeService.getFeaturedList();
-		session.setAttribute("sessionList", sessionRecipeList);
-		session.setAttribute("sessionFullList", recipeList);
+		session.setAttribute("sessionList", recipeService.getFeaturedList());
+		session.setAttribute("sessionFullList", recipeService.getAllRecipe());
 		return "redirect:editRecipe?recipeId="+recipeId+"&updated=done";
 	}
 	
 	@RequestMapping(value="deleteRecipe")
 	public String deleteRecipe(@RequestParam("recipeId") Integer recipeId,@RequestParam("page")Integer page,HttpSession session)
 	{
+		if(session.getAttribute("sessionValue")==null)
+		{
+			return "redirect:/";
+		}
 		recipeService.delete(recipeId);
-		List<Recipe> recipeList=null;
-		recipeList=recipeService.getAllRecipe();
-		List<Recipe> sessionRecipeList=recipeService.getFeaturedList();
-		session.setAttribute("sessionList", sessionRecipeList);
-		session.setAttribute("sessionFullList", recipeList);
+		
+		session.setAttribute("sessionList", recipeService.getFeaturedList());
+		session.setAttribute("sessionFullList", recipeService.getAllRecipe());
 		
 		return "redirect:userRecipe?recipeId="+recipeId+"&page="+page;
 	}

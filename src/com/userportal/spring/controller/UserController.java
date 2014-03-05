@@ -1,6 +1,7 @@
 package com.userportal.spring.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import com.userportal.spring.form.Recipe;
 import com.userportal.spring.form.User;
 import com.userportal.spring.service.LoginService;
 import com.userportal.spring.service.UserService;
+import com.userportal.spring.validator.NewUserValidator;
 import com.userportal.spring.validator.UserChangePasswordValidator;
 import com.userportal.utility.Email;
 
@@ -31,9 +33,19 @@ public class UserController
 	@Autowired
 	private UserChangePasswordValidator userChangePasswordValidator;
 	
+	@Autowired
+	private NewUserValidator newUserValidator;
+	
+	@InitBinder("userEdit")
+	public void initBinder1(WebDataBinder binder)
+	{
+		binder.setValidator(newUserValidator);
+	}
+	
 	@InitBinder("user")
 	public void initBinder(WebDataBinder binder)
 	{
+	
 		binder.setValidator(userChangePasswordValidator);
 	}
 	
@@ -147,6 +159,42 @@ public class UserController
 		model.addAttribute("recipe", new Recipe());
 		return "UserAllVideo";
 	}
+	
+	@RequestMapping(value="editProfile")
+	public String editProfile(Model model)
+	{
+		model.addAttribute("userEdit", new User());
+		model.addAttribute("recipe", new Recipe());
+		return "UserEditProfile";
+	}
+	
+	@RequestMapping(value="doEditProfile")
+	public String doEditProfile(@ModelAttribute("userEdit")@Valid User user,BindingResult result,Model model,HttpSession session)
+	{
+		model.addAttribute("recipe", new Recipe());
+		if(result.hasErrors())
+		{
+			 if(result.hasFieldErrors("userName"))
+			{
+				model.addAttribute("userNameError", result.getFieldError("userName").getDefaultMessage());
+				return "UserEditProfile";
+			}
+			if(result.hasFieldErrors("userEmailId"))
+			{
+				model.addAttribute("userEmailIdError", result.getFieldError("userEmailId").getDefaultMessage());
+				return "UserEditProfile";
+			}
+			
+		}
+		String userId=(String)session.getAttribute("sessionValue");
+		User newUser=userService.getUserById(userId);
+		newUser.setUserName(user.getUserName());
+		newUser.setUserEmailId(user.getUserEmailId());
+		userService.update(newUser);
+		model.addAttribute("Message", "Profile has been updated!!");
+		return "UserHome";
+	}
+
 
 
 }

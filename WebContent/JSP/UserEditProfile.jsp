@@ -1,39 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
 <c:if test="${sessionValue==null }">
-	<jsp:forward page="/index"/>
+<jsp:forward page="/index"></jsp:forward>
 </c:if>
 <script type="text/javascript">
-	function deleteConfirm(recipeId)
+	function validateEmail()
 	{
-		var temp=confirm("Are you sure want to delete!");
-
-		var pageValue=document.getElementById("pageValue").value;
-		
-		if (temp==true)
+		var x=document.getElementById("emailId").value;
+		var atpos=x.indexOf("@");
+		var dotpos=x.lastIndexOf(".");
+		if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length)
 		{
-			
-			window.location.assign("deleteRecipe?recipeId="+recipeId+"&page="+pageValue);
-			
-		}
-		else
-		{
-		  
-		}
+		  alert("Please enter a valid e-mail address");
+		  return false;
+	 	}
 	}
-
 </script>
 <head>
 	<meta charset="UTF-8">
-	<title>Recipe - Food &amp; Recipes s</title>
+	<title> - Food &amp; s</title>
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/style.css"/>">
 </head>
 <body>
+
 	<div class="header">
 		<div>
 			<a href="index"><img src="<c:url value="/resources/images/logo.png" />" alt="Logo"></a>
@@ -43,11 +37,9 @@
 			<input type="submit" value="" id="searchbtn">
 		</form:form>
 	</div>
-	
-	
 	<div class="body">
 		<div>
-			<div class="header">
+		<div class="header">
 		<nav id="nav_wrapper">
 				<ul class="sf-menu" id="suckerfishnav">
 					<li><a href="home">Home</a></li>
@@ -74,35 +66,26 @@
 					</li>
 				</ul>
 			</nav>
-			</div>
+		</div>
+			
 				<div id="content">
 					<div>
-						<ul>
-							<c:forEach items="${recipeList }" var="recipe">
-								<input type="hidden" id="pageValue" value="<c:out value="${PageValue1-1 }"/>">
-							 		<li>
-										<a href="recipe?recipeId=${recipe.recipeId }"><img src="image?recipeId=${recipe.recipeId }" alt="Image" width="160" height="160"></a>
-										<div>
-											<h3><a href="recipe?recipeId=${recipe.recipeId }">${recipe.name }</a>&nbsp;|&nbsp;<a href="editRecipe?recipeId=${recipe.recipeId }">Edit</a>&nbsp;|&nbsp;<a href="#" onclick="deleteConfirm(${recipe.recipeId})">Delete</a></h3>
-											<p>
-											${recipe.directions }... <a href="recipe?recipeId=${recipe.recipeId }">More</a>
-											<br><font color="red">Current Rating: ${recipe.currentRating }</font>
-										</p>
-										
-										</div>
-									</li>
-								
-							</c:forEach>
-						</ul>
-						<div align="right">
-							<c:if test="${PageValue1>1 }">
-								<a href="userRecipe?page=-1">Previous </a>
-							</c:if>
-							<a href="userRecipe?page=${PageValue1-1 }">${PageValue1 }</a> 
-							<a href="userRecipe?page=${PageValue2-1 }">${PageValue2 }</a> 
-							<a href="userRecipe?page=${PageValue3-1 }">${PageValue3 }</a>
+						<div>
+						<center>
+						<br><br><br>
+	<form:form action="doEditProfile" method="POST" enctype="multipart/form-data" modelAttribute="userEdit" onsubmit="return validateEmail();" >
+		<table>
+				<tr><td align="left">Name:</td><td align="left"><form:input path="userName" /></td><td><font color="red"><c:out value="${userNameError}" /></font></td></tr>
+				<tr><td align="left">Email ID:</td><td align="left"><form:input id="emailId" onblur="validateEmail()" path="userEmailId"/></td><td><font color="red"><c:out value="${userEmailIdError}" /></font></td></tr>
+		</table>
+		<br><br>
+		<input type="submit" value="Add">
+	</form:form>
+	</center>
+						
 						</div>
 					</div>
+				
 				</div>
 			</div>
 		<div>

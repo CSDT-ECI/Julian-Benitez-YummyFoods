@@ -55,7 +55,7 @@ function updateAlert()
 					</li>
 					<li class="haschildren"><a href="#" >Settings</a>
 						<ul>
-							<li><a href="#" >Profile</a></li>
+							<li><a href="editProfile" >Profile</a></li>
 							<li><a href="changePassword" >Change Password</a></li>
 							<li><a href="doLogout" >Logout</a></li>
 						</ul>

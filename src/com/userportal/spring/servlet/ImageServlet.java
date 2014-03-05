@@ -3,24 +3,14 @@ package com.userportal.spring.servlet;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.sql.Blob;
-import java.sql.SQLException;
 import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.userportal.spring.controller.LoginController;
 import com.userportal.spring.form.Recipe;
 import com.userportal.spring.service.RecipeService;
-import com.userportal.spring.service.RecipeServiceImpl;
-
 
 public class ImageServlet extends HttpServlet
 {

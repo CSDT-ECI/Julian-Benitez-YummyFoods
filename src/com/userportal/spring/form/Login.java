@@ -6,9 +6,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-import javax.persistence.Transient;
-
-
 
 @Entity
 @Table(name="login", schema="userportalschema")

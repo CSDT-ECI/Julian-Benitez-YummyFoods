@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.userportal.spring.form.Login;
 import com.userportal.spring.form.Recipe;
 import com.userportal.spring.form.User;
@@ -47,10 +50,15 @@ public class UserController
 	}
 	
 	@InitBinder("user")
-	public void initBinder(WebDataBinder binder)
+	public void initBinder2(WebDataBinder binder)
 	{
-	
 		binder.setValidator(userChangePasswordValidator);
+	}
+	
+	@InitBinder("newUser")
+	public void initBinder3(WebDataBinder binder)
+	{
+		binder.setValidator(newUserValidator);
 	}
 	
 	
@@ -226,7 +234,83 @@ public class UserController
 		model.addAttribute("Message", "Profile has been updated!!");
 		return "UserHome";
 	}
+	@RequestMapping(value="/newUser")
+	public String newUser(Model model,HttpSession session)
+	{
+		if(session.getAttribute("sessionFullList")==null)
+		{
+			session.setAttribute("sessionList", recipeService.getFeaturedList());
+			session.setAttribute("sessionFullList", recipeService.getAllRecipe());
+		}
+		
+		model.addAttribute("newUser", new User());
+		model.addAttribute("recipe", new Recipe());
+		return "NewUser";
+	}
+	
+	@RequestMapping(value="/newUserAdd", method=RequestMethod.POST)
+	public String addUser(@ModelAttribute("newUser")@Valid User user,BindingResult result,Login login, Model model,HttpSession session)
+	{
+		model.addAttribute("recipe", new Recipe());
+		
+		if(result.hasErrors())
+		{
+			if(result.hasFieldErrors("userId"))
+			{
+				model.addAttribute("userIdError", result.getFieldError("userId").getDefaultMessage());
+			}
+			 if(result.hasFieldErrors("userName"))
+			{
+				model.addAttribute("userNameError", result.getFieldError("userName").getDefaultMessage());
+			}
+			 if(result.hasFieldErrors("userPassword"))
+			{
+				model.addAttribute("userPasswordError", result.getFieldError("userPassword").getDefaultMessage());
+			}
+			 if(result.hasFieldErrors("userConfirmPassword"))
+			{
+				model.addAttribute("userConfirmPasswordError", result.getFieldError("userConfirmPassword").getDefaultMessage());
+			}
+			 if(result.hasFieldErrors("userEmailId"))
+			 {
+				 model.addAttribute("userEmailIdError", result.getFieldError("userEmailId").getDefaultMessage());
+			 }
+			return "NewUser";
+		}
+		if(user.getUserConfirmPassword().equals(login.getUserPassword()))
+		{
 
-
-
+			user.setLogin(login);
+			userService.save(user);
+			Email.sendEmail(user.getUserEmailId(), "Registration", "Hi,\n\nCongratulations "+user.getUserId()+" for registering!!\n\nRegards\nYummyFoods", "Support<Support@yummyfoods.mailgun.org>");
+			session.setAttribute("sessionValue", user.getUserId());
+			model.addAttribute("Message", "Welcome "+user.getUserId()+", registration is successfull");
+			return "UserHome";
+		}
+		else
+		{
+			model.addAttribute("userPasswordMismatchError", "Password mismatch");
+		}
+		return "NewUser";
+	}
+	
+	@RequestMapping(value="/validateUserId", method=RequestMethod.GET)
+    public @ResponseBody String  validateUSerId(@RequestParam(value = "userId", required = false)String userId) 
+	{
+		java.util.List<User> userIdList=userService.list();
+		String status=null;
+		for(int i=0;i<userIdList.size();i++)
+		{
+			if(userIdList.get(i).getUserId().equals(userId))
+			{
+				status="Sorry this user id is already taken!!!";
+				return status;
+			}
+			else
+			{
+				status="Ok";
+			}
+		}
+		return status;
+	} 
 }

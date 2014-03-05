@@ -18,7 +18,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>imageServlet</servlet-name>
-    <servlet-class>com.userportal.spring.servlet.ImageServlet</servlet-class>
+    <servlet-class>com.yummyfoods.spring.servlet.ImageServlet</servlet-class>
 </servlet>
   <servlet-mapping>
     <servlet-name>imageServlet</servlet-name>

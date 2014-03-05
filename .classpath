@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="resources"/>
-	<classpathentry including="com/userportal/spring/|com/userportal/utility/" kind="src" path="src"/>
+	<classpathentry including="com/yummyfoods/" kind="src" path="src"/>
 	<classpathentry kind="var" path="M2_REPO/javax/persistence/persistence-api/1.0/persistence-api-1.0.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>

@@ -4,7 +4,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>>Food &amp; Recipes</title>
+		<title>Food &amp; Recipes</title>
 		<meta name="keywords" content="404" />
 		<link rel="stylesheet" href="<c:url value="/resources/css/mystyle.css"/>" type="text/css"  media="all" />
 	</head>

@@ -23,7 +23,7 @@ import com.yummyfoods.spring.service.RecipeService;
 import com.yummyfoods.spring.service.UserService;
 import com.yummyfoods.spring.validator.NewUserValidator;
 import com.yummyfoods.spring.validator.UserChangePasswordValidator;
-import com.yummyfoods.utility.Email;
+import com.yummyfoods.spring.service.EmailService;
 
 @Controller
 public class UserController
@@ -42,6 +42,9 @@ public class UserController
 	
 	@Autowired
 	private NewUserValidator newUserValidator;
+
+	@Autowired
+	private EmailService emailService;
 	
 	@InitBinder("userEdit")
 	public void initBinder1(WebDataBinder binder)
@@ -89,7 +92,7 @@ public class UserController
 				{
 					if(login.getUserId().equals(tempUser.getUserId()))
 					{
-						Email.sendEmail(user.getUserEmailId(), "Password Details", "Hi "+tempUser.getUserId()+",\n\nYour password details are\nPassword:"+login.getUserPassword()+"\n\nRegards\nYummyFoods Admin", "Admin<Admin@yummyfoods.mailgun.org>");
+						emailService.sendEmail(user.getUserEmailId(), "Password Details", "Hi "+tempUser.getUserId()+",\n\nYour password details are\nPassword:"+login.getUserPassword()+"\n\nRegards\nYummyFoods Admin", "Admin<Admin@yummyfoods.mailgun.org>");
 						
 					}
 				}
@@ -282,7 +285,7 @@ public class UserController
 
 			user.setLogin(login);
 			userService.save(user);
-			Email.sendEmail(user.getUserEmailId(), "Registration", "Hi,\n\nCongratulations "+user.getUserId()+" for registering!!\n\nRegards\nYummyFoods", "Support<Support@yummyfoods.mailgun.org>");
+			emailService.sendEmail(user.getUserEmailId(), "Registration", "Hi,\n\nCongratulations "+user.getUserId()+" for registering!!\n\nRegards\nYummyFoods", "Support<Support@yummyfoods.mailgun.org>");
 			session.setAttribute("sessionValue", user.getUserId());
 			model.addAttribute("Message", "Welcome "+user.getUserId()+", registration is successfull");
 			return "UserHome";

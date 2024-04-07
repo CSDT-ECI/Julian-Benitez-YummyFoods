@@ -8,6 +8,7 @@ import com.sun.jersey.core.util.MultivaluedMapImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
 
 import javax.ws.rs.core.MediaType;
@@ -20,7 +21,7 @@ public class EmailService {
     @Value("${email.api.url}")
     private String EMAIL_API_URL;
 
-    @Value("${email.api.key}")
+    @Value("${email.api.key:#{null}")
     private String EMAIL_API_KEY;
 
     @Value("${email.api.username}")

@@ -11,13 +11,19 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.yummyfoods.spring.form.Recipe;
 import com.yummyfoods.spring.service.RecipeService;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
+@Controller
 public class ImageServlet extends HttpServlet
 {
 	private static final int DEFAULT_BUFFER_SIZE = 1024000; // 10KB.
 	@Autowired
 	RecipeService recipeService;
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+
+	@ResponseStatus(HttpStatus.OK)
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		Integer recipeId=Integer.parseInt((String)request.getParameter("recipeId"));
 		List<Recipe>sessionRecipeList=(List<Recipe>) request.getSession().getAttribute("sessionList");
@@ -37,7 +43,7 @@ public class ImageServlet extends HttpServlet
 					  response.setBufferSize(DEFAULT_BUFFER_SIZE);
 				     response.setContentType(sessionFullRecipeList.get(i).getContentType());
 				     response.setContentLength((int) image.length());
-				     
+
 				     //response.setHeader("Content-Disposition", "inline; filename=\"" + sessionRecipeList.get(i).getFileName() + "\"");
 				     output = new BufferedOutputStream(response.getOutputStream(), DEFAULT_BUFFER_SIZE);
 				     output.write(image.getBytes(1, (int) image.length()));
@@ -48,14 +54,14 @@ public class ImageServlet extends HttpServlet
 			    	 System.err.println("Some error is coming:"+e.getMessage());
 			    	 e.printStackTrace();
 			     }
-			     finally 
+			     finally
 			     {
 			        output.close();
 			        return;
 			      }
 			}
 		}
-	
+
 		for(int i=0;i<sessionRecipeList.size();i++)
 		{
 			Blob image=sessionRecipeList.get(i).getPic();
@@ -81,7 +87,7 @@ public class ImageServlet extends HttpServlet
 			    	 System.err.println("Some error is coming:"+e.getMessage());
 			    	 e.printStackTrace();
 			     }
-			     finally 
+			     finally
 			     {
 			        output.close();
 			        return;

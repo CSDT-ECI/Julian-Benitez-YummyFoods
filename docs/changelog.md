@@ -18,7 +18,7 @@
 - **Archivos Afectados:**
   - [pom.xml](../pom.xml) 
 - **Resultado Final:** Permite desplegar la aplicación de manera más sencilla y realizar cambios de forma más rápida.
-- [commit]()
+- [commit](https://github.com/CSDT-ECI/Julian-Benitez-YummyFoods/pull/5/commits/77e1d0d363288d9b2c973326481dca57605efd8b)
 
 ### Refactorización de Código (EmailService)
 - **Descripción:** Se refactorizó el código para mejorar la legibilidad y mantenibilidad.
@@ -26,4 +26,4 @@
 - **Archivos Afectados:**
   - [EmailService.java](../src/main/java/com/yummyfoods/spring/service/EmailService.java)
 - **Resultado Final:** Se logra mejorar la calidad del código y facilitar futuras modificaciones.
-- [commit]()
+- [commit](https://github.com/CSDT-ECI/Julian-Benitez-YummyFoods/pull/5/commits/a1d80fa596d3356464d58f0345326a8744a962b7)

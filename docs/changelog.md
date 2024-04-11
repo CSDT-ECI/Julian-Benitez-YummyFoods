@@ -3,11 +3,11 @@
 
 ## Cambios y Refactors
 
-### [Fecha]: [Nombre del Cambio/Refactor]
+### Unit Tests
 
-- **Descripción:** Breve descripción del cambio o refactor realizado.
-- **Motivación:** Razón detrás del cambio o refactor.
+- **Descripción:** Se agregaron pruebas unitarias.
+- **Motivación:** No existían pruebas unitarias en el proyecto.
 - **Archivos Afectados:**
-    - [Nombre del archivo](ruta/al/archivo.md)
-    - [Nombre del archivo](ruta/al/archivo.md)
-- **Resultado Final:** Descripción del estado final después del cambio o refactor.
+  - [UsersDAOImplTest](../src/test/java/com/yummyfoods/spring/dao/UsersDAOImplTest.java)
+  - [UserChangePasswordValidatorTest](../src/test/java/com/yummyfoods/spring/validator/UserChangePasswordValidatorTest.java)
+- **Resultado Final:** Al agregar pruebas unitarias se logra mejorar la calidad del código y se facilita la detección de errores.

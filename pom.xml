@@ -14,7 +14,8 @@
 		<spring.version>3.1.1.RELEASE</spring.version>
 		<hibernate.version>3.5.1-Final</hibernate.version>
 		<junit.version>5.11.0</junit.version>
-		<jdk.version>1.8</jdk.version>
+		<jdk.version>17</jdk.version>
+		<java.version>17</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
  
@@ -204,7 +205,13 @@
 		<artifactId>mysql-connector-java</artifactId>
 		<version>5.1.9</version>
 	</dependency>
-            
+
+		<dependency>
+			<groupId>com.github.spotbugs</groupId>
+			<artifactId>spotbugs</artifactId>
+			<version>4.8.3</version>
+		</dependency>
+
 		</dependencies>
 	<build>
 		<finalName>UserPortal</finalName>
@@ -228,6 +235,11 @@
   					<failOnMissingWebXml>false</failOnMissingWebXml>
   				</configuration>
   			</plugin>
+			<plugin>
+				<groupId>com.github.spotbugs</groupId>
+				<artifactId>spotbugs-maven-plugin</artifactId>
+				<version>4.8.2.0</version>
+			</plugin>
 		</plugins>
 	</build>
 <repositories>

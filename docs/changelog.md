@@ -27,3 +27,10 @@
   - [EmailService.java](../src/main/java/com/yummyfoods/spring/service/EmailService.java)
 - **Resultado Final:** Se logra mejorar la calidad del código y facilitar futuras modificaciones.
 - [commit](https://github.com/CSDT-ECI/Julian-Benitez-YummyFoods/pull/5/commits/a1d80fa596d3356464d58f0345326a8744a962b7)
+
+### GitHub Actions
+- **Descripción:** Se agregó un flujo de trabajo de GitHub Actions para construir, probar y analizar la aplicación.
+- **Motivación:** Facilitar la integración continua y asegurar la calidad del código.
+- **Archivos Afectados:**
+  - [GitHub Actions](../.github/workflows/build-test-analyze.yml) 
+- **Resultado Final:** Se logra obtener un feedback rápido sobre la calidad del código y se facilita la colaboración en el proyecto.

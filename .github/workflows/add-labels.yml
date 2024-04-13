@@ -1,7 +1,9 @@
 name: Add Labels
 on:
   pull_request:
-    types: [ opened ]
+    types: [opened, edited, synchronize, review_requested, ready_for_review, labeled, unlabeled]
+  issue_comment:
+      types: [created]
 
 jobs:
   add_labels:

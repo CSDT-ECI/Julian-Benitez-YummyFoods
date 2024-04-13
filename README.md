@@ -10,16 +10,6 @@ YummyFoods. Es una aplicación web basada en Spring 3.0, Hibernate 3.0 alojada e
 * Mysql
 
 ## Construcción :hammer:
-### Jetty
-En macos
-```bash
-brew install jetty
-```
-El directorio de configuración se encuentra en `/opt/homebrew/Cellar/jetty/<version>`
-
-```bash
-jetty start
-```
 
 ### MySql (Docker)
 Se puede crear una base de datos docker mediante los siguientes comandos
@@ -46,12 +36,10 @@ mvn clean package
 
 ## Ejecución :arrow_forward:
 
-Copiar el archivo `.war` y ubicarlo en el directorio de `webapps/` de Jetty. Ejemplo:
-
 ```bash
-cp target/UserPortal.war /opt/homebrew/Cellar/jetty/9.4.54.v20240208/libexec/webapps/
+mvn tomcat7:run
 ```
 
-La applicación se podrá acceder en http://localhost:8080/UserPortal
+La applicación se podrá acceder en http://localhost:8080/YummyFoods
 
 ![](assets/imgs/index.png)

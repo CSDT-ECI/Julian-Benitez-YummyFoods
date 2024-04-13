@@ -17,6 +17,8 @@ Se puede ver el resultado en [SonarCloud](https://sonarcloud.io/project/overview
 ## Etiquetas (Labels)
 Las etiquetas se agregan automáticamente a los issues y pull requests son una forma de categorizarlos y facilitar su seguimiento.
 
+En este caso al agregar la palabra 'mejora' en el título de un issue o pull request, se le asigna la etiqueta 'enhancement', 'documentation' y 'changelog'.
+
 ![](imgs/labels-gh.png)
 
 ## Conclusiones

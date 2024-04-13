@@ -1,8 +1,9 @@
 # GitHub Actions para CI
-
 Se agregaron los siguientes archivos para la configuración de GitHub Actions:
 * `.github/workflows/build-test-analyze.yml`: Configuración para la ejecución de pruebas unitarias, construcción del proyecto y análisis estático de código.
 * `.github/workflows/add-labels.yml`: Para agregar etiquetas a los issues y pull requests automáticamente.
+*  [add-labels.yml](..%2F.github%2Fworkflows%2Fadd-labels.yml)
+*  [build-test-analyze.yml](..%2F.github%2Fworkflows%2Fbuild-test-analyze.yml)
 
 ![](imgs/runs-gh.png)
 

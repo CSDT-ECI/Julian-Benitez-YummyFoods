@@ -1,5 +1,5 @@
 name: Build, test and analyze
-on: [ push, pull_request ]
+on: [ pull_request ]
 jobs:
   build-test-analyze:
     runs-on: ubuntu-latest

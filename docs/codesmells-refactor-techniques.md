@@ -44,4 +44,4 @@ title: Code Smells y Técnicas de Refactoring
 * Sustituir Excepción por Precontrol
 
 
-
+[🏠](index.md) | [siguiente](clean-code-xp-practices.md)

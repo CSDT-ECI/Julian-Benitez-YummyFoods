@@ -31,7 +31,6 @@ mvn clean verify sonar:sonar \
 -Dsonar.token=sqp_4cf95173998d4de813c1f19b60441d81cf01ebaf
 ```
 
-> [!NOTE]
 > SonarQube está desplegado localmente, por lo que dejar el token en el repositorio no es un problema de seguridad.
 
 ## Resultados
@@ -142,3 +141,5 @@ Además pueden dar un estimado del tiempo que tomaría corregir estos problemas,
 Al complementar estas herramientas las unas con las otras, se puede tener una visión más completa de los problemas en el proyecto y se pueden corregir de manera más eficiente. Por ejemplo, SpotBugs encontró 20 bugs, mientras que SonarLint encontró 313 problemas, y SonarQube encontró 318 problemas. Al corregir los problemas de SonarLint, se pueden corregir los problemas de SpotBugs y SonarQube, y así sucesivamente.
 
 Cada herramienta provee una ventaja, SonarLint provee un análisis mientras el desarrollador escribe el código, SpotBugs provee un análisis al compilar y ejecutar una meta del proyecto, que puede ser integrado en un pipeline de CI/CD, y SonarQube provee un análisis más profundo del proyecto, y también puede ser integrado en un pipeline de CI/CD.
+
+[🏠](index.md) |[anterior](TestingDebt.md) | [siguiente](devexp-ai.md)

@@ -32,3 +32,4 @@ Debido a los puntos anteriores, los siguientes principios no se están cumpliend
 * **Code Standards**: Contar con un estándar de código ayuda a mantener la consistencia en todo el código fuente, tanto actual como futuro. Esto facilita la realización de cambios y garantiza la calidad del código.
 * **Collective Code Ownership**: Dado que no soy el autor del código, es fundamental adoptar un enfoque colectivo para realizar cambios, evitando culpar a individuos específicos.
 
+[🏠](index.md) |[anterior](codesmells-refactor-techniques.md) | [siguiente](TestingDebt.md)

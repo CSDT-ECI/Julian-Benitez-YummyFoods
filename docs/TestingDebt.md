@@ -53,3 +53,5 @@ Se podrían implementar pruebas de integración para verificar el correcto funci
 
 ### Ejecución Automática
 Se podría implementar un sistema de integración continua para ejecutar las pruebas automáticamente en cada commit.
+
+[🏠](index.md) |[anterior](clean-code-xp-practices.md) | [siguiente](static-analysis.md)

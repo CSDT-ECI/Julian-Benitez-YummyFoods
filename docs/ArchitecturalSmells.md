@@ -97,3 +97,5 @@ mientras se trabaja en el código, sin necesidad de ejecutar un análisis estát
 * [Designite](https://www.designite-tools.com/)
 * [Architectural Smells](https://www.arcan.tech/blog/what-are-architectural-smells/)
 * [Technical vs Architectural Debt](https://agiletechnicalexcellence.com/2023/04/23/technical-vs-architectural-debt.html)
+
+[🏠](index.md) |[anterior](github-actions.md)

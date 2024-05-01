@@ -131,3 +131,6 @@ detección de posibles vulnerabilidades.
 * [Developer Experience (DevEx)](https://microsoft.github.io/code-with-engineering-playbook/developer-experience/)
 * [A new way to measure developer productivity – from the creators of DORA and SPACE](https://newsletter.pragmaticengineer.com/p/developer-productivity-a-new-framework)
 * [DevEx: What Actually Drives Productivity](https://queue.acm.org/detail.cfm?id=3595878)
+
+
+[🏠](index.md) |[anterior](static-analysis.md) | [siguiente](github-actions.md)

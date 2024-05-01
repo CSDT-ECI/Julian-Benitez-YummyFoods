@@ -23,3 +23,5 @@ En este caso al agregar la palabra 'mejora' en el título de un issue o pull req
 
 ## Conclusiones
 GitHub Actions nos brinda la posibilidad de implementar integración continua, junto con otras formas de automatización, lo que permite al equipo de desarrollo evitar errores y garantizar que el código cumpla con los estándares de calidad establecidos.
+
+[🏠](index.md) |[anterior](devexp-ai.md) | [siguiente](ArchitecturalSmells.md)

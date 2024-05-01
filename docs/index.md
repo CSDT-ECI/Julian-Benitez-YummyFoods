@@ -1,17 +1,9 @@
-# Yummy Foods
+---
+title: Yummy Foods
+---
 
-Se trata de una aplicación donde el usuario puede publicar su receta y puede ver las recetas publicadas por otros usuarios. 
-Solo un usuario registrado puede publicar la receta, puede proporcionar calificaciones a otras recetas. Validación de 
-front end, back end validación se utilizan junto con cualquier otro tipo de excepción que puede ocurrir y si un usuario 
-va para una mala url que vendrá a la página de error genérico en lugar de dar error 404.
-
-La tecnología AJAX se implementa 
-para hacer llamadas asíncronas para asignar la calificación a las recetas. El usuario recibe un correo de bienvenida una
-vez que se registra en la aplicación, también puede restablecer su contraseña utilizando la opción Olvidé mi contraseña 
-de la página de inicio de sesión, en este caso se enviará un correo a su dirección de correo electrónico con los detalles
-de la contraseña. Mailgun-api se utiliza (basado en el cliente jersey) para realizar estas acciones.
-
-![](imgs/index.png)
+## Presentación
+* [Empezar](presentation1.md)
 
 ## Índice
 * ♻️ [Code Smells y Técnicas de Refactoring](codesmells-refactor-techniques)
@@ -21,3 +13,18 @@ de la contraseña. Mailgun-api se utiliza (basado en el cliente jersey) para rea
 * 🤖 [DevExp + AI](devexp-ai.md)
 * 👾 [GitHub Actions](github-actions.md)
 * 👃 [Architectural Smells](ArchitecturalSmells.md)
+
+## 🍱 Yummy Foods
+Esta aplicación web es una plataforma donde los usuarios pueden compartir y descubrir recetas de cocina. 
+Los usuarios registrados pueden publicar sus propias recetas, calificar las de otros y recibir una notificación por 
+correo electrónico al registrarse o al restablecer su contraseña. Se implementa validación en el front-end y en el 
+back-end para garantizar la integridad de los datos, junto con manejo de errores para una experiencia de usuario fluida.
+Además, se utiliza tecnología AJAX para realizar calificaciones de recetas de forma asíncrona, 
+mejorando la interactividad del sitio.
+
+![](imgs/index.png){:.centered}
+
+## 👊 Motivación
+La motivación de este proyecto es mejorar la calidad del código fuente de la aplicación Yummy Foods, mediante la identificación 
+de problemas, la aplicación de técnicas de refactorización, uso de herramientas de análisis estático y la implementación de GitHub Actions
+para automatizar la integración continua.

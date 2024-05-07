@@ -1,0 +1,25 @@
+name: Add Labels
+on:
+  pull_request:
+    types: [opened, edited, synchronize, review_requested, ready_for_review, labeled, unlabeled]
+  issue_comment:
+      types: [created]
+
+jobs:
+  add_labels:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: add labels
+        uses: actions-ecosystem/action-add-labels@v1.1.0
+        if: contains(github.event.pull_request.body, 'mejora')
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          labels: |
+            documentation
+            changelog
+            enhancement
